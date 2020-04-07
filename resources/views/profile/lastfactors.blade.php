@@ -2,122 +2,129 @@
 
 @section('content')
 
-<div id="content-wrapper" class="d-flex flex-column">
+<div id="content-wrapper" class="d-flex flex-column col-10 p-5">
 
  <div id="content">
 
   <div class="container-fluid">
     <div class="row justify-content-md-between">
         <div class="col-lg-6 ">
-        <div class="card o-hidden border-0 shadow-lg my-5 mgbnim p-5">
-          <h4 class="mb-3 darkpurplec rightalign mgnim">جزئیات صورتحساب</h4>
-            <table class="table site-block-order-table mb-4">
-                <thead>
-                    <th class="btnone">کالا</th>
-                    <th class="btnone">تعداد</th>
-                    <th class="btnone">مجموع</th>
-                </thead>
-                <tbody class="rightalign">
-                    <tr>
-                        <td>شلوار جین تیره زنانه</td>
-                        <td>1</td>
-                        <td>149,000</td>
-                    </tr>
-                    <tr>
-                        <td>کفش اسپورت زنانه</td>
-                        <td>1</td>
-                        <td>225,000</td>
-                    </tr>
-                    <tr>
-                        <td class="text-black font-weight-bold" colspan="2"><strong>قیمت کل</strong></td>
-                        <td class="text-black">374,000</td>
-                    </tr>
-                    <tr>
-                        <td class="text-black font-weight-bold" colspan="2"><strong>با اعمال تخفیف</strong></td>
-                        <td class="text-black font-weight-bold"><strong>374,000</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="mgnim">تاریخ ثبت سفارش : 9.9.2019 / تاریخ تحویل کالا : 11.9.2019</p>
-            <p class="mgnim darkpurplec">به آدرس :</p>
-            <p class="mgnim"><i class="fas fa-fw fa-map-marker-alt darkpurplec"></i> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+        <div class="card cardbg o-hidden border-0 shadow-lg my-5 p-5">
+          <h4 class="mb-3 text-center">جزئیات صورتحساب</h4>
+
+            <div class="booking-summery bg-one">
+                    <h4 class="title">بلیت</h4>
+                    <ul>
+                        <li>
+                            <h6 class="subtitle">Venus</h6>
+                            <span class="info">English-2d</span>
+                        </li>
+                        <li>
+                            <h6 class="subtitle"><span>سینما ملت</span><span>02</span></h6>
+                            <div class="info"><span>دوشنبه 20 فروردین ، 11:00</span> <span>بلیت</span></div>
+                        </li>
+                        <li>
+                            <h6 class="subtitle mb-0"><span>قیمت بلیت</span><span>150.000 تومان</span></h6>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h6 class="subtitle"><span>combos</span><span>57.000 تومان</span></h6>
+                            <span class="info"><span>2 Nachos Combo</span></span>
+                        </li>
+                        <li>
+                            <h6 class="subtitle"><span>غذا و نوشیدنی</span></h6>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <span class="info"><span>قیمت</span><span>207.000 تومان</span></span>
+                            <span class="info"><span>vat</span><span>15.000 تومان</span></span>
+                        </li>
+                    </ul>
+                </div>
+            <p class="mt-4 text-right tifany">تاریخ ثبت سفارش : 9.9.2019 </p>
         </div>
     </div>
 
         <div class="col-lg-6">
-        <div class="card o-hidden border-0 shadow-lg my-5 mgbnim p-5">
-          <h4 class="mb-3 darkpurplec rightalign mgnim">جزئیات صورتحساب</h4>
-          <table class="table site-block-order-table mb-4">
-                    <thead>
-                        <th class="btnone">کالا</th>
-                        <th class="btnone">تعداد</th>
-                        <th class="btnone">مجموع</th>
-                    </thead>
-                    <tbody class="rightalign">
-                        <tr>
-                            <td>شلوار جین تیره زنانه</td>
-                            <td>1</td>
-                            <td>149,000</td>
-                        </tr>
-                        <tr>
-                            <td>کفش اسپورت زنانه</td>
-                            <td>1</td>
-                            <td>225,000</td>
-                        </tr>
-                        <tr>
-                            <td class="text-black font-weight-bold" colspan="2"><strong>قیمت کل</strong></td>
-                            <td class="text-black">374,000</td>
-                        </tr>
-                        <tr>
-                            <td class="text-black font-weight-bold" colspan="2"><strong>با اعمال تخفیف</strong></td>
-                            <td class="text-black font-weight-bold"><strong>374,000</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            <p class="mgnim">تاریخ ثبت سفارش : 9.9.2019 / تاریخ تحویل کالا : 11.9.2019</p>
-            <p class="mgnim darkpurplec">به آدرس :</p>
-            <p class="mgnim"><i class="fas fa-fw fa-map-marker-alt darkpurplec"></i> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+        <div class="card cardbg o-hidden border-0 shadow-lg my-5 p-5">
+          <h4 class="mb-3 text-center">جزئیات صورتحساب</h4>
+          <div class="booking-summery bg-one">
+                <h4 class="title">بلیت</h4>
+                <ul>
+                    <li>
+                        <h6 class="subtitle">Venus</h6>
+                        <span class="info">English-2d</span>
+                    </li>
+                    <li>
+                        <h6 class="subtitle"><span>سینما ملت</span><span>02</span></h6>
+                        <div class="info"><span>دوشنبه 20 فروردین ، 11:00</span> <span>بلیت</span></div>
+                    </li>
+                    <li>
+                        <h6 class="subtitle mb-0"><span>قیمت بلیت</span><span>150.000 تومان</span></h6>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <h6 class="subtitle"><span>combos</span><span>57.000 تومان</span></h6>
+                        <span class="info"><span>2 Nachos Combo</span></span>
+                    </li>
+                    <li>
+                        <h6 class="subtitle"><span>غذا و نوشیدنی</span></h6>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <span class="info"><span>قیمت</span><span>207.000 تومان</span></span>
+                        <span class="info"><span>vat</span><span>15.000 تومان</span></span>
+                    </li>
+                </ul>
+            </div>
+        <p class="mt-4 text-right tifany">تاریخ ثبت سفارش : 9.9.2019 </p>
         </div>
         </div>
 
         <div class="col-lg-6">
-                <div class="card o-hidden border-0 shadow-lg my-5 mgbnim p-5">
-          <h4 class="mb-3 darkpurplec rightalign mgnim">جزئیات صورتحساب</h4>
-          <table class="table site-block-order-table mb-4">
-                        <thead>
-                            <th class="btnone">کالا</th>
-                            <th class="btnone">تعداد</th>
-                            <th class="btnone">مجموع</th>
-                        </thead>
-                        <tbody class="rightalign">
-                            <tr>
-                                <td>شلوار جین تیره زنانه</td>
-                                <td>1</td>
-                                <td>149,000</td>
-                            </tr>
-                            <tr>
-                                <td>کفش اسپورت زنانه</td>
-                                <td>1</td>
-                                <td>225,000</td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-weight-bold" colspan="2"><strong>قیمت کل</strong></td>
-                                <td class="text-black">374,000</td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-weight-bold" colspan="2"><strong>با اعمال تخفیف</strong></td>
-                                <td class="text-black font-weight-bold"><strong>374,000</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-            <p class="mgnim">تاریخ ثبت سفارش : 9.9.2019 / تاریخ تحویل کالا : 11.9.2019</p>
-            <p class="mgnim darkpurplec">به آدرس :</p>
-            <p class="mgnim"><i class="fas fa-fw fa-map-marker-alt darkpurplec"></i> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                <div class="card cardbg o-hidden border-0 shadow-lg my-5 p-5">
+          <h4 class="mb-3 text-center">جزئیات صورتحساب</h4>
+          <div class="booking-summery bg-one">
+                <h4 class="title">بلیت</h4>
+                <ul>
+                    <li>
+                        <h6 class="subtitle">Venus</h6>
+                        <span class="info">English-2d</span>
+                    </li>
+                    <li>
+                        <h6 class="subtitle"><span>سینما ملت</span><span>02</span></h6>
+                        <div class="info"><span>دوشنبه 20 فروردین ، 11:00</span> <span>بلیت</span></div>
+                    </li>
+                    <li>
+                        <h6 class="subtitle mb-0"><span>قیمت بلیت</span><span>150.000 تومان</span></h6>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <h6 class="subtitle"><span>combos</span><span>57.000 تومان</span></h6>
+                        <span class="info"><span>2 Nachos Combo</span></span>
+                    </li>
+                    <li>
+                        <h6 class="subtitle"><span>غذا و نوشیدنی</span></h6>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <span class="info"><span>قیمت</span><span>207.000 تومان</span></span>
+                        <span class="info"><span>vat</span><span>15.000 تومان</span></span>
+                    </li>
+                </ul>
+            </div>
+        <p class="mt-4 text-right tifany">تاریخ ثبت سفارش : 9.9.2019 </p>
         </div>
             </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>{{-- === --}}
 @endsection

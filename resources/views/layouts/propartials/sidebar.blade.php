@@ -2,80 +2,82 @@
 <div id="page-top ">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper mb-3">
+        <div class="row">
+      <!-- sidebarr -->
+      <div class="col-2">
+      <ul class="mysidebar sidebg top-100 navbar-nav1 bg-gradient-primary sidebarr sidebarr-dark accordion mb-6" id="accordionsidebarr">
 
-      <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion mt40" id="accordionSidebar">
-
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-          <div class="sidebar-brand-icon ">
+        <!-- sidebarr - Brand -->
+        <a class="sidebarr-brand d-flex align-items-center justify-content-center" href="">
+          <div class="sidebarr-brand-icon ">
             <i class="fas fa-user"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">حساب کاربری</div>
+          <div class="sidebarr-brand-text mx-3">حساب کاربری</div>
         </a>
 
         <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+        <hr class="sidebarr-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-          <a class="nav-link" href="/profile">
+        <li class="nav-item1 active pr-3">
+          <a class="nav-link1" href="/profile">
             <i class="fas fa-fw fa-info-circle"></i>
-            <span class="txtright">مشخصات کاربری</span></a>
+            <span class="text-right">مشخصات کاربری</span></a>
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        {{-- <hr class="sidebarr-divider"> --}}
 
         <!-- Heading -->
-        <!-- <div class="sidebar-heading">
+        <!-- <div class="sidebarr-heading">
 
         </div> -->
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <li class="nav-item1 pr-3">
+          <a class="nav-link1 collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-pen"></i>
-            <span class="txtright">ویرایش اطلاعات</span>
+            <span class="text-right">ویرایش اطلاعات</span>
           </a>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionsidebarr">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item txtright" href="/proinfoedit">اطلاعات شخصی من</a>
-              <a class="collapse-item txtright" href="/addressedit">آدرس های من</a>
+              <a class="collapse-item text-right" href="/proinfoedit">اطلاعات شخصی من</a>
+              <a class="collapse-item text-right" href="/addressedit">آدرس های من</a>
             </div>
           </div>
         </li>
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        {{-- <hr class="sidebarr-divider"> --}}
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-          <a class="nav-link" href="/wallet">
+        <li class="nav-item1 pr-3">
+          <a class="nav-link1" href="/wallet">
             <i class="fas fa-fw fa-wallet"></i>
-            <span class="txtright">کیف پول</span></a>
+            <span class="text-right">کیف پول</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item">
-          <a class="nav-link" href="/lastfactors">
+        <li class="nav-item1 pr-3">
+          <a class="nav-link1" href="/lastfactors">
             <i class="fas fa-fw fa-file-invoice"></i>
-            <span class="txtright">خرید های قبلی</span></a>
+            <span class="text-right">خرید های قبلی</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item">
-          <a class="nav-link" href="/liked">
+        {{-- <li class="nav-item1 pr-3">
+          <a class="nav-link1" href="/liked">
             <i class="fas fa-fw fa-heart"></i>
-            <span class="txtright">علاقه مندی ها</span></a>
-        </li>
+            <span class="text-right">علاقه مندی ها</span></a>
+        </li> --}}
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebarr-divider d-none d-md-block">
 
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <!-- sidebarr Toggler (sidebarr) -->
+        <div class="text-center d-none d-md-inline1 ml-5">
+          <button class="rounded-circle border-0 jccenter" id="sidebarrToggle"></button>
         </div>
 
       </ul>
-      <!-- End of Sidebar -->
+    </div>
+  <!-- End of sidebarr -->

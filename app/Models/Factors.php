@@ -24,6 +24,6 @@ class Factors extends Model
     }
     public function Shows()
     {
-        return $this->belongsToMany('App\Models\Shows', 'Factors_Shows', 'factors_id', 'shows_id')->withPivot('seat_number');
+        return $this->belongsToMany('App\Models\Shows', 'Factors_Show', 'factors_id', 'shows_id')->withPivot('seat_number');
     }
 }

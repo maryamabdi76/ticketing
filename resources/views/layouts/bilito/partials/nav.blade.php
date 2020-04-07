@@ -20,7 +20,7 @@
     <div class="container">
         <div class="header-wrapper">
             <div class="logo">
-                <a href="index.html">
+                <a href="/">
                     <img src="{{asset('images/logo/logo.png')}}" alt="logo">
                 </a>
             </div>
@@ -132,20 +132,19 @@
                     <a href="/contact"> تماس با ما </a>
                 </li>
 
-
                 @if (Route::has('login'))
-                <li class="header-button pr-0">
+                <li class="header-button pl-0">
                     @auth
-                        <a href="{{ url('/home') }}">{{ Auth::user()->name }}</a>
+                        <a href="{{ url('/home') }}" style="padding:10px 20px"><i class="fa fa-user"></i></a>
                     @else
                     <a href="/login"> ورود | عضویت </a>
                     @endauth
                 </li>
                 @endif
-                {{-- <li class="header-button pr-0">
-                    <a href="/login"> ورود | عضویت </a>
-                </li> --}}
+
             </ul>
+
+            
             <div class="header-bar d-lg-none">
                 <span></span>
                 <span></span>

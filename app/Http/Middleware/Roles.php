@@ -19,7 +19,7 @@ class Roles
     {
         $id = auth()->user()->id;
         $user = User::find($id);
-        foreach ($user->role as $role)
+        foreach ($user->roles as $role)
             if ($role->name == 'Admin') {
                 return $next($request);
             } elseif ($role->name == 'User') {
