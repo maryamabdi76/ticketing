@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Models\Role;
-use App\Models\Gender;
+use App\Models\Roles;
+use App\Models\Genders;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use DataTables;

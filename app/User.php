@@ -37,12 +37,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Role()
-    {
-        return $this->belongsToMany('App\Models\Role','roles_users', 'users_id', 'roles_id');
-    }
     public function Genders()
     {
-        return $this->belongsTo('App\Models\Gender','gender','id');
+        return $this->belongsTo('App\Models\Genders','gender','id');
+    }
+    public function Roles()
+    {
+        return $this->belongsToMany('App\Models\Roles', 'roles_user', 'users_id', 'roles_id');
+    }
+    public function Reviews()
+    {
+        return $this->hasMany('App\Models\Reviews','id','users_id');
+    }
+    public function Addresses()
+    {
+        return $this->hasMany('App\Models\Addresses','id','users_id');
+    }
+    public function Factors()
+    {
+        return $this->hasMany('App\Models\Factors','id','users_id');
+    }
+    public function Wallets()
+    {
+        return $this->hasOne('App\Models\Wallets','id','users_id');
     }
 }

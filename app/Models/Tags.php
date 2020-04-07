@@ -9,9 +9,16 @@ class Tags extends Model
     protected $fillable=[
         'path','imaggable_id','imaggable_type'
     ];
-    public function Kala()
+    public function Events()
     {
-        return $this->morphedByMany("App\Models\Kala","taggable");
+        return $this->morphedByMany('App\Models\Events', 'taggable');
     }
-
+    public function Shows()
+    {
+        return $this->morphedByMany('App\Models\Shows', 'taggable');
+    }
+    public function Posts()
+    {
+        return $this->morphedByMany('App\Models\Posts', 'taggable');
+    }
 }
