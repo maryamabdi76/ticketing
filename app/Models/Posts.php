@@ -10,6 +10,10 @@ class Posts extends Model
     {
         return $this->belongsTo('App\Models\Events','events_id','id');
     }
+    public function Comments()
+    {
+        return $this->hasMany('App\Models\Comments','id','posts_id');
+    }
     public function Images()
     {
         return $this->morphMany("App\Models\Images","imageable");

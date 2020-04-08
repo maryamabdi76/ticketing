@@ -37,6 +37,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // public function Role()
+    // {
+    //     return $this->belongsToMany('App\Models\Role','roles_users', 'users_id', 'roles_id');
+    // }
+    // public function Genders()
+    // {
+    //     return $this->belongsTo('App\Models\Gender','gender','id');
+    // }
+
     public function Genders()
     {
         return $this->belongsTo('App\Models\Genders','gender','id');
@@ -48,6 +57,10 @@ class User extends Authenticatable
     public function Reviews()
     {
         return $this->hasMany('App\Models\Reviews','id','users_id');
+    }
+    public function Comments()
+    {
+        return $this->hasMany('App\Models\Comments','id','users_id');
     }
     public function Addresses()
     {

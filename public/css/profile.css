@@ -127,9 +127,7 @@
     .sidebarr-dark #sidebarrToggle:hover{background-color:rgba(255,255,255,.25)}
     .sidebarr-dark.toggled #sidebarrToggle::after{color:rgba(255,255,255,.5)}
     .sidebarr-toggled footer.sticky-footer{width:100%}
-    .nav-item1 .nav-link1{
-        /* height:4.375rem; maryaaaaaaaaaaaaaaaaaam*/
-        display:flex;align-items:center;padding:0 .75rem}.topbar .nav-item1 .nav-link1:focus{outline:0}.topbar .nav-item1:focus{outline:0}
+    .nav-item1 .nav-link1{height:4.375rem;display:flex;align-items:center;padding:0 .75rem}.topbar .nav-item1 .nav-link1:focus{outline:0}.topbar .nav-item1:focus{outline:0}
     .nav-tabs .nav-item1{margin-bottom:-1px}
     .nav-tabs .nav-item1.show .nav-link1,.nav-tabs .nav-link1.active{color:#6e707e;background-color:#fff;border-color:#dddfeb #dddfeb #fff}
     .nav-fill .nav-item1{flex:1 1 auto;text-align:center}.nav-justified .nav-item1{flex-basis:0;flex-grow:1;text-align:center}
@@ -192,4 +190,153 @@
     padding-left: 20px;
     -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* ================ribbon=============== */
+.box {
+    position: relative;
+  }
+
+  /* common */
+  .ribbon {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .ribbon::before {
+    position: absolute;
+    /* z-index: 2147483647!important; */
+    content: '';
+    display: block;
+    border: 5px solid #5560ff ;
+  }
+  .ribbon::after {
+    position: absolute;
+    /* z-index: 2147483647!important; */
+    content: '';
+    display: block;
+    border: 5px solid #ff434391 ;
+  }
+  .ribbon span {
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 15px 0;
+    /* background-color: #f1948a; */
+    background-image: -webkit-linear-gradient(45deg, #5560ffbb 17%, #aa52a1bb 63%, #ff4343bb 100%);
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    color: #fff;
+    font: 700 18px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* top left*/
+  .ribbon-top-left {
+    top: -10px;
+    left: -10px;
+  }
+  .ribbon-top-left::before,
+  .ribbon-top-left::after {
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+  .ribbon-top-left::before {
+    top: 0;
+    right: 0;
+  }
+  .ribbon-top-left::after {
+    bottom: 0;
+    left: 0;
+  }
+  .ribbon-top-left span {
+    right: -25px;
+    top: 30px;
+    transform: rotate(-45deg);
+  }
+
+  /* top right*/
+  .ribbon-top-right {
+    top: -10px;
+    right: -10px;
+  }
+  .ribbon-top-right::before,
+  .ribbon-top-right::after {
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+  .ribbon-top-right::before {
+    top: 0;
+    left: 0;
+  }
+  .ribbon-top-right::after {
+    bottom: 0;
+    right: 0;
+  }
+  .ribbon-top-right span {
+    left: -25px;
+    top: 30px;
+    transform: rotate(45deg);
+  }
+
+  /* bottom left*/
+  .ribbon-bottom-left {
+    bottom: -10px;
+    left: -10px;
+  }
+  .ribbon-bottom-left::before,
+  .ribbon-bottom-left::after {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  .ribbon-bottom-left::before {
+    bottom: 0;
+    right: 0;
+  }
+  .ribbon-bottom-left::after {
+    top: 0;
+    left: 0;
+  }
+  .ribbon-bottom-left span {
+    right: -25px;
+    bottom: 30px;
+    transform: rotate(225deg);
+  }
+
+  /* bottom right*/
+  .ribbon-bottom-right {
+    bottom: -10px;
+    right: -10px;
+  }
+  .ribbon-bottom-right::before,
+  .ribbon-bottom-right::after {
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+  }
+  .ribbon-bottom-right::before {
+    bottom: 0;
+    left: 0;
+  }
+  .ribbon-bottom-right::after {
+    top: 0;
+    right: 0;
+  }
+  .ribbon-bottom-right span {
+    left: -25px;
+    bottom: 30px;
+    transform: rotate(-225deg);
+  }
+  .mglr9{
+    margin-left: .9rem!important;
+    margin-right: .9rem!important;
+}
+.mgtb15{
+    /* margin-top: .05rem!important; */
+    margin-bottom: .15rem!important;
+}
+.mr-15imp
+{
+    margin-right: 1.5rem !important;
 }

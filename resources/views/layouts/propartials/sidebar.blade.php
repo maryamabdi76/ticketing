@@ -9,7 +9,7 @@
       <ul class="mysidebar sidebg top-100 navbar-nav1 bg-gradient-primary sidebarr sidebarr-dark accordion mb-6" id="accordionsidebarr">
 
         <!-- sidebarr - Brand -->
-        <a class="sidebarr-brand d-flex align-items-center justify-content-center" href="">
+        <a class="sidebarr-brand d-flex align-items-center justify-content-center mr-15imp" href="">
           <div class="sidebarr-brand-icon ">
             <i class="fas fa-user"></i>
           </div>
@@ -20,7 +20,7 @@
         <hr class="sidebarr-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item1 active pr-3">
+        <li class="nav-item1 active mr-15imp">
           <a class="nav-link1" href="/profile">
             <i class="fas fa-fw fa-info-circle"></i>
             <span class="text-right">مشخصات کاربری</span></a>
@@ -35,7 +35,7 @@
         </div> -->
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item1 pr-3">
+        <li class="nav-item1 mr-15imp">
           <a class="nav-link1 collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-pen"></i>
             <span class="text-right">ویرایش اطلاعات</span>
@@ -51,25 +51,25 @@
         {{-- <hr class="sidebarr-divider"> --}}
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item1 pr-3">
+        <li class="nav-item1 mr-15imp">
           <a class="nav-link1" href="/wallet">
             <i class="fas fa-fw fa-wallet"></i>
             <span class="text-right">کیف پول</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item1 pr-3">
+        <li class="nav-item1 mr-15imp">
           <a class="nav-link1" href="/lastfactors">
             <i class="fas fa-fw fa-file-invoice"></i>
             <span class="text-right">خرید های قبلی</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
-        {{-- <li class="nav-item1 pr-3">
+        <li class="nav-item1 mr-15imp">
           <a class="nav-link1" href="/liked">
             <i class="fas fa-fw fa-heart"></i>
             <span class="text-right">علاقه مندی ها</span></a>
-        </li> --}}
+        </li>
         <!-- Divider -->
         <hr class="sidebarr-divider d-none d-md-block">
 

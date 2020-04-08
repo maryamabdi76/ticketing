@@ -56,6 +56,7 @@ Route::get('/proinfoedit', ['as'=>'profile.proinfoedit','uses'=>'ProfileControll
 Route::get('/addressedit', ['as'=>'profile.addressedit','uses'=>'ProfileController@addressedit']);
 Route::get('/wallet', ['as'=>'profile.wallet','uses'=>'ProfileController@wallet']);
 Route::get('/lastfactors', ['as'=>'profile.lastfactors','uses'=>'ProfileController@lastfactors']);
+Route::get('/liked', ['as'=>'profile.liked','uses'=>'ProfileController@liked']);
 
 
 
