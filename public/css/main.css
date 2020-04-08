@@ -905,7 +905,7 @@ input[type="submit"] {
 }
 
 *::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
   background-color: #F5F5F5;
 }
 
@@ -8747,7 +8747,7 @@ aside {
   color: #ffffff;
   z-index: 999;
   bottom: 30px;
-  right: 30px;
+  left: 30px;
   position: fixed;
   border-radius: 5px;
   -webkit-transform: translateY(150px);
@@ -9181,3 +9181,9 @@ aside {
   .tifanyc{
     color: #31d7a9!important;
   }
+
+
+.gradiant-bg{
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+    cursor:pointer
+}

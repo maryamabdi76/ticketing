@@ -14,5 +14,9 @@
 <script src="{{asset('js/odometer.min.js')}}"></script>
 <script src="{{asset('js/viewport.jquery.js')}}"></script>
 <script src="{{asset('js/nice-select.js')}}"></script>
+
+<script src="{{asset('js/stackedCards.min.js')}}"></script>
+
 <script src="{{asset('js/main.js')}}"></script>
+
 

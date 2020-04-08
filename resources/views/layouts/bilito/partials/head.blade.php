@@ -15,5 +15,9 @@
     <link rel="stylesheet" href="{{asset('css/jquery.animatedheadline.css')}}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
+    <link rel="stylesheet" href="{{asset('css/slider.css')}}">
+
+    <link rel="stylesheet" href="{{asset('css/stackedCards.css')}}">
+
     <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/x-icon">
     <title>Bilito</title>
