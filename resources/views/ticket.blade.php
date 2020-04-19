@@ -4,7 +4,7 @@
 
 
     <!-- ==========Window-Warning-Section========== -->
-    <section class="window-warning inActive">
+    {{-- <section class="window-warning inActive">
         <div class="lay"></div>
         <div class="warning-item">
             <h6 class="subtitle">خوش آمدید</h6>
@@ -12,19 +12,19 @@
             <div class="thumb">
                 <img src="{{asset('images/movie/seat-plan.png')}}" alt="movie">
             </div>
-            <a href="/movie-seat" class="custom-button seatPlanButton">نقشه صندلی ها <i class="fas fa-angle-left"></i></a>
+            <a href="/seat/" class="custom-button seatPlanButton">نقشه صندلی ها <i class="fas fa-angle-left"></i></a>
         </div>
-    </section>
+    </section> --}}
     <!-- ==========Window-Warning-Section========== -->
 
     <!-- ==========Banner-Section========== -->
-    <section class="details-banner hero-area bg_img" data-background="{{asset('images/banner/banner03.jpg')}}">
+    <section class="details-banner hero-area bg_img" data-background="{{asset('images/banner/banner04.jpg')}}">
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content">
-                    <h3 class="title">Venus</h3>
+                <h3 class="title">{{$eventname}}</h3>
                     <div class="tags">
-                        <a href="#0">انگلیسی</a>
+                        {{-- <a href="#0">انگلیسی</a> --}}
                         <a href="#0">فارسی</a>
                     </div>
                 </div>
@@ -98,84 +98,43 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9 mb-5 mb-lg-0">
                     <ul class="seat-plan-wrapper bg-five">
+                        @foreach($count as $v)
                         <li>
                             <div class="movie-name">
                                 <div class="icons">
                                     <i class="fas fa-heart"></i>
                                     <i class="fas fa-heart"></i>
                                 </div>
-                                <a href="#0" class="name">سینما ملت</a>
+                                <a href="#0" class="name">
+                                        @foreach($locations as $l)
+                                        @if($l['id'] === $v)
+                                        {{$l['name']}}
+                                        @endif
+                                       @endforeach
+                                </a>
                                 <div class="location-icon">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                             </div>
-                            <div class="movie-schedule">
+                            <div class="movie-schedule justify-content-lg-start">
+                                @foreach($sans as $s)
+                                @if($s->locations_id===$v)
                                 <div class="item">
-                                    09:40
+                                    <form action="/seat" method="post">
+                                        @csrf
+                                        <input type="hidden" name="salons_id" value="{{$s->salons_id}}">
+                                        <input type="hidden" name="shows_id" value="{{$s->shows_id}}">
+                                        <input type="submit" value="{{$s->begin}}" class="bgtrasparent maxh2">
+                                        {{-- <a href="/seat/{{$s->salons_id}}" class="text-white"> --}}
+                                            {{-- {{$s->begin}} --}}
+                                        {{-- </a> --}}
+                                    </form>
                                 </div>
-                                <div class="item">
-                                    13:45
-                                </div>
-                                <div class="item">
-                                    15:45
-                                </div>
-                                <div class="item">
-                                    19:50
-                                </div>
+                                @endif
+                                @endforeach
                             </div>
                         </li>
-                        <li>
-                            <div class="movie-name">
-                                <div class="icons">
-                                    <i class="fas fa-heart"></i>
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <a href="#0" class="name">سینما آزادی</a>
-                                <div class="location-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                            </div>
-                            <div class="movie-schedule">
-                                <div class="item">
-                                    09:40
-                                </div>
-                                <div class="item">
-                                    13:45
-                                </div>
-                                <div class="item">
-                                    15:45
-                                </div>
-                                <div class="item">
-                                    19:50
-                                </div>
-                            </div>
-                        </li>
-                        <li  class="active">
-                            <div class="movie-name">
-                                <div class="icons">
-                                    <i class="fas fa-heart"></i>
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <a href="#0" class="name">سینما ماندانا</a>
-                                <div class="location-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                            </div>
-                            <div class="movie-schedule">
-                                <div class="item">
-                                    09:40
-                                </div>
-                                <div class="item active">
-                                    13:45
-                                </div>
-                                <div class="item">
-                                    15:45
-                                </div>
-                                <div class="item">
-                                    19:50
-                                </div>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-10">

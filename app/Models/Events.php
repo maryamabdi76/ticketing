@@ -38,4 +38,8 @@ class Events extends Model
     {
         return $this->morphtoMany("App\Models\Tags","taggable");
     }
+    public function Sliders()
+    {
+        return $this->hasMany('App\Models\Sliders','id','events_id');
+    }
 }

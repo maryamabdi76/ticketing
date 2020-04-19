@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tags extends Model
 {
     protected $fillable=[
-        'path','imaggable_id','imaggable_type'
+        'path','taggable_id','taggable_type'
     ];
     public function Events()
     {

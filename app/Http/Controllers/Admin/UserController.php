@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('Role')->get();
+        $users = User::with('Roles')->get();
         return view('admin.users.index')->with('users', $users);
     }
 
@@ -75,8 +75,8 @@ class UserController extends Controller
     {
         $data = array(
             'user' => User::find($id),
-            'gender' => Gender::all(),
-            'role' => Role::all(),
+            'gender' => Genders::all(),
+            'role' => Roles::all(),
         );
         return view('admin.users.edit')->with($data);
     }

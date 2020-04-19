@@ -33,9 +33,9 @@
                     </div>
                     <div class="widget-1 widget-check">
                         <div class="widget-header">
-                            <h5 class="m-title">فیلتر</h5> <a href="#0" class="clear-check">پاک کردن همه</a>
+                            <h5 class="m-title">فیلتر</h5> <a href="{{route('movie')}}" class="clear-check">پاک کردن همه</a>
                         </div>
-                        <div class="widget-1-body">
+                        {{-- <div class="widget-1-body">
                             <h6 class="subtitle">زبان</h6>
                             <div class="check-area">
                                 <div class="form-group">
@@ -48,9 +48,9 @@
                                     <input type="checkbox" name="lang" id="lang5"><label for="lang5">Multiple Language</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                    <div class="widget-1 widget-check">
+                    {{-- <div class="widget-1 widget-check">
                         <div class="widget-1-body">
                             <h6 class="subtitle">نمایش</h6>
                             <div class="check-area">
@@ -65,45 +65,28 @@
                                 <a href="#0"> نمایش بیشتر <i class="plus mr-2"></i></a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="widget-1 widget-check">
                         <div class="widget-1-body">
                             <h6 class="subtitle">ژانر</h6>
+                            <form method="post" action="{{route('moviegenre')}}">
+                                {{ csrf_field() }}
                             <div class="check-area">
                                 <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre1"><label for="genre1">پیش نمایش</label>
+                                    <input type="checkbox" name="genre[]" value="*" id="genre0"><label for="genre0">همه</label>
                                 </div>
+                                @foreach($genres as $genre)
+                                {{-- {{dd($genre->name)}} --}}
                                 <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre2"><label for="genre2">ترسناک</label>
+                                    <input type="checkbox" name="genre[]" value="{{$genre->name}}" id="genre{{$genre->id}}">
+                                    <label for="genre{{$genre->id}}">{{$genre->name}}</label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre3"><label for="genre3">درام</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre4"><label for="genre4">عاشقانه</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre5"><label for="genre5">اکشن</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre6"><label for="genre6">کمدی</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre7"><label for="genre7">رمانتیک</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre8"><label for="genre8">انیمیشن</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre9"><label for="genre9">علمی-تخیلی</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre10"><label for="genre10">ماجراجویی</label>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="add-check-area">
-                                <a href="#0"> نمایش بیشتر <i class="plus mr-2"></i></a>
+                                <button style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);" type="submit"> اعمال</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div class="widget-1 widget-banner">
@@ -124,10 +107,8 @@
                                         <select class="select-bar">
                                             <option value="12">12</option>
                                             <option value="15">15</option>
-                                            <option value="18">18</option>
-                                            <option value="21">21</option>
-                                            <option value="24">24</option>
-                                            <option value="27">27</option>
+                                            <option value="18">20</option>
+                                            <option value="21">25</option>
                                             <option value="30">30</option>
                                         </select>
                                     </div>
@@ -135,9 +116,8 @@
                                         <span class="show">مرتب سازی :</span>
                                         <select class="select-bar">
                                             <option value="showing">در حال نمایش</option>
-                                            <option value="exclusive">انحصاری</option>
-                                            <option value="trending">مشهور</option>
-                                            <option value="most-view">بیشترین نمایش</option>
+                                            <option value="exclusive">پرفروش ترین</option>
+                                            <option value="trending">محبوب ترین</option>
                                         </select>
                                     </div>
                                 </div>
@@ -154,378 +134,73 @@
                         <div class="tab-area">
                             <div class="tab-item active">
                                 <div class="row mb-10 justify-content-center">
+                                    @foreach($movies->unique('name') as $movie)
                                     <div class="col-sm-6 col-lg-4">
                                         <div class="movie-grid">
                                             <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie01.jpg')}}" alt="movie">
+                                                <a href="/movie-details/{{$movie->id}}">
+                                                    <img width="330px" height="400px" src="{{asset('/').$movie->Images()->get()->first()->path}}" alt="movie">
                                                 </a>
                                             </div>
                                             <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">alone</a>
+                                                <h5 class="title m-0" style="font-size:1.1rem">
+                                                    <a href="/movie-details/{{$movie->id}}">{{$movie->name}}</a>
                                                 </h5>
                                                 <ul class="movie-rating-percent">
-                                                    <li>
+                                                    {{-- <li>
                                                         <div class="thumb">
                                                             <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
                                                         </div>
                                                         <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
+                                                    </li> --}}
+                                                    {{-- <li>
                                                         <div class="thumb">
                                                             <img src="{{asset('images/movie/cake.png')}}" alt="movie">
                                                         </div>
                                                         <span class="content">88%</span>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie02.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">mars</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie03.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">venus</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie04.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">on watch</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie05.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">fury</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie06.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">trooper</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie07.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">horror night</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie08.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">the lost name</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie09.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">calm stedfast</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie10.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">criminal on party</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie11.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">halloween party</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="/movie-details">
-                                                    <img src="{{asset('images/movie/movie12.jpg')}}" alt="movie">
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0">
-                                                    <a href="/movie-details">the most wanted</a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-item">
                                 <div class="movie-area mb-10">
+                                    @foreach($movies->unique('name') as $movie)
                                     <div class="movie-list">
                                         <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie01.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie01.jpg')}}" alt="movie">
+                                            <a href="/movie-details/{{$movie->id}}" class="w-100 bg_img h-100" data-background="{{asset('/').$movie->Images()->get()->first()->path}}">
+                                                <img src="{{asset('/').$movie->Images()->get()->first()->path}}" alt="movie">
                                             </a>
                                         </div>
                                         <div class="movie-content bg-one">
                                             <h5 class="title">
-                                                <a href="/movie-details">alone</a>
+                                            <a href="/movie-details/{{$movie->id}}">{{$movie->name}}</a>
                                             </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
+                                            {{-- <p class="duration">2 ساعت 50 دقیقه</p> --}}
                                             <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
+                                                @foreach($movie->genres()->get() as $genre)
+                                                <a href="#0">{{$genre->name}}</a>
+                                                @endforeach
                                             </div>
                                             <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
+                                                <span>تاریخ اکران : </span> <a href="#0">{{$movie->date}}</a>
                                             </div>
                                             <ul class="movie-rating-percent">
-                                                <li>
+                                                {{-- <li>
                                                     <div class="thumb">
                                                         <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
                                                     </div>
                                                     <span class="content">88%</span>
-                                                </li>
-                                                <li>
+                                                </li> --}}
+                                                {{-- <li>
                                                     <div class="thumb">
                                                         <img src="{{asset('images/movie/cake.png')}}" alt="movie">
                                                     </div>
                                                     <span class="content">88%</span>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                             <div class="book-area">
                                                 <div class="book-ticket">
@@ -556,696 +231,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie02.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie02.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">mars</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie03.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie03.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">venus</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie04.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie04.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">on watch</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie05.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie05.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">fury</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie06.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie06.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">trooper</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie07.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie07.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">horror night</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie08.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie08.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">the lost name</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie09.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie09.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">calm stedfast</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie10.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie10.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">criminal on party</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie11.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie11.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">halloween party</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details" class="w-100 bg_img h-100" data-background="{{asset('images/movie/movie12.jpg')}}">
-                                                <img class="d-sm-none" src="{{asset('images/movie/movie12.jpg')}}" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title">
-                                                <a href="/movie-details">the most wanted</a>
-                                            </h5>
-                                            <p class="duration">2 ساعت 50 دقیقه</p>
-                                            <div class="movie-tags">
-                                                <a href="#0">اکشن</a>
-                                                <a href="#0">ماجراجویی</a>
-                                                <a href="#0">فانتزی</a>
-                                            </div>
-                                            <div class="release">
-                                                <span>تاریخ انتشار : </span> <a href="#0">20 فروردین 1399</a>
-                                            </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                    <div class="react-item">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/heart.png')}}" alt="icons">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item ml-auto">
-                                                        <a href="/movie-ticket">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/book.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">خرید بلیت</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="react-item">
-                                                            <a href="#0" class="popup-video">
-                                                            <div class="thumb">
-                                                                <img src="{{asset('images/icons/play-button.png')}}" alt="icons">
-                                                            </div>
-                                                            <span class="mr-2">نمایش تیزر</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                         <div class="pagination-area text-center">
                             <a href="#0"><i class="fas fa-angle-double-right"></i><span> قبلی </span></a>
-                            <a href="#0">1</a>
+                            <a href="#0" class="active">1</a>
                             <a href="#0">2</a>
-                            <a href="#0" class="active">3</a>
+                            <a href="#0">3</a>
                             <a href="#0">4</a>
                             <a href="#0">5</a>
                             <a href="#0"><span>بعدی </span><i class="fas fa-angle-double-left"></i></a>

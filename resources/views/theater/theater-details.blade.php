@@ -2,348 +2,244 @@
 @extends('layouts.bilito.mainlayout')
 @section('content')
 
-    <!-- ==========Event-Banner-Section========== -->
-    <section class="event-banner-section bg_img" data-background="{{asset('images/banner/banner09.jpg')}}">
+
+    <!-- ==========Banner-Section========== -->
+    {{-- <section class="details-banner bg_img" data-background="{{asset('images/banner/banner03.jpg')}}"> --}}
+    <section class="details-banner bg_img" data-background="{{asset('images/banner/banner04.jpg')}}">
+        {{-- <section class="details-banner bg_img" data-background="{{asset('/').$theater->Images()->get()->first()->path}}"> --}}
         <div class="container">
-            <div class="event-banner">
-                <a href="https://www.youtube.com/embed/GT6-H4BRyqQ" class="video-popup">
-                    <span></span>
-                    <i class="flaticon-play-button"></i>
-                </a>
+            <div class="details-banner-wrapper">
+                <div class="details-banner-thumb">
+                    <img src="{{asset('/').$theater->Images()->get()->first()->path}}" alt="movie">
+                    <a href="https://www.youtube.com/embed/KGeBMAgc46E" class="video-popup">
+                        <img src="{{asset('images/movie/video-button.png')}}" alt="movie">
+                    </a>
+                </div>
+                <div class="details-banner-content mr-25darsad">
+                <h3 class="title">{{$theater->name}}</h3>
+                    <div class="tags">
+                        {{-- <a href="#0">فارسی</a> --}}
+                    </div>
+                    @foreach($theater->genres()->get() as $genre)
+                    <a href="/theater/genres/{{$genre->id}}" class="button">{{$genre->name}}</a>
+                    @endforeach
+                    <div class="social-and-duration">
+                        <div class="duration-area">
+                            <div class="item">
+                                <i class="fas fa-calendar-alt"></i><span>{{$theater->date}}</span>
+                            </div>
+                        </div>
+                        <ul class="social-share">
+                            <li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#0"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#0"><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a href="#0"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="#0"><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ==========Banner-Section========== -->
+
+
+    <!-- ==========Book-Section========== -->
+    <section class="book-section bg-one">
+        <div class="container">
+            <div class="book-wrapper">
+                <div class="left-side">
+                    {{-- <div class="item">
+                        <div class="item-header">
+                            <div class="thumb">
+                                <img src="{{asset('images/movie/tomato2.png')}}" alt="movie">
+                            </div>
+                            <div class="counter-area">
+                                <span class="counter-item odometer" data-odometer-final="88">0</span>
+                            </div>
+                        </div>
+                        <p>tomatometer</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="thumb">
+                                <img src="{{asset('images/movie/cake2.png')}}" alt="movie">
+                            </div>
+                            <div class="counter-area">
+                                <span class="counter-item odometer" data-odometer-final="88">0</span>
+                            </div>
+                        </div>
+                        <p>audience Score</p>
+                    </div> --}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="rated">
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5 class="title">4.5</h5>
+                        </div>
+                        <p>نظر کاربران</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="rated rate-it">
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5 class="title">0.0</h5>
+                        </div>
+                        <p><a href="#0">نظر دهید</a></p>
+                    </div>
+                </div>
+                {{-- <a href="/movie-ticket" class="custom-button">خرید بلیت</a> --}}
             </div>
         </div>
     </section>
-    <!-- ==========Event-Banner-Section========== -->
+    <!-- ==========Book-Section========== -->
 
-    <!-- ==========Event-Book-Search========== -->
-    <section class="event-book-search padding-top pt-lg-0">
+    <!-- ==========Movie-Section========== -->
+    <section class="movie-details-section padding-top padding-bottom">
         <div class="container">
-            <div class="event-search bg_img text-right" data-background="{{asset('images/ticket/ticket-bg01.jpg')}}">
-                <div class="event-search-top">
-                    <div class="left">
-                        <h3 class="title">لیگ فوتبال</h3>
+            <div class="row justify-content-center flex-wrap-reverse mb--50">
+                <div class="col-lg-3 col-sm-10 col-md-6 mb-50">
+                    <div class="widget-1 widget-offer">
+                        <h3 class="title">تبلیغات</h3>
                     </div>
-                    <div class="right">
-                        <ul class="countdown">
-							<li>
-								<h2><span class="days">00</span></h2>
-								<p class="days_text">روز</p>
-							</li>
-							<li>
-								<h2><span class="hours">00</span></h2>
-								<p class="hours_text">ساعت</p>
-							</li>
-							<li>
-								<h2><span class="minutes">00</span></h2>
-								<p class="minu_text">دقیقه</p>
-							</li>
-							<li>
-								<h2><span class="seconds">00</span></h2>
-								<p class="seco_text">ثانیه</p>
-							</li>
-						</ul>
-                        <a href="/theater-ticket" class="custom-button">خرید بلیت</a>
-                    </div>
-                </div>
-                <div class="event-search-bottom">
-                    <div class="contact-side justify-content-start">
-                        <div class="item">
-                            <div class="item-thumb">
-                                <img src="{{asset('images/event/icon/event-icon02.png')}}" alt="event">
-                            </div>
-                            <div class="item-content">
-                                <span class="up">خیابان لورم</span>
-                                <span>شهر لورم</span>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-thumb">
-                                <img src="{{asset('images/event/icon/event-icon03.png')}}" alt="event">
-                            </div>
-                            <div class="item-content">
-                                <span class="up">ارتباط با ما :</span>
-                                <a href="MailTo:hello@Boleto .com">hello@Ticketing.com</a>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="social-icons">
-                        <li>
+                    <div class="widget-1 widget-banner">
+                        <div class="widget-1-body">
                             <a href="#0">
-                                <i class="fab fa-facebook-f"></i>
+                                <img src="{{asset('images/sidebar/banner/banner01.jpg')}}" alt="banner">
                             </a>
-                        </li>
-                        <li>
-                            <a href="#0" class="">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <i class="fab fa-pinterest-p"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0" class="">
-                                <i class="fab fa-google"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Event-Book-Search========== -->
-
-    <!-- ==========Event-About========== -->
-    <section class="event-about padding-top padding-bottom">
-        <div class="container">
-            <div class="row justify-content-between flex-wrap-reverse">
-                <div class="col-lg-7 col-xl-6">
-                    <div class="event-about-content">
-                        <div class="section-header-3 left-style m-0">
-                            <span class="cate">آیا آماده هستید شرکت کنید ؟</span>
-                            <h2 class="title">football league tournament</h2>
-                            <p>Morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, tristique senectus et netus et malesuada fames ac turpis egestas ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.Aenean ultricies mi vitae est. Mauris Eonec eu ribero sit amet quam egestas semper. Aenean are ultricies mi senectus et netus et malesuada fames ac turpis egestas.
-                            </p>
-                            <a href="/theater-ticket" class="custom-button">خرید بلیت</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-7">
-                    <div class="event-about-thumb">
-                        <img src="{{asset('images/sports/sports-about.jpg')}}" alt="sports">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Event-About========== -->
-
-    <!-- ==========Statistics-Section========== -->
-    <section class="statistics-section padding-top padding-bottom bg_img pb-lg-0" data-background="{{asset('images/statistics/statistics-bg01.jpg')}}">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">ما چه کار می کنیم </span>
-                <h2 class="title">آمار اخیر ما </h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-            </div>
-            <div class="statistics-wrapper">
-                <div class="row mb--20">
-                    <div class="col-md-4">
-                        <div class="stat-item">
-                            <div class="stat-thumb">
-                                <img src="{{asset('images/statistics/stat01.png')}}" alt="statistics">
-                            </div>
-                            <div class="stat-content">
-                                <h3 class="counter-item odometer" data-odometer-final="450"></h3>
-                                <span class="info">Tickets Booked</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-item">
-                            <div class="stat-thumb">
-                                <img src="{{asset('images/statistics/stat02.png')}}" alt="statistics">
-                            </div>
-                            <div class="stat-content">
-                                <h3 class=" counter-item odometer" data-odometer-final="500"></h3>
-                                <span class="info">Usefull Sessions</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-item">
-                            <div class="stat-thumb">
-                                <img src="{{asset('images/statistics/stat03.png')}}" alt="statistics">
-                            </div>
-                            <div class="stat-content">
-                                <h3 class=" counter-item odometer" data-odometer-final="30"></h3>
-                                <span class="info">Talented Speakers</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Statistics-Section========== -->
-
-    <!-- ==========Faq-Section========== -->
-    <section class="faq-section padding-top">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">ما چطور می توانیم کمک کنیم ؟</span>
-                <h2 class="title">سوالات متداول</h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-            </div>
-            <div class="faq-area padding-bottom">
-                <div class="faq-wrapper">
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">آیا می توانم بلیط های خود را بعد از قرار دادن سفارش ارتقا دهم ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item active open">
-                        <div class="faq-title">
-                            <h6 class="title">چرا روش تحویل بلیط من تغییر کرده است ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">چرا نام دیگری روی بلیط چاپ شده است و آیا این مسئله در رویداد من مشکل ایجاد خواهد کرد ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">بلیط های صندلی های من متوالی نیست ، آیا آنها هنوز کنار هم تضمین شده اند ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">چرا نام دیگری روی بلیط چاپ شده است و آیا این مسئله در رویداد من مشکل ایجاد خواهد کرد ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Faq-Section========== -->
-
-    <!-- ==========Event-Section========== -->
-    <section class="event-details padding-bottom padding-top">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">حامیان رویداد</span>
-                <h2 class="title">همکاران و حامیان </h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-            </div>
-            <div class="tabTwo sponsor-tab">
-                <ul class="tab-menu">
-                    <li class="active">
-                        حامیان سوپر
-                    </li>
-                    <li>
-                        حامیان طلایی
-                    </li>
-                    <li>
-                        حامیان نقره ای
-                    </li>
-                </ul>
-                <div class="tab-area">
-                    <div class="tab-item active">
-                        <div class="owl-theme owl-carousel sponsor-slider">
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/1.png')}}" alt="sponsor">
+                <div class="col-lg-9 mb-50">
+                    <div class="movie-details">
+                        <h3 class="title">تصاویر</h3>
+                        <div class="details-photos owl-carousel">
+                            @foreach($theater->Images()->get() as $k=>$photo)
+                            <div class="thumb">
+                                <a href="{{asset('/').$photo->path}}" class="img-pop">
+                                    <img src="{{asset('/').$photo->path}}" alt="movie">
                                 </a>
                             </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/2.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/3.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/4.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/5.png')}}" alt="sponsor">
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-theme owl-carousel sponsor-slider">
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/3.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/4.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/5.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/1.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/2.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-theme owl-carousel sponsor-slider">
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/3.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/1.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/4.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/2.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/5.png')}}" alt="sponsor">
-                                </a>
+                        <div class="tab summery-review">
+                            <ul class="tab-menu">
+                                <li class="active">
+                                    خلاصه تئاتر
+                                </li>
+                                <li>
+                                    نظرات کاربران <span>{{$count}}</span>
+                                </li>
+                            </ul>
+                            <div class="tab-area">
+                                <div class="tab-item active">
+                                    <div class="item">
+                                        <div class="header">
+                                            <h5 class="sub-title">بازیگران</h5>
+                                        </div>
+                                        <p>{{$theater->act}}</p>
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">
+                                            <h5 class="sub-title">عوامل</h5>
+                                        </div>
+                                        <p>{{$theater->team}}</p>
+                                    </div>
+                                </div>
+                                <div class="tab-item">
+                                  @foreach($reviews as $v)
+                                    <div class="movie-review-item">
+                                        <div class="author">
+                                            <div class="thumb">
+                                                  @if($v->user->gender===1)
+                                                    <img src="{{asset('images/avatar/femaleavatar.png')}}" alt="female avatar"/>
+                                                  @endif
+                                                  @if($v->user->gender===2)
+                                                    <img src="{{asset('images/avatar/maleavatar.png')}}" alt="male avatar"/>
+                                                  @endif
+                                            </div>
+                                            <div class="movie-review-info">
+                                                  <h6 class="subtitle mt-3">{{$v->user->name}}</h6>
+                                                  <span class="reply-date">{{$v->created_at}}</span>
+                                                </div>
+                                        </div>
+                                        <div class="movie-review-content">
+                                                <div class="review">
+                                                @for ($i=1; $i <= 5 ; $i++)
+                                                <i class="fas fa-heart {{ ($i <= $v->rating) ? 'heart__f' : 'heart__o'}}"></i>
+                                                @endfor
+                                                </div>
+                                            <p>{{$v->comment}}</p>
+                                            <div class="review-meta">
+                                                <a href="#0">
+                                                    <i class="flaticon-hand"></i><span>{{$v->like}}</span>
+                                                </a>
+                                                <a href="#0" class="dislike">
+                                                    <i class="flaticon-dont-like-symbol"></i><span>{{$v->dislike}}</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  @endforeach
+                                  @if(!empty(Auth::user()->name))
+                                  <div class="widget-1 widget-offer">
+                                          <h3 class="title mt-5">نظرات خود را ثبت کنید</h3>
+                                          <div class="offer-body">
+                                              <div class="offer-item">
+                                                  <form method="POST" action="/review" class="mt-0" id="review">
+                                                      @csrf
+                                                      <input type="hidden" name="events_id" value="{{$id}}">
+                                                      <div class="form-group">
+                                                          <span><label for="rating" class="pl-3">امتیاز شما به این فیلم :</label>
+                                                          <input type="number" id="rating" name="rating" min="0" max="5" class="inpnumw"></span>
+                                                      </div>
+                                                      <div class="form-group">
+                                                      <textarea rows="8" cols="80" name="comment" form="review" class="bgtrasparent text-white" placeholder="نظر خود را اینجا بنویسید ..."></textarea>
+                                                      </div>
+                                                      <input class="letter__spacing__1 probutton" type="submit" value="ثبت نظر">
+                                                  </form>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              @endif
+                                </div>
+                                <div class="widget-1 widget-offer">
+                                    <h3 class="title mt-5">خرید بلیت</h3>
+                                    <div class="offer-body">
+                                        <div class="offer-item">
+                                                @if($flag===0)
+                                                <div class="mt-3 mb-3 text-center">
+                                                <p class="text-white text-center">متاسفانه در حال حاضر این برنامه نمایش داده نمی شود !</p>
+                                                </div>
+                                            @endif
+                                            @if($flag===1)
+                                                <form method="POST" action="/ticket" class="mt-0">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$id}}">
+                                                    <span class="text-white pt-1 pb-1 pl-5">روز مورد نظرتان را انتخاب کنید:</span>
+                                                    <select class="myselect-bar1 text-black mt-3 mb-3 inpdatew ml-5 " name="date">
+                                                        @foreach($date as $d)
+                                                            <option value="{{$d}}">{{$d}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <input class="letter__spacing__1 probutton inpdatew" type="submit" value="خرید بلیت">
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -351,6 +247,6 @@
             </div>
         </div>
     </section>
-    <!-- ==========Event-Section========== -->
+    <!-- ==========Movie-Section========== -->
 
     @endsection

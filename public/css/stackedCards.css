@@ -44,6 +44,7 @@
     border-radius: 8px;
     box-shadow: 0 3px 6px 0px #333;
     list-style: none;
+    /* width: 600px; */
     width: 100%;
     position: absolute;
     left: 50%;

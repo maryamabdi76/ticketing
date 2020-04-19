@@ -206,7 +206,7 @@
             }
         });
         $('.tab-slider').owlCarousel({
-            loop: true,
+            // loop: true,
             rtl: true,
             responsiveClass: true,
             nav: false,
@@ -337,6 +337,7 @@
         $('.cast-prev-2').on('click', function () {
             owlTT.trigger('prev.owl.carousel', [300]);
         })
+
         $('.details-photos').owlCarousel({
             // loop:true,
             rtl: true,
@@ -364,28 +365,29 @@
                 }
             }
         });
-        var book = 0;
-        $(".seat-free img").on('click', function (e) {
-            if (book == 0) {
-                $(this).attr("src", "./assets/images/movie/seat01-free.png");
-                book = 1;
-            }
-            else if (book == 1) {
-                $(this).attr("src", "./assets/images/movie/seat01-booked.png");
-                book = 0;
-            }
-        });
-        var bookTwo = 1;
-        $(".seat-free-two img").on('click', function (e) {
-            if (bookTwo == 0) {
-                $(this).attr("src", "./assets/images/movie/seat02-free.png");
-                bookTwo = 1;
-            }
-            else if (bookTwo == 1) {
-                $(this).attr("src", "./assets/images/movie/seat02-booked.png");
-                bookTwo = 0;
-            }
-        });
+        // var book = 0;
+        // $(".seat-free img").on('click', function (e) {
+        //     if (book == 0) {
+        //         $(this).attr("src", "http://127.0.0.1:8000/images/movie/seat01.png");
+        //         book = 1;
+        //     }
+        //     else if (book == 1) {
+        //         $(this).attr("src", "http://127.0.0.1:8000/images/movie/seat01-chosen.png");
+        //         book = 0;
+        //     }
+        // });
+        // var bookTwo = 1;
+        // $(".seat-free-two img").on('click', function (e) {
+        //     if (bookTwo == 0) {
+        //         $(this).attr("src", "http://127.0.0.1:8000/images/movie/seat02-free.png");
+        //         bookTwo = 1;
+        //     }
+        //     else if (bookTwo == 1) {
+        //         $(this).attr("src", "http://127.0.0.1:8000/images/movie/seat02-booked.png");
+        //         bookTwo = 0;
+        //     }
+        // });
+
         // shop cart + - start here
         var CartPlusMinus = $('.cart-plus-minus');
         CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
@@ -511,3 +513,16 @@
         })
     });
 })(jQuery);
+
+$('.input_seat_checkbox').each(function(){
+    $(this).hide().after('<div class="seat_checkbox" />');
+
+});
+
+$('.seat_checkbox').on('click',function(){
+    $(this).toggleClass('checked').prev().prop('checked',$(this).is('.checked'))
+});
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });

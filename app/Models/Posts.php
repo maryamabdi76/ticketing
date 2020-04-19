@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
 {
+    protected $fillable = ['title', 'content', 'views',];
     public function Events()
     {
         return $this->belongsTo('App\Models\Events','events_id','id');

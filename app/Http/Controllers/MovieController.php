@@ -3,27 +3,138 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Events;
+use App\Models\Posts;
+use App\Models\Genres;
+use App\Models\Locations;
+use App\Models\Shows;
+use App\Models\Reviews;
 
 class MovieController extends Controller
 {
     public function index()
     {
-        return view('movie.movie');
+        $movies = Events::all()->where('categories_id', 1);
+        $genres = Genres::join('events_genre', 'genres.id', '=', 'events_genre.genres_id')
+            ->join('events', 'events.id', '=', 'events_genre.events_id')
+            ->where('categories_id', 1)
+            ->select('genres.id', 'genres.name')->groupBy('id', 'genres.name')->get();
+        $data = array(
+            'shows' => Shows::all(),
+            'locations' => Locations::all(),
+            'movies' => $movies,
+            'genres' => $genres
+        );
+        return view('movie.movie')->with($data);
     }
-    public function details()
+    public function details($id)
     {
-        return view('movie.movie-details');
+        $date=array();
+        $i=$flag=0;
+
+        $movie = Events::findOrFail($id);
+        $related = Posts::where('events_id', $id)->get();
+        $reviews = Reviews::where('events_id', $id)->orderBy('created_at')->get();
+        $count = count($reviews);
+
+
+        $shows = Shows::where('events_id','=',$id)->get();
+
+        foreach($shows as $v){
+            $date[$i]=$v->date;
+            $i++;
+            }
+        $date = array_unique($date);
+
+        if($date){
+        $flag=1;
+        }
+
+        $data = array(
+            'movie' => $movie,
+            'related' => $related,
+            'reviews' => $reviews,
+            'count' =>$count,
+            'date' =>$date,
+            'flag' => $flag,
+            'id' => $id
+        );
+
+        return view('movie.movie-details')->with($data);
     }
-    public function ticket()
+
+    public function searchgenre(Request $request)
     {
-        return view('movie.movie-ticket');
+        $checkbox = $request['genre'];
+        $movies = Events::join('events_genre', 'events.id', '=', 'events_genre.events_id')
+            ->join('genres', 'genres.id', '=', 'events_genre.genres_id')->Where(function ($query) use ($checkbox) {
+                for ($i = 0; $i < count($checkbox); $i++) {
+                    if ($checkbox[$i] == '*')
+                        $query->select('* from events');
+                    else
+                        $query->orwhere('genres.name', $checkbox[$i]);
+                }
+            })
+            ->where('categories_id', 1)->select('events.id', 'events.name', 'events.date')->get();
+        $genres = Genres::join('events_genre', 'genres.id', '=', 'events_genre.genres_id')
+            ->join('events', 'events.id', '=', 'events_genre.events_id')
+            ->where('categories_id', 1)
+            ->select('genres.id', 'genres.name')->groupBy('id', 'genres.name')->get();
+        $data = array(
+            'shows' => Shows::all(),
+            'locations' => Locations::all(),
+            'movies' => $movies,
+            'genres' => $genres
+        );
+        return view('movie.movie')->with($data);
     }
-    public function seat()
+
+    public function searchmovie(Request $request)
     {
-        return view('movie.movie-seat');
+        $city = $request->city;
+        $date = $request->date;
+        $cinema = $request->cinema;
+        $search = $request->search;
+        if (isset($city) || isset($date) || isset($cinema) || isset($search))
+            $movies = Events::where('categories_id', 1)->join('shows', 'shows.events_id', '=', 'events.id')
+                ->join('salons', 'salons.id', '=', 'shows.salons_id')
+                ->join('locations', 'locations.id', '=', 'salons.locations_id')
+                ->where('locations.name', 'like', "%{$cinema}%")
+                ->where('locations.city', 'like', "%{$city}%")
+                ->where('shows.date', 'like', "%{$date}%")
+                ->select('events.id', 'events.name', 'events.date')
+                ->where('events.name', 'like', "%{$search}%")->get();
+        else
+            $movies = Events::all()->where('categories_id', 1);
+        $genres = Genres::join('events_genre', 'genres.id', '=', 'events_genre.genres_id')
+            ->join('events', 'events.id', '=', 'events_genre.events_id')
+            ->where('categories_id', 1)
+            ->select('genres.id', 'genres.name')->groupBy('id', 'genres.name')->get();
+        $data = array(
+            'shows' => Shows::all(),
+            'locations' => Locations::all(),
+            'movies' => $movies,
+            'genres' => $genres
+        );
+        return view('movie.movie')->with($data);
     }
-    public function checkout()
+
+    public function genres($id)
     {
-        return view('movie.movie-checkout');
+        $movies = Events::join('events_genre', 'events.id', '=', 'events_genre.events_id')
+            ->join('genres', 'genres.id', '=', 'events_genre.genres_id')
+            ->where('genres.id', $id)->where('categories_id', 1)->select('events.id', 'events.name', 'events.date')->get();
+        $genres = Genres::join('events_genre', 'genres.id', '=', 'events_genre.genres_id')
+            ->join('events', 'events.id', '=', 'events_genre.events_id')
+            ->where('categories_id', 1)
+            ->select('genres.id', 'genres.name')->groupBy('id', 'genres.name')->get();
+        $data = array(
+            'shows' => Shows::all(),
+            'locations' => Locations::all(),
+            'movies' => $movies,
+            'genres' => $genres
+        );
+        return view('movie.movie')->with($data);
     }
+
 }

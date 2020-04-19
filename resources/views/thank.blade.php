@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- ==========Banner-Section========== -->
-    <section class="details-banner event-details-banner hero-area bg_img seat-plan-banner style-two" data-background="{{asset('images/banner/banner10.jpg')}}">
+    <section class="details-banner event-details-banner hero-area bg_img seat-plan-banner style-two" data-background="{{asset('images/banner/banner04.jpg')}}">
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content style-two">

@@ -52,7 +52,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2 text-right">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 tifany">موجودی کیف پول</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">120000 تومان</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{$money}} تومان</div>
                     </div>
                     <div class="col-auto">
                       <a href="/wallet"><i class="fas fa-wallet fa-3x tifany "></i></a>
@@ -68,10 +68,10 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2 text-right">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 tifany">خرید های قبلی</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{$factorcount}}</div>
                     </div>
                     <div class="col-auto">
-                      <a href="/lastfactors"><i class="fas fa-file-invoice fa-3x tifany"></i></a>
+                    <a href="/lastfactors/{{Auth::user()->id}}"><i class="fas fa-file-invoice fa-3x tifany"></i></a>
                     </div>
                   </div>
                 </div>

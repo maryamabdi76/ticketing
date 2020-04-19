@@ -45,12 +45,9 @@
         -webkit-animation-timing-function:transform cubic-bezier(.18,1.25,.4,1),opacity cubic-bezier(0,1,.4,1);
         animation-timing-function:transform cubic-bezier(.18,1.25,.4,1),opacity cubic-bezier(0,1,.4,1)}@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
     .sidebarr .nav-item1.dropdown .dropdown-toggle::after,.topbar .nav-item1.dropdown .dropdown-toggle::after{width:1rem;text-align:center;float:left;vertical-align:0;border:0;font-weight:900;content:'\f105';font-family:'Font Awesome 5 Free'}.sidebarr .nav-item1.dropdown.show .dropdown-toggle::after,.topbar .nav-item1.dropdown.show .dropdown-toggle::after{content:'\f106'}.sidebarr .nav-item1 .nav-link1,.topbar .nav-item1 .nav-link1{position:relative}.sidebarr .nav-item1 .nav-link1 .badge-counter,.topbar .nav-item1 .nav-link1 .badge-counter{position:absolute;transform:scale(.7);transform-origin:top right;right:.25rem;margin-top:-.25rem}.sidebarr .nav-item1 .nav-link1 .img-profile,.topbar .nav-item1 .nav-link1 .img-profile{height:2rem;width:2rem}.topbar{height:4.375rem}.topbar #sidebarrToggleTop{height:2.5rem;width:2.5rem}.topbar #sidebarrToggleTop:hover{background-color:#eaecf4}.topbar #sidebarrToggleTop:active{background-color:#dddfeb}
-    .sidebarr{width:6.5rem;
-        padding-bottom: 20px;
-        /* min-height:70vh maryaaaaaaaaaaaaaaaaaaaaaam*/
-    }.sidebarr .nav-item1{position:relative}
+    .sidebarr{width:7rem;/*min-height:100vh;*/}.sidebarr .nav-item1{position:relative;padding-right:0;}
     .sidebarr .nav-item1:last-child{margin-bottom:1rem}
-    .sidebarr .nav-item1 .nav-link1{text-align:center;padding:.75rem 1rem;width:6.5rem}
+    .sidebarr .nav-item1 .nav-link1{text-align:center;width:6.5rem}
     .sidebarr .nav-item1 .nav-link1 span{font-size:.65rem;display:block}
     .sidebarr .nav-item1.active .nav-link1{font-weight:700}
     .sidebarr .nav-item1 .collapse{position:absolute;left:calc(6.5rem + 1.5rem / 2);z-index:1;top:2px}
@@ -67,13 +64,13 @@
     .sidebarr #sidebarrToggle:hover{text-decoration:none}
     .sidebarr #sidebarrToggle:focus{outline:0}
     .sidebarr.toggled{width:0!important;overflow:hidden}
-    .sidebarr.toggled #sidebarrToggle::after{content:'\f104';font-family:'Font Awesome 5 Free';margin-left:.25rem;}
-    .sidebarr .sidebarr-brand{height:4.375rem;text-decoration:none;font-size:1rem;font-weight:800;padding:1.5rem 1rem;text-align:center;text-transform:uppercase;letter-spacing:.05rem;z-index:1}
+    .sidebarr.toggled #sidebarrToggle::after{content:'\f104';font-family:'Font Awesome 5 Free';margin-left:.25rem}
+    .sidebarr .sidebarr-brand{height:4.375rem;text-decoration:none;font-size:1rem;font-weight:800;text-align:center;text-transform:uppercase;letter-spacing:.05rem;z-index:1}
     .sidebarr .sidebarr-brand .sidebarr-brand-icon i{font-size:2rem}
     .sidebarr .sidebarr-brand .sidebarr-brand-text{display:none}
     .sidebarr hr.sidebarr-divider{margin:0 1rem 1rem}
     .sidebarr .sidebarr-heading{text-align:center;padding:0 1rem;font-weight:800;font-size:.65rem}
-    @media (min-width:768px){.sidebarr{width:14rem!important}
+    @media (min-width:768px){.sidebarr{width:12rem!important}
     .sidebarr .nav-item1 .collapse{position:relative;left:0;z-index:1;top:0;-webkit-animation:none;animation:none}
     .sidebarr .nav-item1 .collapse .collapse-inner{border-radius:0;box-shadow:none}
     .sidebarr .nav-item1 .collapsing{display:block;transition:height .15s ease}
@@ -81,8 +78,8 @@
     .sidebarr .nav-item1 .nav-link1{display:block;width:100%;text-align:right;padding:1rem;width:14rem}
     .sidebarr .nav-item1 .nav-link1 i{font-size:.85rem;margin-right:.25rem}
     .sidebarr .nav-item1 .nav-link1 span{font-size:.85rem;display:inline}
-    .sidebarr .nav-item1 .nav-link1[data-toggle=collapse]::after{width:1rem;text-align:center;margin-right:3rem;/*maryaaaaaaaaam*/vertical-align:0;border:0;font-weight:900;content:'\f106';font-family:'Font Awesome 5 Free'}
-    .sidebarr .nav-item1 .nav-link1[data-toggle=collapse].collapsed::after{content:'\f104';margin-right:3rem/*maryaaaaaaaaam*/}
+    .sidebarr .nav-item1 .nav-link1[data-toggle=collapse]::after{width:1rem;text-align:center;margin-right:.5rem;vertical-align:0;border:0;font-weight:900;content:'\f106';font-family:'Font Awesome 5 Free'}
+    .sidebarr .nav-item1 .nav-link1[data-toggle=collapse].collapsed::after{content:'\f104';}
     .sidebarr .sidebarr-brand .sidebarr-brand-icon i{font-size:2rem}
     .sidebarr .sidebarr-brand .sidebarr-brand-text{display:inline}
     .sidebarr .sidebarr-heading{text-align:right}
@@ -127,7 +124,7 @@
     .sidebarr-dark #sidebarrToggle:hover{background-color:rgba(255,255,255,.25)}
     .sidebarr-dark.toggled #sidebarrToggle::after{color:rgba(255,255,255,.5)}
     .sidebarr-toggled footer.sticky-footer{width:100%}
-    .nav-item1 .nav-link1{height:4.375rem;display:flex;align-items:center;padding:0 .75rem}.topbar .nav-item1 .nav-link1:focus{outline:0}.topbar .nav-item1:focus{outline:0}
+    .nav-item1 .nav-link1{height:4.375rem;display:flex;align-items:center;}.topbar .nav-item1 .nav-link1:focus{outline:0}.topbar .nav-item1:focus{outline:0}
     .nav-tabs .nav-item1{margin-bottom:-1px}
     .nav-tabs .nav-item1.show .nav-link1,.nav-tabs .nav-link1.active{color:#6e707e;background-color:#fff;border-color:#dddfeb #dddfeb #fff}
     .nav-fill .nav-item1{flex:1 1 auto;text-align:center}.nav-justified .nav-item1{flex-basis:0;flex-grow:1;text-align:center}
@@ -148,7 +145,6 @@
     color: white!important;
 }
 .jccenter{
-    /* justify-content:center!important ; */
     margin: 0 auto !important;
 }
 .cardbg{
@@ -339,4 +335,36 @@
 .mr-15imp
 {
     margin-right: 1.5rem !important;
+}
+.mr-1imp
+{
+    margin-right: 1rem !important;
+}
+.mb-15imp
+{
+    margin-bottom: 1.5rem !important;
+}
+.mb-3imp
+{
+    margin-bottom: 3rem !important;
+}
+.fontsize20{
+    font-size: 20px!important;
+}
+.txtright{
+    text-align: right!important;
+    /* align-content: flex-start!important;
+    float: right!important; */
+}
+.h80vh
+{
+    min-height:80vh;
+}
+.minwidth300
+{
+    min-width: 300px!important;
+}
+.fcenter{
+    position: relative;
+    left:50%!important;
 }

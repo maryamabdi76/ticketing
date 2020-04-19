@@ -16,6 +16,6 @@ class Salons extends Model
     }
     public function Segments()
     {
-        return $this->belongsToMany('App\Models\Segments', 'arrangements', 'salons_id', 'segments_id')->withPivot('orders');
+        return $this->belongsToMany('App\Models\Segments', 'arrangements', 'salons_id', 'segments_id');
     }
 }

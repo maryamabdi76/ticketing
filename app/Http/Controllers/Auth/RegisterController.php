@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Models\Roles;
+use App\Models\Wallets;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -68,24 +69,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user= User::create([
-            'username' => $data['username'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'gender' => $data['gender'],
-            'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
-        ]);
-        $role= Roles::find(2);
-        $user->Role()->attach($role->id);
-        return $user;
-        // return User::create([
-        //     'username' => $data['username'],
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'gender' => $data['gender'],
-        //     'phone' => $data['phone'],
-        //     'password' => Hash::make($data['password']),
-        // ]);
+        {
+            $user= User::create([
+                'username' => $data['username'],
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'],
+                'password' => Hash::make($data['password']),
+            ]);
+            $role= Roles::find(2);
+            $user->Roles()->attach($role->id);
+
+            $email=$data['email'];
+            $users_id=User::where('email','=',$email)->get('id');
+            $users_id=$users_id[0]->id;
+
+            $wallet= new Wallets();
+            $wallet->users_id=$users_id;
+            $wallet->save();
+
+            return $user;
+        }
     }
 }

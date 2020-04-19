@@ -3,7 +3,14 @@
 @section('content')
 
     <!-- ==========Event-Banner-Section========== -->
-    <section class="event-banner-section bg_img" data-background="{{asset('images/banner/banner06.jpg')}}">
+    <section class="event-banner-section bg_img " data-background="">
+    {{-- <section class="event-banner-section bg_img " data-background="{{asset('/').$concert->Images()->get()->first()->path}}"> --}}
+        {{-- <section class="event-banner-section bg_img" data-background="{{asset('images/banner/banner06.jpg')}}"> --}}
+            {{-- <div class="details-banner-wrapper">
+                <div class="details-banner-thumb">
+                    <img src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="movie">
+                </div>
+            </div> --}}
         <div class="container">
             <div class="event-banner">
                 <a href="https://www.youtube.com/embed/GT6-H4BRyqQ" class="video-popup">
@@ -21,7 +28,7 @@
             <div class="event-search bg_img" data-background="{{asset('images/ticket/ticket-bg01.jpg')}}">
                 <div class="event-search-top">
                     <div class="left">
-                        <h3 class="title">دیجیتال مارکتینگ -2020</h3>
+                        <h3 class="title">{{$concert->name}}</h3>
                     </div>
                     <div class="right">
                         <ul class="countdown">
@@ -52,8 +59,8 @@
                                 <img src="{{asset('images/event/icon/event-icon01.png')}}" alt="event">
                             </div>
                             <div class="item-content">
-                                <span class="up">3 روز (جمعه - یکشنبه )</span>
-                                <span>70+ ورکشاپ</span>
+                                <span class="up">{{$concert->date}}</span>
+                                <span></span>
                             </div>
                         </div>
                         <div class="item">
@@ -116,16 +123,130 @@
                     <div class="event-about-content">
                         <div class="section-header-3 left-style m-0">
                             <span class="cate">آماده هستید که شرکت کنید ؟</span>
-                            <h2 class="title">دیجیتال مارکتینپ - <span>2020</span></h2>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                            </p>
-                            <a href="/concert-ticket" class="custom-button">خرید بلیت</a>
+                            <h2 class="title">{{$concert->name}}<span></span></h2>
+                                        <div class="movie-details">
+                                            <div class="tab summery-review">
+                                                <ul class="tab-menu">
+                                                    <li class="active">
+                                                         کنسرت
+                                                    </li>
+                                                    <li>
+                                                        نظرات کاربران <span>{{$count}}</span>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-area">
+                                                    <div class="tab-item active">
+                                                        {{-- <div class="item">
+                                                            <h5 class="sub-title">خلاصه</h5>
+                                                            <p>{{$concert->description}}</p>
+                                                        </div> --}}
+                                                        <div class="item">
+                                                            <div class="header">
+                                                                <h5 class="sub-title">خواننده</h5>
+                                                            </div>
+                                                            <p>{{$concert->act}}</p>
+                                                        </div>
+                                                        <div class="item">
+                                                            <div class="header">
+                                                                <h5 class="sub-title">عوامل</h5>
+                                                            </div>
+                                                            <p style="white-space: pre-wrap">{{$concert->team}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-item">
+                                                        @foreach($reviews as $v)
+                                                            <div class="movie-review-item">
+                                                                <div class="author">
+                                                                    <div class="thumb">
+                                                                        @if($v->user->gender===1)
+                                                                            <img src="{{asset('images/avatar/femaleavatar.png')}}" alt="female avatar"/>
+                                                                        @endif
+                                                                        @if($v->user->gender===2)
+                                                                            <img src="{{asset('images/avatar/maleavatar.png')}}" alt="male avatar"/>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="movie-review-info">
+                                                                        <h6 class="subtitle mt-3">{{$v->user->name}}</h6>
+                                                                        <span class="reply-date">{{$v->created_at}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="movie-review-content">
+                                                                        <div class="review">
+                                                                        @for ($i=1; $i <= 5 ; $i++)
+                                                                        <i class="fas fa-heart {{ ($i <= $v->rating) ? 'heart__f' : 'heart__o'}}"></i>
+                                                                        @endfor
+                                                                        </div>
+                                                                    <p>{{$v->comment}}</p>
+                                                                    <div class="review-meta">
+                                                                        <a href="#0">
+                                                                            <i class="flaticon-hand"></i><span>{{$v->like}}</span>
+                                                                        </a>
+                                                                        <a href="#0" class="dislike">
+                                                                            <i class="flaticon-dont-like-symbol"></i><span>{{$v->dislike}}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @if(!empty(Auth::user()->name))
+                                                            <div class="widget-1 widget-offer">
+                                                                    <h3 class="title mt-5">نظرات خود را ثبت کنید</h3>
+                                                                    <div class="offer-body">
+                                                                        <div class="offer-item">
+                                                                            <form method="POST" action="/review" class="mt-0" id="review">
+                                                                                @csrf
+                                                                                <input type="hidden" name="events_id" value="{{$id}}">
+                                                                                <div class="form-group">
+                                                                                    <span><label for="rating" class="pl-3">امتیاز شما به این فیلم :</label>
+                                                                                    <input type="number" id="rating" name="rating" min="0" max="5" class="inpnumw"></span>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                <textarea rows="8" cols="80" name="comment" form="review" class="bgtrasparent text-white" placeholder="نظر خود را اینجا بنویسید ..."></textarea>
+                                                                                </div>
+                                                                                <input class="letter__spacing__1 probutton" type="submit" value="ثبت نظر">
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-1 widget-offer">
+                                                <h3 class="title mt-5">خرید بلیت</h3>
+                                                <div class="offer-body">
+                                                    <div class="offer-item">
+                                                        @if($flag===0)
+                                                            <div class="mt-3 mb-3 text-center">
+                                                            <p class="text-white text-center">متاسفانه در حال حاضر این برنامه نمایش داده نمی شود !</p>
+                                                            </div>
+                                                        @endif
+                                                        @if($flag===1)
+                                                            <form method="POST" action="/ticket" class="mt-0">
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{$id}}">
+                                                                <span class="text-white pt-1 pb-1">روز مورد نظرتان را انتخاب کنید:</span>
+                                                                <select class="myselect-bar1 text-black mt-3 mb-3" name="date">
+                                                                    @foreach($date as $d)
+                                                                        <option value="{{$d}}">{{$d}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <input class="letter__spacing__1 probutton" type="submit" value="خرید بلیت">
+                                                            </form>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-7">
                     <div class="event-about-thumb">
-                        <img src="{{asset('images/event/event-about.jpg')}}" alt="event">
+                        <img src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="event">
                     </div>
                 </div>
             </div>
@@ -134,7 +255,7 @@
     <!-- ==========Event-About========== -->
 
     <!-- ==========Gallery-Section========== -->
-    <div class="speaker-gallery">
+    <div class="speaker-gallery padding-bottom">
         <div class="row m-0">
             <div class="col-md-6 p-0">
                 <div class="row m-0">
@@ -182,8 +303,195 @@
     </div>
     <!-- ==========Gallery-Section========== -->
 
+    {{-- <div class="container">
+        <div class="row justify-content-center flex-wrap-reverse mb--50">
+            <div class="col-lg-7 offset-lg-1 mb-50">
+                <div class="movie-details">
+                    <div class="tab summery-review">
+                        <ul class="tab-menu">
+                            <li class="active">
+                                خلاصه کنسرت
+                            </li>
+                            <li>
+                                نظرات کاربران <span>147</span>
+                            </li>
+                        </ul>
+                        <div class="tab-area">
+                            <div class="tab-item active">
+                                <div class="item">
+                                    <h5 class="sub-title">خلاصه</h5>
+                                    <p>{{$concert->description}}</p>
+                                </div>
+                                <div class="item">
+                                    <div class="header">
+                                        <h5 class="sub-title">خواننده</h5>
+                                    </div>
+                                    <p>{{$concert->act}}</p>
+                                </div>
+                                <div class="item">
+                                    <div class="header">
+                                        <h5 class="sub-title">عوامل</h5>
+                                    </div>
+                                    <p>{{$concert->team}}</p>
+
+                            </div>
+                            <div class="tab-item">
+                                <div class="movie-review-item">
+                                    <div class="author">
+                                        <div class="thumb">
+                                            <a href="#0">
+                                                <img src="{{asset('images/cast/cast02.jpg')}}" alt="cast">
+                                            </a>
+                                        </div>
+                                        <div class="movie-review-info">
+                                            <span class="reply-date">13 روز پیش</span>
+                                            <h6 class="subtitle"><a href="#0">minkuk seo</a></h6>
+                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="movie-review-content">
+                                        <div class="review">
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                        </div>
+                                        <h6 class="cont-title">Awesome Movie</h6>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+                                        <div class="review-meta">
+                                            <a href="#0">
+                                                <i class="flaticon-hand"></i><span>8</span>
+                                            </a>
+                                            <a href="#0" class="dislike">
+                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
+                                            </a>
+                                            <a href="#0">
+                                                گزارش مشکل
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-review-item">
+                                    <div class="author">
+                                        <div class="thumb">
+                                            <a href="#0">
+                                                <img src="{{asset('images/cast/cast04.jpg')}}" alt="cast">
+                                            </a>
+                                        </div>
+                                        <div class="movie-review-info">
+                                            <span class="reply-date">13 روز پیش</span>
+                                            <h6 class="subtitle"><a href="#0">rudra rai</a></h6>
+                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="movie-review-content">
+                                        <div class="review">
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                        </div>
+                                        <h6 class="cont-title">Awesome Movie</h6>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+                                        <div class="review-meta">
+                                            <a href="#0">
+                                                <i class="flaticon-hand"></i><span>8</span>
+                                            </a>
+                                            <a href="#0" class="dislike">
+                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
+                                            </a>
+                                            <a href="#0">
+                                                گزارش مشکل
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-review-item">
+                                    <div class="author">
+                                        <div class="thumb">
+                                            <a href="#0">
+                                                <img src="{{asset('images/cast/cast01.jpg')}}" alt="cast">
+                                            </a>
+                                        </div>
+                                        <div class="movie-review-info">
+                                            <span class="reply-date">13 روز پیش</span>
+                                            <h6 class="subtitle"><a href="#0">rafuj</a></h6>
+                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="movie-review-content">
+                                        <div class="review">
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                        </div>
+                                        <h6 class="cont-title">Awesome Movie</h6>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+                                        <div class="review-meta">
+                                            <a href="#0">
+                                                <i class="flaticon-hand"></i><span>8</span>
+                                            </a>
+                                            <a href="#0" class="dislike">
+                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
+                                            </a>
+                                            <a href="#0">
+                                                گزارش مشکل
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-review-item">
+                                    <div class="author">
+                                        <div class="thumb">
+                                            <a href="#0">
+                                                <img src="{{asset('images/cast/cast03.jpg')}}" alt="cast">
+                                            </a>
+                                        </div>
+                                        <div class="movie-review-info">
+                                            <span class="reply-date">13 روز پیش</span>
+                                            <h6 class="subtitle"><a href="#0">bela bose</a></h6>
+                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="movie-review-content">
+                                        <div class="review">
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                            <i class="flaticon-favorite-heart-button"></i>
+                                        </div>
+                                        <h6 class="cont-title">Awesome Movie</h6>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+                                        <div class="review-meta">
+                                            <a href="#0">
+                                                <i class="flaticon-hand"></i><span>8</span>
+                                            </a>
+                                            <a href="#0" class="dislike">
+                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
+                                            </a>
+                                            <a href="#0">
+                                                گزارش مشکل
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="load-more text-center">
+                                    <a href="#0" class="custom-button transparent">نمایش بیشتر</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
     <!-- ==========Speaker-Section========== -->
-    <section class="speaker-section padding-bottom padding-top">
+    {{-- <section class="speaker-section padding-bottom padding-top">
         <div class="container">
             <div class="section-header-3">
                 <span class="cate">با کادر ما آشنا شوید</span>
@@ -261,12 +569,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ==========Speaker-Section========== -->
 
 
     <!-- ==========Statistics-Section========== -->
-    <section class="statistics-section padding-top padding-bottom bg_img pb-lg-0" data-background="{{asset('images/statistics/statistics-bg01.jpg')}}">
+    {{-- <section class="statistics-section padding-top padding-bottom bg_img pb-lg-0" data-background="{{asset('images/statistics/statistics-bg01.jpg')}}">
         <div class="container">
             <div class="section-header-3">
                 <span class="cate">ما چه کار می کنیم </span>
@@ -311,11 +619,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ==========Statistics-Section========== -->
 
     <!-- ==========Faq-Section========== -->
-    <section class="faq-section padding-top">
+    {{-- <section class="faq-section padding-top">
         <div class="container">
             <div class="section-header-3">
                 <span class="cate">ما چطور می توانیم کمک کنیم ؟</span>
@@ -377,11 +685,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ==========Faq-Section========== -->
 
     <!-- ==========Event-Section========== -->
-    <section class="event-details padding-bottom padding-top">
+    {{-- <section class="event-details padding-bottom padding-top">
         <div class="container">
             <div class="section-header-3">
                 <span class="cate">حامیان رویداد</span>
@@ -491,7 +799,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ==========Event-Section========== -->
 
     @endsection

@@ -25,46 +25,12 @@
 
     <div id="bilitoSlider" class="stacked-cards pt-5 mt-2">
 		<ul>
+            @foreach($sliders as $e)
 			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider1.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
+                <img src="{{asset('/').$e->Images()->get()->first()->path}}" style=""/>
+                <a class="w-100 text-center text-white m-2" href="/movie-details/{{$e->events_id}}">{{$e->title}}</a>
             </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider2.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider3.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider4.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-            <li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider5.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider1.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider2.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider3.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider4.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
-			<li class="gradiant-bg">
-                <img src="{{asset('images/slider/slider5.jpg')}}" />
-                <a class="w-100 text-center text-white m-2" href="/movie-details">نمایش جزئیات</a>
-            </li>
+            @endforeach
 		</ul>
     </div>
 
@@ -105,266 +71,45 @@
                 <div class="tab-area mb-30-none">
                     <div class="tab-item active">
                         <div class="owl-carousel owl-theme tab-slider">
+                            {{-- {{dd($x)}} --}}
+                            @foreach($x as $k=>$v)
                             <div class="item">
                                 <div class="event-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
+                                            @if($v[0]->categories_id==1)
+                                            <a href="/movie-details/{{$v[0]->events_id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
+                                            </a>
+                                            @elseif($v[0]->categories_id==2)
+                                            <a href="/concert-details/{{$v[0]->events_id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
+                                            </a>
+                                            @else
+                                            <a href="/theater-details/{{$v[0]->events_id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
+                                            </a>
+                                            @endif
+
                                         <div class="event-date">
                                             <h6 class="date-title"><i class="fa fa-store"></i></h6>
-                                            {{-- <span>Dec</span> --}}
                                         </div>
                                     </div>
                                     <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
+                                        <h5 class="title m-0" style="font-size:1.1rem">
+                                            @if($v[0]->categories_id==1)
+                                            <a href="/movie-details/{{$v[0]->events_id}}">{{$v[0]->name}}</a>
+                                            @elseif($v[0]->categories_id==2)
+                                            <a href="/concert-details/{{$v[0]->events_id}}">{{$v[0]->name}}</a>
+                                            @else
+                                            <a href="/theater-details/{{$v[0]->events_id}}">{{$v[0]->name}}</a>
+                                            @endif
                                         </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
+                                        <ul class="movie-rating-percent">
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title"><i class="fa fa-store"></i></h6>
-                                            {{-- <span>Dec</span> --}}
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title"><i class="fa fa-store"></i></h6>
-                                            {{-- <span>Dec</span> --}}
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title"><i class="fa fa-store"></i></h6>
-                                            {{-- <span>Dec</span> --}}
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -375,6 +120,7 @@
 
 
     <!-- ==========Liked========== -->
+    @if($mostratings->count() > 0)
     <section class="event-section padding-top padding-bottom bg-four">
         <div class="container">
             <div class="tab">
@@ -387,272 +133,63 @@
                 <div class="tab-area mb-30-none">
                     <div class="tab-item active">
                         <div class="owl-carousel owl-theme tab-slider">
+                            @foreach($mostratings as $mostrating)
                             <div class="item">
                                 <div class="event-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
+                                            @if($mostrating->events->categories_id==1)
+                                            <a href="/movie-details/{{$mostrating->events->id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$mostrating->events->Images()->get()->first()->path}}" alt="movie">
+                                            </a>
+                                            @elseif($mostrating->events->categories_id==2)
+                                            <a href="/concert-details/{{$mostrating->events->id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$mostrating->events->Images()->get()->first()->path}}" alt="movie">
+                                            </a>
+                                            @else
+                                            <a href="/theater-details/{{$mostrating->events->id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$mostrating->events->Images()->get()->first()->path}}" alt="movie">
+                                            </a>
+                                            @endif
+
                                         <div class="event-date">
                                             <h6 class="date-title"><i class="fa fa-heart"></i></h6>
-                                            {{-- <span>Dec</span> --}}
                                         </div>
                                     </div>
                                     <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
+                                        <h5 class="title m-0" style="font-size:1.1rem">
+                                            @if($mostrating->events->categories_id==1)
+                                            <a href="/movie-details/{{$mostrating->events->id}}">{{$mostrating->events->name}}</a>
+                                            @elseif($mostrating->events->categories_id==2)
+                                            <a href="/concert-details/{{$mostrating->events->id}}">{{$mostrating->events->name}}</a>
+                                            @else
+                                            <a href="/theater-details/{{$mostrating->events->id}}">{{$mostrating->events->name}}</a>
+                                            @endif
                                         </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
+                                        <ul class="movie-rating-percent">
+                                            {{-- <li>
+                                                <div class="thumb">
+                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
+                                                </div>
+                                                <span class="content">88%</span>
+                                            </li>
+                                            <li>
+                                                <div class="thumb">
+                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
+                                                </div>
+                                                <span class="content">88%</span>
+                                            </li> --}}
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title"><i class="fa fa-heart"></i></h6>
-                                            {{-- <span>Dec</span> --}}
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title"><i class="fa fa-heart"></i></h6>
-                                            {{-- <span>Dec</span> --}}
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title"><i class="fa fa-heart"></i></h6>
-                                            {{-- <span>Dec</span> --}}
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endif
     <!-- ==========Best-Seller========== -->
 
 
@@ -670,30 +207,30 @@
                         <li class="active">
                             در حال نمایش
                         </li>
-                        <li>
+                        {{-- <li>
                             به زودی
-                        </li>
-                        <li>
-                            انحصاری
-                        </li>
+                        </li> --}}
+                        <a href="{{route('movie')}}" style="">نمایش همه</a>
                     </ul>
                 </div>
                 <div class="tab-area mb-30-none">
                     <div class="tab-item active">
                         <div class="owl-carousel owl-theme tab-slider">
+                            @foreach($events as $movie)
+                            @if($movie->categories_id ==1)
                             <div class="item">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie01.jpg')}}" alt="movie">
+                                        <a href="/movie-details/{{$movie->id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$movie->Images()->get()->first()->path}}" alt="movie">
                                         </a>
                                     </div>
                                     <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">alone</a>
+                                        <h5 class="title m-0" style="font-size:1.1rem">
+                                            <a href="/movie-details/{{$movie->id}}">{{$movie->name}}</a>
                                         </h5>
                                         <ul class="movie-rating-percent">
-                                            <li>
+                                           {{--  <li>
                                                 <div class="thumb">
                                                     <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
                                                 </div>
@@ -704,193 +241,27 @@
                                                     <img src="{{asset('images/movie/cake.png')}}" alt="movie">
                                                 </div>
                                                 <span class="content">88%</span>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie02.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">mars</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie03.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">venus</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie04.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">horror night</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
+                            @endforeach
                         </div>
                     </div>
-                    <div class="tab-item">
+                    {{-- <div class="tab-item">
                         <div class="owl-carousel owl-theme tab-slider">
                             <div class="item">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
+                                        <a href="/movie-details/{{$movie->id}}">
                                             <img src="{{asset('images/movie/movie01.jpg')}}" alt="movie">
                                         </a>
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="/movie-details">alone</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie02.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">mars</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie03.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">venus</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie04.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">horror night</a>
+                                            <a href="/movie-details/{{$movie->id}}">alone</a>
                                         </h5>
                                         <ul class="movie-rating-percent">
                                             <li>
@@ -910,123 +281,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie01.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">alone</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie02.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">mars</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie03.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">venus</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/movie-details">
-                                            <img src="{{asset('images/movie/movie04.jpg')}}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/movie-details">horror night</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/tomato.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{{asset('images/movie/cake.png')}}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -1046,109 +301,49 @@
                         <li class="active">
                             در حال نمایش
                         </li>
-                        <li>
+                        {{-- <li>
                             به زودی
-                        </li>
-                        <li>
-                            انحصاری
-                        </li>
+                        </li> --}}
+                        <a href="{{route('concert')}}" style="">نمایش همه</a>
+
                     </ul>
                 </div>
                 <div class="tab-area mb-30-none">
                     <div class="tab-item active">
                         <div class="owl-carousel owl-theme tab-slider">
+                            @foreach($events as $concert)
+                            @if($concert->categories_id ==2)
                             <div class="item">
                                 <div class="event-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
+                                        <a href="/concert-details/{{$concert->id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="concert">
                                         </a>
-                                        <div class="event-date">
+                                        {{-- <div class="event-date">
                                             <h6 class="date-title">28</h6>
                                             <span>Dec</span>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
+                                        <h5 class="title m-0" style="font-size:1.1rem">
+                                            <a href="/concert-details/{{$concert->id}}">{{$concert->name}}</a>
                                         </h5>
                                         <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
+                                            <span>کنسرت</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
+                            @endforeach
                         </div>
                     </div>
-                    <div class="tab-item">
+                    {{-- <div class="tab-item">
                         <div class="owl-carousel owl-theme tab-slider">
                             <div class="item">
                                 <div class="event-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
+                                        <a href="/concert-details/{{$concert->id}}">
                                             <img src="{{asset('images/event/event01.jpg')}}" alt="event">
                                         </a>
                                         <div class="event-date">
@@ -1157,71 +352,8 @@
                                         </div>
                                     </div>
                                     <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
+                                        <h5 class="title m-0" >
+                                            <a href="/concert-details/{{$concert->id}}">Digital Economy Conference 2020</a>
                                         </h5>
                                         <div class="movie-rating-percent">
                                             <span>327 Montague Street</span>
@@ -1230,95 +362,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event01.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">Digital Economy Conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event02.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">web design conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event03.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">digital thinkers meetup</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details">
-                                            <img src="{{asset('images/event/event04.jpg')}}" alt="event">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/concert-details">world digital conference 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -1338,101 +382,42 @@
                         <li class="active">
                             در حال نمایش
                         </li>
-                        <li>
+                        {{-- <li>
                             به زودی
-                        </li>
-                        <li>
-                            انحصاری
-                        </li>
+                        </li> --}}
+                        <a href="{{route('theater')}}" style="">نمایش همه</a>
+
                     </ul>
                 </div>
                 <div class="tab-area mb-30-none">
                     <div class="tab-item active">
                         <div class="owl-carousel owl-theme tab-slider">
+                            @foreach($events as $theater)
+                            @if($theater->categories_id ==3)
                             <div class="item">
                                 <div class="sports-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports01.jpg')}}" alt="sports">
+                                        <a href="/theater-details/{{$theater->id}}">
+                                            <img width="330px" height="400px" src="{{asset('/').$theater->Images()->get()->first()->path}}" alt="theater">
                                         </a>
-                                        <div class="event-date">
+                                        {{-- <div class="event-date">
                                             <h6 class="date-title">28</h6>
                                             <span>Dec</span>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">football league tournament</a>
+                                        <h5 class="title m-0"  style="font-size:1.1rem">
+                                        <a href="/theater-details/{{$theater->id}}">{{$theater->name}}</a>
                                         </h5>
                                         <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
+                                            <span>تئاتر</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports02.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">world cricket league 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports03.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">basket ball league tournament</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports04.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">world badminton league 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            @endif
+                            @endforeach
                         </div>
                     </div>
                     <div class="tab-item">
@@ -1440,7 +425,7 @@
                             <div class="item">
                                 <div class="sports-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
+                                        <a href="/theater-details/{{$theater->id}}">
                                             <img src="{{asset('images/sports/sports01.jpg')}}" alt="sports">
                                         </a>
                                         <div class="event-date">
@@ -1450,158 +435,7 @@
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="/theater-details">football league tournament</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports02.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">world cricket league 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports03.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">basket ball league tournament</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports04.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">world badminton league 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports01.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">football league tournament</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports02.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">world cricket league 2020</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports03.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">basket ball league tournament</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="sports-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/theater-details">
-                                            <img src="{{asset('images/sports/sports04.jpg')}}" alt="sports">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="/theater-details">world badminton league 2020</a>
+                                            <a href="/theater-details/{{$theater->id}}">football league tournament</a>
                                         </h5>
                                         <div class="movie-rating-percent">
                                             <span>327 Montague Street</span>

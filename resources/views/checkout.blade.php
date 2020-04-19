@@ -2,16 +2,15 @@
 @extends('layouts.bilito.mainlayout')
 @section('content')
 
-
     <!-- ==========Banner-Section========== -->
-    <section class="details-banner event-details-banner hero-area bg_img seat-plan-banner" data-background="{{asset('images/banner/banner07.jpg')}}">
+    <section class="details-banner hero-area bg_img seat-plan-banner" data-background="{{asset('images/banner/banner04.jpg')}}">
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content style-two">
-                    <h3 class="title"><span class="d-block">دیجیتال مارکتینگ</span>
-                        <span class="d-block">2020</span></h3>
+                    <h3 class="title">{{$eventname}}</h3>
                     <div class="tags">
-                        <span>لورم</span>
+                    <a href="#0">{{$location->name}}</a>
+                        {{-- <a href="#0">English - 2D</a> --}}
                     </div>
                 </div>
             </div>
@@ -24,19 +23,19 @@
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="/movie-seat" class="custom-button back-button">
+                    <a href="/seat/{{$show[0]->shows_id}}" class="custom-button back-button">
                         <i class="fa fa-angle-double-left"></i> قبلی
                     </a>
                 </div>
-                <div class="item date-item">
-                    <span class="date">دوشنبه ، 20 فروردین 1399 </span>
-                    <select class="select-bar">
-                        <option value="sc1">09:40</option>
-                        <option value="sc2">13:45</option>
-                        <option value="sc3">15:45</option>
-                        <option value="sc4">19:50</option>
-                    </select>
-                </div>
+                    {{-- <div class="item date-item">
+                        <span class="date">دوشنبه ، 20 فروردین 1399 </span>
+                        <select class="select-bar">
+                            <option value="sc1">09:40</option>
+                            <option value="sc2">13:45</option>
+                            <option value="sc3">15:45</option>
+                            <option value="sc4">19:50</option>
+                        </select>
+                    </div> --}}
                 <div class="item">
                     <h5 class="title">05:00</h5>
                     <p>دقیقه مانده</p>
@@ -46,17 +45,18 @@
     </section>
     <!-- ==========Page-Title========== -->
 
-    <!-- ==========Event-Section========== -->
-    <div class="event-facility padding-bottom padding-top">
+    <!-- ==========Movie-Section========== -->
+    <div class="movie-facility padding-bottom padding-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    @if(empty(Auth::user()->name))
                     <div class="checkout-widget d-flex flex-wrap align-items-center justify-cotent-between">
                         <div class="title-area">
                             <h5 class="title">عضو بیلیتو هستید؟</h5>
                             <p>برای کسب امتیاز و ورود آسان تر به سیستم وارد شوید!</p>
                         </div>
-                        <a href="#0" class="sign-in-area">
+                        <a href="/login" class="sign-in-area">
                             <i class="fas fa-user"></i><span>ورود</span>
                         </a>
                     </div>
@@ -77,75 +77,17 @@
                             </div>
                         </form>
                     </div>
+                    @endif
                     <div class="checkout-widget checkout-contact">
-                        <h5 class="title">انتخاب بلیت</h5>
-                        <div class="ticket--area row justify-content-center">
-                            <div class="col-sm-6 col-md-4">
-                                <div class="ticket-item">
-                                    <div class="ticket-thumb">
-                                        <img src="{{asset('images/event/ticket/ticket01.png')}}" alt="event">
-                                    </div>
-                                    <div class="ticket-content">
-                                        <span class="ticket-title">بلیت استاندارد</span>
-                                        <h2 class="amount"><sup>$</sup>49</h2>
-                                        <a href="#0" class="t-button">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                        <h5 class="title">کد تخفیف </h5>
+                        <form class="checkout-contact-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="کد تخفیف را وارد کنید">
                             </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="ticket-item two">
-                                    <div class="hot">
-                                        <span>hot</span>
-                                    </div>
-                                    <div class="ticket-thumb">
-                                        <img src="{{asset('images/event/ticket/ticket02.png')}}" alt="event">
-                                    </div>
-                                    <div class="ticket-content">
-                                        <span class="ticket-title">بلیت ویژه</span>
-                                        <h2 class="amount"><sup>$</sup>79</h2>
-                                        <a href="#0" class="t-button">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <input type="submit" value="اعمال" class="custom-button">
                             </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="ticket-item three">
-                                    <div class="ticket-thumb">
-                                        <img src="{{asset('images/event/ticket/ticket03.png')}}" alt="event">
-                                    </div>
-                                    <div class="ticket-content">
-                                        <span class="ticket-title">بلیت VIP</span>
-                                        <h2 class="amount"><sup>$</sup>99</h2>
-                                        <a href="#0" class="t-button">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-30-none">
-                            <div class="col-md-6 col-xl-5">
-                                <form class="cart-button event-cart">
-                                    <span class="d-inline-block">تعداد صندلی : </span>
-                                    <div class="cart-plus-minus"><div class="dec qtybutton">-</div>
-                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                    <div class="inc qtybutton">+</div></div>
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-xl-7">
-                                <form class="checkout-contact-form mb-0">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="کد تخفیف">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" value="اعمال" class="custom-button">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="checkout-widget checkout-card mb-0">
                         <h5 class="title">عملیات پرداخت </h5>
@@ -215,41 +157,37 @@
                         <h4 class="title">بلیت</h4>
                         <ul>
                             <li>
-                                <h6 class="subtitle">Venus</h6>
-                                <span class="info">English-2d</span>
+                                <h6 class="subtitle">{{$eventname}}</h6>
                             </li>
                             <li>
-                                <h6 class="subtitle"><span>سینما ملت</span><span>02</span></h6>
-                                <div class="info"><span>دوشنبه 20 فروردین ، 11:00</span> <span>بلیت</span></div>
+                                <h6 class="subtitle"><span>{{$location->name}}</span><span>{{$show[0]->salons_name}}</span></h6>
+                            <div class="info"><span>تاریخ</span> <span>{{$show[0]->shows_date}}</span></div>
+                            <div class="info"><span>سانس</span> <span>{{$show[0]->end}}&nbsp;-&nbsp;{{$show[0]->begin}}</span></div>
+                                <div class="info"><span>شماره صندلی</span>
+                                    <span>@foreach($factor[0]->shows as $a)
+                                    &nbsp;{{$a->pivot->seat_number}}
+                                    @endforeach</span>
+                                </div>
                             </li>
-                            <li>
-                                <h6 class="subtitle mb-0"><span>قیمت بلیت</span><span>150.000 تومان</span></h6>
-                            </li>
-                        </ul>
-                        <ul class="side-shape">
-                            <li>
-                                <h6 class="subtitle"><span>combos</span><span>57.000 تومان</span></h6>
-                                <span class="info"><span>2 Nachos Combo</span></span>
-                            </li>
-                            <li>
-                                <h6 class="subtitle"><span>غذا و نوشیدنی</span></h6>
-                            </li>
+                            {{-- <li>
+                                <h6 class="subtitle mb-0"><span>قیمت هر بلیت</span><span>{{$show[0]->price}} تومان</span></h6>
+                            </li> --}}
                         </ul>
                         <ul>
-                            <li>
-                                <span class="info"><span>قیمت</span><span>207.000 تومان</span></span>
-                                <span class="info"><span>vat</span><span>15.000 تومان</span></span>
-                            </li>
-                        </ul>
+                                <li>
+                                    <span class="info"><span>جمع کل</span><span>{{$factor[0]->sum}} تومان</span></span>
+                                    <span class="info"><span>تخفیف</span><span>{{$factor[0]->discount}} تومان</span></span>
+                                </li>
+                            </ul>
                     </div>
                     <div class="proceed-area  text-center">
-                        <h6 class="subtitle"><span>مبلغ قابل پرداخت</span><span>222.000 تومان</span></h6>
+                    <h6 class="subtitle"><span>مبلغ قابل پرداخت</span><span>{{$factor[0]->total}} تومان</span></h6>
                         <a href="/thank" class="custom-button back-button">پرداخت</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ==========Event-Section========== -->
+    <!-- ==========Movie-Section========== -->
 
     @endsection

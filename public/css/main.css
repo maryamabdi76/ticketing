@@ -1088,7 +1088,24 @@ input[type="submit"] {
   -webkit-transition: all ease 0.3s;
   transition: all ease 0.3s;
 }
+.section-header-2 .tab-menu a {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 30px;
+    border: 1px solid #11326f;
+    padding: 9px 27px;
+    border-radius: 25px;
+    margin: 0 5px 10px;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    color:#fff
+  }
 
+  .section-header-2 .tab-menu a:hover {
+    -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+            box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+  }
 .section-header-2 .tab-menu li.active {
   background: -webkit-linear-gradient(169deg, #5560ff 0%, #ff4343 100%);
 }
@@ -4078,7 +4095,7 @@ input[type="submit"] {
 }
 
 .movie-review-item .author {
-  padding-right: 30px;
+  padding-right: 20px;
   width: 305px;
 }
 
@@ -8371,7 +8388,7 @@ input[type="submit"] {
 }
 
 .post-item.post-details .post-content .content .tags-area .tags a::after {
-  content: ",";
+  content: "،";
 }
 
 .post-item.post-details .post-content .content .tags-area .tags a:last-child::after {
@@ -9170,20 +9187,135 @@ aside {
     opacity: 0;
   }
 }
+
+.text-hover:hover{
+    color:#31D7A9 !important;
+}
+
 /*# sourceMappingURL=main.css.map */
 /*ApendddddddddddddddddddddddddddddddddSaraaaaaaaaaaaaaaaaaaaaaaaaaa*/
 .letter__spacing__1{
-  letter-spacing: 1.5px!important;
+    letter-spacing: 1.5px!important;
+    }
+    .ltr{
+      direction: ltr!important;
+    }
+    .tifanyc{
+      color: #31d7a9!important;
+    }
+
+  .gradiant-bg{
+      background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+      cursor:pointer
   }
-  .ltr{
-    direction: ltr!important;
+  .probutton{
+      background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+      -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+      box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+      padding: 10px 49px;
+      font-weight: 600;
+      border-radius: 25px;
+      display: inline-block;
+      color: #fff!important;
   }
-  .tifanyc{
-    color: #31d7a9!important;
+  .probutton:hover{
+      -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+      box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+  }
+  .jccenter{
+      margin: 0 auto !important;
   }
 
+    .myselect-bar {
+      border-radius: 25px;
+      background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+      -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+              box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+      border: none;
+      height: 36px;
+    }
 
-.gradiant-bg{
-    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
-    cursor:pointer
+    .myselect-bar option {
+      background: #032055;
+    }
+
+    .myselect-bar option:hover{
+      background: #001232;
+    }
+
+    .myselect-bar::after {
+      border-color: #ffffff;
+    }
+
+    .myselect-bar1 {
+        border-radius: 25px;
+        background: #032055;
+        -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+                box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+
+        border: 1px solid #31d7a9;
+        height: 50px;
+      }
+
+      .myselect-bar1 option {
+        background: #032055;
+      }
+
+      .myselect-bar1 option:hover{
+        background: #001232!important;
+      }
+
+      .myselect-bar1::after {
+        border-color: #ffffff;
+      }
+
+.heart__f{
+    color: #ff4343!important;
+}
+.heart__o{
+    color: #223c6e!important;
+}
+.bgtrasparent{
+    background: transparent!important;
+}
+.inpnumw{
+    width: 5rem!important;
+}
+.inpdatew{
+    max-width: 15rem!important;
+}
+.borderbottomnone{
+    border-bottom: none!important;
+}
+.maxh2{
+    max-height: 2rem!important;
+    border: none!important;
+}
+.maxh2:hover{
+    color: black!important;
+}
+
+.fontsize30{
+    font-size: 30px!important;
+}
+
+.topright50{
+    position: relative!important;
+    /* top: 50%!important; */
+    right: 40%!important;
+    /* margin-right: 40%; */
+    margin-top: 40%;
+}
+.maxh500{
+    min-height: 300px!important;
+}
+
+/* ==========================seat checkbox============================ */
+.seat_checkbox {
+    width: 42px;
+    height: 39px;
+    background: url(./img/seat.png);
+}
+.seat_checkbox.checked {
+    background: url(./img/seat-chosen.png);
 }

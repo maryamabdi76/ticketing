@@ -4,29 +4,32 @@
 
 
     <!-- ==========Banner-Section========== -->
-    <section class="details-banner bg_img" data-background="{{asset('images/banner/banner03.jpg')}}">
+    {{-- <section class="details-banner bg_img" data-background="{{asset('images/banner/banner03.jpg')}}"> --}}
+    <section class="details-banner bg_img" data-background="{{asset('images/banner/banner04.jpg')}}">
+        {{-- <section class="details-banner bg_img" data-background="{{asset('/').$movie->Images()->get()->first()->path}}"> --}}
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-thumb">
-                    <img src="{{asset('images/movie/venus.jpg')}}" alt="movie">
+                    <img src="{{asset('/').$movie->Images()->get()->first()->path}}" alt="movie">
                     <a href="https://www.youtube.com/embed/KGeBMAgc46E" class="video-popup">
                         <img src="{{asset('images/movie/video-button.png')}}" alt="movie">
                     </a>
                 </div>
                 <div class="details-banner-content mr-25darsad">
-                    <h3 class="title">Venus</h3>
+                <h3 class="title">{{$movie->name}}</h3>
                     <div class="tags">
-                        <a href="#0">انگلیسی</a>
-                        <a href="#0">فارسی</a>
+                        {{-- <a href="#0">فارسی</a> --}}
                     </div>
-                    <a href="#0" class="button">ترسناک</a>
+                    @foreach($movie->genres()->get() as $genre)
+                    <a href="/movie/genres/{{$genre->id}}" class="button">{{$genre->name}}</a>
+                    @endforeach
                     <div class="social-and-duration">
                         <div class="duration-area">
                             <div class="item">
-                                <i class="fas fa-calendar-alt"></i><span>20 فروردین 1399</span>
+                                <i class="fas fa-calendar-alt"></i><span>{{$movie->date}}</span>
                             </div>
                             <div class="item">
-                                <i class="fas fa-clock"></i><span>2ساعت  50 دقیقه </span>
+                                {{-- <i class="fas fa-clock"></i><span>2ساعت  50 دقیقه </span> --}}
                             </div>
                         </div>
                         <ul class="social-share">
@@ -50,7 +53,7 @@
         <div class="container">
             <div class="book-wrapper">
                 <div class="left-side">
-                    <div class="item">
+                    {{-- <div class="item">
                         <div class="item-header">
                             <div class="thumb">
                                 <img src="{{asset('images/movie/tomato2.png')}}" alt="movie">
@@ -71,7 +74,7 @@
                             </div>
                         </div>
                         <p>audience Score</p>
-                    </div>
+                    </div> --}}
                     <div class="item">
                         <div class="item-header">
                             <div class="rated">
@@ -83,7 +86,7 @@
                             </div>
                             <h5 class="title">4.5</h5>
                         </div>
-                        <p>Users Rating</p>
+                        <p>نظر کاربران</p>
                     </div>
                     <div class="item">
                         <div class="item-header">
@@ -96,10 +99,10 @@
                             </div>
                             <h5 class="title">0.0</h5>
                         </div>
-                        <p><a href="#0">Rate It</a></p>
+                        <p><a href="#0">نظر دهید</a></p>
                     </div>
                 </div>
-                <a href="/movie-ticket" class="custom-button">خرید بلیت</a>
+                {{-- <a href="/movie-ticket" class="custom-button">خرید بلیت</a> --}}
             </div>
         </div>
     </section>
@@ -110,58 +113,8 @@
         <div class="container">
             <div class="row justify-content-center flex-wrap-reverse mb--50">
                 <div class="col-lg-3 col-sm-10 col-md-6 mb-50">
-                    <div class="widget-1 widget-tags">
-                        <ul>
-                            <li>
-                                <a href="#0">2D</a>
-                            </li>
-                            <li>
-                                <a href="#0">imax 2D</a>
-                            </li>
-                            <li>
-                                <a href="#0">4DX</a>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="widget-1 widget-offer">
-                        <h3 class="title">پیشنهاد قابل استفاده</h3>
-                        <div class="offer-body">
-                            <div class="offer-item">
-                                <div class="thumb">
-                                    <img src="{{asset('images/sidebar/offer01.png')}}" alt="sidebar">
-                                </div>
-                                <div class="content">
-                                    <h6>
-                                        <a href="#0">Amazon Pay Cashback Offer</a>
-                                    </h6>
-                                    <p>Win Cashback Upto Rs 300*</p>
-                                </div>
-                            </div>
-                            <div class="offer-item">
-                                <div class="thumb">
-                                    <img src="{{asset('images/sidebar/offer02.png')}}" alt="sidebar">
-                                </div>
-                                <div class="content">
-                                    <h6>
-                                        <a href="#0">PayPal Offer</a>
-                                    </h6>
-                                    <p>Transact first time with Paypal and
-                                        get 100% cashback up to Rs. 500</p>
-                                </div>
-                            </div>
-                            <div class="offer-item">
-                                <div class="thumb">
-                                    <img src="{{asset('images/sidebar/offer03.png')}}" alt="sidebar">
-                                </div>
-                                <div class="content">
-                                    <h6>
-                                        <a href="#0">HDFC Bank Offer</a>
-                                    </h6>
-                                    <p>Get 15% discount up to INR 100*
-                                        and INR 50* off on F&B T&C apply</p>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="title">تبلیغات</h3>
                     </div>
                     <div class="widget-1 widget-banner">
                         <div class="widget-1-body">
@@ -175,314 +128,141 @@
                     <div class="movie-details">
                         <h3 class="title">تصاویر</h3>
                         <div class="details-photos owl-carousel">
+                            {{-- {{dd($movie->Images())}} --}}
+                            @foreach($movie->Images()->orderBy('id','desc')->take(5)->get() as $k=>$photo)
                             <div class="thumb">
-                                <a href="{{asset('images/movie/movie-details01.jpg')}}" class="img-pop">
-                                    <img src="{{asset('images/movie/movie-details01.jpg')}}" alt="movie">
+                                <a href="{{asset('/').$photo->path}}" class="img-pop">
+                                    <img src="{{asset('/').$photo->path}}" alt="movie">
                                 </a>
                             </div>
-                            <div class="thumb">
-                                <a href="{{asset('images/movie/movie-details02.jpg')}}" class="img-pop">
-                                    <img src="{{asset('images/movie/movie-details02.jpg')}}" alt="movie">
-                                </a>
-                            </div>
-                            <div class="thumb">
-                                <a href="{{asset('images/movie/movie-details03.jpg')}}" class="img-pop">
-                                    <img src="{{asset('images/movie/movie-details03.jpg')}}" alt="movie">
-                                </a>
-                            </div>
-                            <div class="thumb">
-                                <a href="{{asset('images/movie/movie-details01.jpg')}}" class="img-pop">
-                                    <img src="{{asset('images/movie/movie-details01.jpg')}}" alt="movie">
-                                </a>
-                            </div>
-                            <div class="thumb">
-                                <a href="{{asset('images/movie/movie-details02.jpg')}}" class="img-pop">
-                                    <img src="{{asset('images/movie/movie-details02.jpg')}}" alt="movie">
-                                </a>
-                            </div>
-                            <div class="thumb">
-                                <a href="{{asset('images/movie/movie-details03.jpg')}}" class="img-pop">
-                                    <img src="{{asset('images/movie/movie-details03.jpg')}}" alt="movie">
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
+
+                        @if($related->count() > 0)
+                        <h3 class="title">اخبار مرتبط</h3>
+                        <div class="mb-5">
+                            @foreach($related as $post)
+                            <div class="col-12">
+                                <a href="/blog-details/{{$post->id}}" class="text-white text-hover" >
+                                    <i class="fa fa-angle-left ml-2"></i>{{$post->title}}
+                                    {{-- <img src="{{asset('/').$post->Images()->get()->first()->path}}" alt="movie"> --}}
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+
                         <div class="tab summery-review">
                             <ul class="tab-menu">
                                 <li class="active">
                                     خلاصه فیلم
                                 </li>
                                 <li>
-                                    نظرات کاربران <span>147</span>
+                                    نظرات کاربران <span>{{$count}}</span>
                                 </li>
                             </ul>
                             <div class="tab-area">
                                 <div class="tab-item active">
                                     <div class="item">
                                         <h5 class="sub-title">خلاصه</h5>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+                                        <p>{{$movie->description}}</p>
                                     </div>
                                     <div class="item">
                                         <div class="header">
                                             <h5 class="sub-title">بازیگران</h5>
-                                            <div class="navigation">
-                                                <div class="cast-prev"><i class="flaticon-double-right-arrows-angles"></i></div>
-                                                <div class="cast-next"><i class="flaticon-double-right-arrows-angles"></i></div>
-                                            </div>
                                         </div>
-                                        <div class="casting-slider owl-carousel">
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast01.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                    <span class="cate">بازیگر</span>
-                                                    <p>As Richie Tozier</p>
-                                                </div>
-                                            </div>
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast02.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">nora hardy</a></h6>
-                                                    <span class="cate">بازیگر</span>
-                                                    <p>As raven</p>
-                                                </div>
-                                            </div>
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast03.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">alvin peters</a></h6>
-                                                    <span class="cate">بازیگر</span>
-                                                    <p>As magneto</p>
-                                                </div>
-                                            </div>
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast04.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">josh potter</a></h6>
-                                                    <span class="cate">بازیگر</span>
-                                                    <p>As quicksilver</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p>{{$movie->act}}</p>
                                     </div>
                                     <div class="item">
                                         <div class="header">
                                             <h5 class="sub-title">عوامل</h5>
-                                            <div class="navigation">
-                                                <div class="cast-prev-2"><i class="flaticon-double-right-arrows-angles"></i></div>
-                                                <div class="cast-next-2"><i class="flaticon-double-right-arrows-angles"></i></div>
-                                            </div>
                                         </div>
-                                        <div class="casting-slider-two owl-carousel">
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast05.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">pete warren</a></h6>
-                                                    <span class="cate">بازیگر</span>
-                                                </div>
-                                            </div>
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast06.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">howard bass</a></h6>
-                                                    <span class="cate">executive producer</span>
-                                                </div>
-                                            </div>
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast07.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">naomi smith</a></h6>
-                                                    <span class="cate">producer</span>
-                                                </div>
-                                            </div>
-                                            <div class="cast-item">
-                                                <div class="cast-thumb">
-                                                    <a href="#0">
-                                                        <img src="{{asset('images/cast/cast08.jpg')}}" alt="cast">
-                                                    </a>
-                                                </div>
-                                                <div class="cast-content">
-                                                    <h6 class="cast-title"><a href="#0">tom martinez</a></h6>
-                                                    <span class="cate">producer</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p style="white-space: pre-wrap">{{$movie->team}}</p>
                                     </div>
                                 </div>
                                 <div class="tab-item">
-                                    <div class="movie-review-item">
-                                        <div class="author">
-                                            <div class="thumb">
-                                                <a href="#0">
-                                                    <img src="{{asset('images/cast/cast02.jpg')}}" alt="cast">
-                                                </a>
+                                    @foreach($reviews as $v)
+                                        <div class="movie-review-item">
+                                            <div class="author">
+                                                <div class="thumb">
+                                                    @if($v->user->gender===1)
+                                                        <img src="{{asset('images/avatar/femaleavatar.png')}}" alt="female avatar"/>
+                                                    @endif
+                                                    @if($v->user->gender===2)
+                                                        <img src="{{asset('images/avatar/maleavatar.png')}}" alt="male avatar"/>
+                                                    @endif
+                                                </div>
+                                                <div class="movie-review-info">
+                                                        <h6 class="subtitle mt-3">{{$v->user->name}}</h6>
+                                                        <span class="reply-date">{{$v->created_at}}</span>
+                                                </div>
                                             </div>
-                                            <div class="movie-review-info">
-                                                <span class="reply-date">13 روز پیش</span>
-                                                <h6 class="subtitle"><a href="#0">minkuk seo</a></h6>
-                                                <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="movie-review-content">
-                                            <div class="review">
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                            </div>
-                                            <h6 class="cont-title">Awesome Movie</h6>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            <div class="review-meta">
-                                                <a href="#0">
-                                                    <i class="flaticon-hand"></i><span>8</span>
-                                                </a>
-                                                <a href="#0" class="dislike">
-                                                    <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                                </a>
-                                                <a href="#0">
-                                                    گزارش مشکل
-                                                </a>
+                                            <div class="movie-review-content">
+                                                    <div class="review">
+                                                    @for ($i=1; $i <= 5 ; $i++)
+                                                    <i class="fas fa-heart {{ ($i <= $v->rating) ? 'heart__f' : 'heart__o'}}"></i>
+                                                    @endfor
+                                                    </div>
+                                                <p>{{$v->comment}}</p>
+                                                <div class="review-meta">
+                                                    <a href="#0">
+                                                        <i class="flaticon-hand"></i><span>{{$v->like}}</span>
+                                                    </a>
+                                                    <a href="#0" class="dislike">
+                                                        <i class="flaticon-dont-like-symbol"></i><span>{{$v->dislike}}</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="movie-review-item">
-                                        <div class="author">
-                                            <div class="thumb">
-                                                <a href="#0">
-                                                    <img src="{{asset('images/cast/cast04.jpg')}}" alt="cast">
-                                                </a>
-                                            </div>
-                                            <div class="movie-review-info">
-                                                <span class="reply-date">13 روز پیش</span>
-                                                <h6 class="subtitle"><a href="#0">rudra rai</a></h6>
-                                                <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="movie-review-content">
-                                            <div class="review">
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                            </div>
-                                            <h6 class="cont-title">Awesome Movie</h6>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            <div class="review-meta">
-                                                <a href="#0">
-                                                    <i class="flaticon-hand"></i><span>8</span>
-                                                </a>
-                                                <a href="#0" class="dislike">
-                                                    <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                                </a>
-                                                <a href="#0">
-                                                    گزارش مشکل
-                                                </a>
+                                    @endforeach
+
+                                    @if(!empty(Auth::user()->name))
+                                        <div class="widget-1 widget-offer">
+                                                <h3 class="title mt-5">نظرات خود را ثبت کنید</h3>
+                                                <div class="offer-body">
+                                                    <div class="offer-item">
+                                                        <form method="POST" action="/review" class="mt-0" id="review">
+                                                            @csrf
+                                                            <input type="hidden" name="events_id" value="{{$id}}">
+                                                            <div class="form-group">
+                                                                <span><label for="rating" class="pl-3">امتیاز شما به این فیلم :</label>
+                                                                <input type="number" id="rating" name="rating" min="0" max="5" class="inpnumw"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <textarea rows="8" cols="80" name="comment" form="review" class="bgtrasparent text-white" placeholder="نظر خود را اینجا بنویسید ..."></textarea>
+                                                            </div>
+                                                            <input class="letter__spacing__1 probutton" type="submit" value="ثبت نظر">
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="movie-review-item">
-                                        <div class="author">
-                                            <div class="thumb">
-                                                <a href="#0">
-                                                    <img src="{{asset('images/cast/cast01.jpg')}}" alt="cast">
-                                                </a>
-                                            </div>
-                                            <div class="movie-review-info">
-                                                <span class="reply-date">13 روز پیش</span>
-                                                <h6 class="subtitle"><a href="#0">rafuj</a></h6>
-                                                <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                            </div>
+                                    @endif
+
+                                </div>
+                                <div class="widget-1 widget-offer">
+                                    <h3 class="title mt-5">خرید بلیت</h3>
+                                    <div class="offer-body">
+                                        <div class="offer-item">
+                                            @if($flag===0)
+                                                <div class="mt-3 mb-3 text-center">
+                                                <p class="text-white text-center">متاسفانه در حال حاضر این برنامه نمایش داده نمی شود !</p>
+                                                </div>
+                                            @endif
+                                            @if($flag===1)
+                                                <form method="POST" action="/ticket" class="mt-0">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$id}}">
+                                                    <span class="text-white pt-1 pb-1 pl-5">روز مورد نظرتان را انتخاب کنید:</span>
+                                                    <select class="myselect-bar1 text-black mt-3 mb-3 inpdatew ml-5 " name="date">
+                                                        @foreach($date as $d)
+                                                            <option value="{{$d}}">{{$d}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <input class="letter__spacing__1 probutton inpdatew" type="submit" value="خرید بلیت">
+                                                </form>
+                                            @endif
                                         </div>
-                                        <div class="movie-review-content">
-                                            <div class="review">
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                            </div>
-                                            <h6 class="cont-title">Awesome Movie</h6>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            <div class="review-meta">
-                                                <a href="#0">
-                                                    <i class="flaticon-hand"></i><span>8</span>
-                                                </a>
-                                                <a href="#0" class="dislike">
-                                                    <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                                </a>
-                                                <a href="#0">
-                                                    گزارش مشکل
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="movie-review-item">
-                                        <div class="author">
-                                            <div class="thumb">
-                                                <a href="#0">
-                                                    <img src="{{asset('images/cast/cast03.jpg')}}" alt="cast">
-                                                </a>
-                                            </div>
-                                            <div class="movie-review-info">
-                                                <span class="reply-date">13 روز پیش</span>
-                                                <h6 class="subtitle"><a href="#0">bela bose</a></h6>
-                                                <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="movie-review-content">
-                                            <div class="review">
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                            </div>
-                                            <h6 class="cont-title">Awesome Movie</h6>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            <div class="review-meta">
-                                                <a href="#0">
-                                                    <i class="flaticon-hand"></i><span>8</span>
-                                                </a>
-                                                <a href="#0" class="dislike">
-                                                    <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                                </a>
-                                                <a href="#0">
-                                                    گزارش مشکل
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="load-more text-center">
-                                        <a href="#0" class="custom-button transparent">نمایش بیشتر</a>
                                     </div>
                                 </div>
                             </div>

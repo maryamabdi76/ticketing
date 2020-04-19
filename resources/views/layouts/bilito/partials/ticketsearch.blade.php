@@ -1,6 +1,6 @@
 
     <!-- ==========Ticket-Search========== -->
-    <section class="search-ticket-section padding-top pt-lg-0">
+    <section class="search-ticket-section padding-top pt-lg-0 mb-5">
         <div class="container">
             <div class="search-tab bg_img" data-background="{{asset('images/ticket/ticket-bg01.jpg')}}">
                 <div class="row align-items-center mb--20">
@@ -35,19 +35,18 @@
                 </div>
                 <div class="tab-area">
                     <div class="tab-item active">
-                        <form class="ticket-search-form">
-                            <div class="form-group">
+                        <form class="ticket-search-form" method="POST" action="{{route('searchmovie')}}">
+                                {{ csrf_field() }}
+                                <div class="form-group">
                                 <div class="thumb">
                                     <img src="{{asset('images/ticket/city.png')}}" alt="ticket">
                                 </div>
                                 <span class="type mr-2">شهر</span>
-                                <select class="select-bar">
-                                    <option value="london">تهران</option>
-                                    <option value="dhaka">اصفهان</option>
-                                    <option value="rosario">شیراز</option>
-                                    <option value="madrid">کیش</option>
-                                    <option value="koltaka">گیلان</option>
-                                    <option value="rosario">شیراز</option>
+                                <select name="city" class="select-bar">
+                                    <option  value=""></option>
+                                    @foreach($locations->unique('city') as $location)
+                                    <option value="{{$location->city}}">{{$location->city}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -55,11 +54,11 @@
                                     <img src="{{asset('images/ticket/date.png')}}" alt="ticket">
                                 </div>
                                 <span class="type mr-2">تاریخ</span>
-                                <select class="select-bar">
-                                    <option value="26-12-19">23/10/2020</option>
-                                    <option value="26-12-19">24/10/2020</option>
-                                    <option value="26-12-19">25/10/2020</option>
-                                    <option value="26-12-19">26/10/2020</option>
+                                <select name="date" class="select-bar">
+                                    <option  value=""></option>
+                                    @foreach($shows->unique('date')->sortBy('date') as $show)
+                                    <option  value="{{$show->date}}">{{$show->date}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -67,107 +66,108 @@
                                     <img src="{{asset('images/ticket/cinema.png')}}" alt="ticket">
                                 </div>
                                 <span class="type mr-2">سینما</span>
-                                <select class="select-bar">
-                                    <option value="Awaken">ملت</option>
-                                    <option value="dhaka">ماندانا</option>
-                                    <option value="rosario">آزادی</option>
+                                <select name="cinema" class="select-bar">
+                                    <option  value=""></option>
+                                    @foreach($locations->sortBy('name') as $location)
+                                    <option  value="{{$location->name}}">{{$location->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group large">
-                                <input type="text" placeholder="جستجو برای فیلم">
+                                <input name="search" type="text" placeholder="جستجو برای فیلم">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
                     </div>
                     <div class="tab-item">
-                        <form class="ticket-search-form">
+                        <form class="ticket-search-form" method="POST" action="{{route('searchconcert')}}">
+                            {{ csrf_field() }}
                             <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{{asset('images/ticket/city.png')}}" alt="ticket">
-                                </div>
-                                <span class="type mr-2">شهر</span>
-                                <select class="select-bar">
-                                    <option value="london">تهران</option>
-                                    <option value="dhaka">اصفهان</option>
-                                    <option value="rosario">شیراز</option>
-                                    <option value="madrid">کیش</option>
-                                    <option value="koltaka">گیلان</option>
-                                    <option value="rosario">شیراز</option>
-                                </select>
+                            <div class="thumb">
+                                <img src="{{asset('images/ticket/city.png')}}" alt="ticket">
                             </div>
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{{asset('images/ticket/date.png')}}" alt="ticket">
-                                </div>
-                                <span class="type mr-2">تاریخ</span>
-                                <select class="select-bar">
-                                    <option value="26-12-19">23/10/2020</option>
-                                    <option value="26-12-19">24/10/2020</option>
-                                    <option value="26-12-19">25/10/2020</option>
-                                    <option value="26-12-19">26/10/2020</option>
-                                </select>
+                            <span class="type mr-2">شهر</span>
+                            <select name="city" class="select-bar">
+                                <option  value=""></option>
+                                @foreach($locations->unique('city') as $location)
+                                <option value="{{$location->city}}">{{$location->city}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="{{asset('images/ticket/date.png')}}" alt="ticket">
                             </div>
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{{asset('images/ticket/cinema.png')}}" alt="ticket">
-                                </div>
-                                <span class="type mr-2">کنسرت</span>
-                                <select class="select-bar">
-                                    <option value="Awaken">ملت</option>
-                                    <option value="dhaka">ماندانا</option>
-                                    <option value="rosario">آزادی</option>
-                                </select>
+                            <span class="type mr-2">تاریخ</span>
+                            <select name="date" class="select-bar">
+                                <option  value=""></option>
+                                @foreach($shows->unique('date')->sortBy('date') as $show)
+                                <option  value="{{$show->date}}">{{$show->date}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="{{asset('images/ticket/cinema.png')}}" alt="ticket">
                             </div>
-                            <div class="form-group large">
-                                <input type="text" placeholder="جستجو برای کنسرت">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </div>
-                        </form>
+                            <span class="type mr-2">کنسرت</span>
+                            <select name="cinema" class="select-bar">
+                                <option  value=""></option>
+                                @foreach($locations->sortBy('name') as $location)
+                                <option  value="{{$location->name}}">{{$location->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group large">
+                            <input name="search" type="text" placeholder="جستجو برای کنسرت">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
                     </div>
                     <div class="tab-item">
-                        <form class="ticket-search-form">
+                        <form class="ticket-search-form" method="POST" action="{{route('searchtheater')}}">
+                            {{ csrf_field() }}
                             <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{{asset('images/ticket/city.png')}}" alt="ticket">
-                                </div>
-                                <span class="type mr-2">شهر</span>
-                                <select class="select-bar">
-                                    <option value="london">تهران</option>
-                                    <option value="dhaka">اصفهان</option>
-                                    <option value="rosario">شیراز</option>
-                                    <option value="madrid">کیش</option>
-                                    <option value="koltaka">گیلان</option>
-                                    <option value="rosario">شیراز</option>
-                                </select>
+                            <div class="thumb">
+                                <img src="{{asset('images/ticket/city.png')}}" alt="ticket">
                             </div>
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{{asset('images/ticket/date.png')}}" alt="ticket">
-                                </div>
-                                <span class="type mr-2">تاریخ</span>
-                                <select class="select-bar">
-                                    <option value="26-12-19">23/10/2020</option>
-                                    <option value="26-12-19">24/10/2020</option>
-                                    <option value="26-12-19">25/10/2020</option>
-                                    <option value="26-12-19">26/10/2020</option>
-                                </select>
+                            <span class="type mr-2">شهر</span>
+                            <select name="city" class="select-bar">
+                                <option  value=""></option>
+                                @foreach($locations->unique('city') as $location)
+                                <option value="{{$location->city}}">{{$location->city}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="{{asset('images/ticket/date.png')}}" alt="ticket">
                             </div>
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{{asset('images/ticket/cinema.png')}}" alt="ticket">
-                                </div>
-                                <span class="type mr-2">تئاتر</span>
-                                <select class="select-bar">
-                                    <option value="Awaken">ملت</option>
-                                    <option value="dhaka">ماندانا</option>
-                                    <option value="rosario">آزادی</option>
-                                </select>
+                            <span class="type mr-2">تاریخ</span>
+                            <select name="date" class="select-bar">
+                                <option  value=""></option>
+                                @foreach($shows->unique('date')->sortBy('date') as $show)
+                                <option  value="{{$show->date}}">{{$show->date}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="{{asset('images/ticket/cinema.png')}}" alt="ticket">
                             </div>
-                            <div class="form-group large">
-                                <input type="text" placeholder="جستجو برای تئاتر">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </div>
-                        </form>
+                            <span class="type mr-2">تئاتر</span>
+                            <select name="cinema" class="select-bar">
+                                <option  value=""></option>
+                                @foreach($locations->sortBy('name') as $location)
+                                <option  value="{{$location->name}}">{{$location->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group large">
+                            <input name="search" type="text" placeholder="جستجو برای تئاتر">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>

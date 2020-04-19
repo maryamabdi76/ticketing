@@ -18,7 +18,7 @@
               <div class="text-right pt-4">
                     <h5 class="h6 text-gray-900 mb-4 tifany">موجودی کیف پول</h5>
                   </div>
-                  <h3>120000 تومان</h3>
+                <h3>{{$money[0]->money}} تومان</h3>
 
                   <div class="text-right mt-4">
                         <h5 class="h6 text-gray-900 mb-4 tifany">شارژ کیف پول</h5>
