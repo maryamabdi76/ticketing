@@ -27,7 +27,7 @@
                 <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="laravel_datatable" class="table text-center table-bordred table-striped  table-hover" >
+                                <table class="d-table table text-center table-bordred table-striped  table-hover" >
                                     <thead>
                                         <th>آیدی</th>
                                         <th>نام و نام خانوادگی</th>
@@ -38,10 +38,10 @@
                                         <th>نقش</th>
                                         {{-- <th>تاریخ عضویت</th>
                                         <th>آخرین تغییر</th> --}}
-                                        <th> </th>
+                                        <th>عملیات</th>
                                     </thead>
                                     <tbody>
-                                        @foreach($users as $k=>$v)
+                                    @foreach($users as $k=>$v)
                                         <tr>
                                         <td>{{$v['id']}}</td>
                                         <td>{{$v['name']}}</td>
@@ -50,17 +50,17 @@
                                         <td>{{$v['email']}}</td>
                                         <td>{{$v->genders->name}}</td>
                                         <td>
-                                            @foreach ($v->role as $role)
+                                            @foreach ($v->roles as $role)
                                             {{ $role->name }}
                                             @endforeach
                                         </td>
                                         {{-- <td>{{$v['created_at']}}</td>
                                         <td>{{$v['updated_at']}}</td> --}}
                                         <td>
-                                            <a href="/edit/{{$v["id"]}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Edit">
+                                            <a href="/editUser/{{$v["id"]}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="ویرایش">
                                                 <span class="fa fa-edit"></span>
                                             </a>
-                                            <a href="/delete/{{$v["id"]}}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this item?');" >
+                                            <a href="/deleteUser/{{$v["id"]}}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="حذف" onclick="return confirm('Are you sure you want to delete this item?');" >
                                                 <span class="fa fa-trash"></span>
                                             </a>
                                         </td>

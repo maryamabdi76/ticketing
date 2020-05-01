@@ -1,6 +1,9 @@
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('plugins/datatables/dataTables.bootstrap4.js')}}"></script>
+
 <script src="{{asset('js/adminlte.js')}}"></script>
 <script src="{{asset('js/demo.js')}}"></script>
 <script src="{{asset('plugins/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -23,3 +26,21 @@
 <script src="{{asset('js/viewport.jquery.js')}}"></script>
 <script src="{{asset('js/nice-select.js')}}"></script>
 
+
+<script>
+    $(function () {
+      $('.d-table').DataTable({
+
+    "order":[],
+          "language": {
+              "paginate": {
+                  "next": "بعدی",
+                  "previous" : "قبلی"
+              },
+              "search": " جستجو ",
+              "lengthMenu":"نمایش _MENU_ سطر",
+          },
+        "info" : false,
+      });
+    });
+  </script>

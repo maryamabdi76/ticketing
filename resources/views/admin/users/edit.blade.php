@@ -29,7 +29,7 @@
                 <div class="card-header">{{ __('ویرایش کاربر') }}</div>
 
                 <div class="card-body">
-                <form method="POST" action="/update">
+                <form method="POST" action="/updateUser">
                         @csrf
                         <input id="id" type="hidden" class="form-control " name="id" value="{{ $user->id}}" >
 
@@ -100,7 +100,7 @@
                                 <select id="role" name="role" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
                                     <option value="" disabled @if(empty($user->role)) selected @endif>نقش</option>
                                     @foreach($role as $v)
-                                    <option value="{{$v->id}}" @if($v->name==$user->role[0]->name) selected @endif>{{$v->name}}</option>
+                                    <option value="{{$v->id}}" @if($v->name==$user->roles[0]->name) selected @endif>{{$v->name}}</option>
                                     @endforeach
                                 </select>
 

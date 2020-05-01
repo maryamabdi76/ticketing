@@ -11,7 +11,7 @@ class Reviews extends Model
     // protected $date = ["deleted_at"];
 
     protected $fillable = [
-        'rating','comment','like','dislike'
+        'rating','comment','like','dislike','status'
     ];
 
 

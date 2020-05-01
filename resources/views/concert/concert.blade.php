@@ -40,7 +40,7 @@
                                 {{ csrf_field() }}
                             <div class="check-area">
                                 <div class="form-group">
-                                    {{-- <input type="checkbox" name="genre[]" value="*" id="genre0"><label for="genre0">همه</label> --}}
+                                    <input type="checkbox" name="genre[]" value="*" id="genre0"><label for="genre0">همه</label>
                                 </div>
                                 @foreach($genres as $genre)
                                 {{-- {{dd($genre->name)}} --}}
@@ -65,65 +65,102 @@
                     </div>
                 </div>
                 <div class="col-lg-9 mb-50 mb-lg-0">
-                    <div class="filter-tab">
+                    <div class="filter-tab tab">
                         <div class="filter-area">
                             <div class="filter-main">
                                 <div class="left w-100 justify-content-between">
-                                    <div class="item">
-                                        <span class="show">نمایش :</span>
-                                        <select class="select-bar">
-                                            <option value="12">12</option>
-                                            <option value="15">15</option>
-                                            <option value="18">20</option>
-                                            <option value="21">25</option>
-                                            <option value="30">30</option>
-                                        </select>
-                                    </div>
                                     <div class="item mr-0">
                                         <span class="show">مرتب سازی  :</span>
-                                        <select class="select-bar">
-                                            <option value="showing">در حال نمایش</option>
-                                            <option value="exclusive">پرفروش ترین</option>
-                                            <option value="trending">محبوب ترین</option>
-                                        </select>
+                                        <a class="select-b @if($sort) active @endif" href="{{ route('sortShowingConcert') }}"onclick="event.preventDefault(); document.getElementById('sortShowing').submit();">
+                                            در حال نمایش</a>
+                                        <form id="sortShowing" action="{{ route('sortShowingConcert') }}" method="POST" style="display: none;">
+                                        @csrf
+                                            @foreach($arrayIdConcerts as $id)
+                                            <input type="hidden" name="show[]" value="{{$id}}">
+                                            @endforeach
+                                        </form>
                                     </div>
+                                    <ul class="grid-button tab-menu">
+                                        <li class="active">
+                                            <i class="fas fa-th"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-bars"></i>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-10 justify-content-center">
-                            @foreach($concerts->unique('name') as $concert)
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="/concert-details/{{$concert->id}}">
-                                            <img width="330px" height="400px" src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="event">
-                                        </a>
-                                        {{-- <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div> --}}
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0" style="font-size:1.1rem">
-                                        <a href="/concert-details/{{$concert->id}}">{{$concert->name}}</a>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span></span>
+                        <div class="tab-area">
+                            <div class="tab-item active">
+                                <div class="row mb-10 justify-content-center">
+                                @if($concerts->count()==0)
+                                    <h5 class="text-center pt-5 pb-5">متاسفانه موردی یافت نشد!</h5>
+                                @endif
+                                 @foreach($concerts as $concert)
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="event-grid">
+                                        <div class="movie-thumb c-thumb">
+                                            <a href="/concert-details/{{$concert->id}}">
+                                                <img width="220px" height="300px" src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="event">
+                                            </a>
+                                        </div>
+                                        <div class="movie-content bg-one">
+                                            <h5 class="title m-0" style="font-size:1.1rem">
+                                            <a href="/concert-details/{{$concert->id}}">{{$concert->name}}</a>
+                                            </h5>
+                                            <div class="movie-rating-percent">
+                                                <span></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
+                                </div>
                             </div>
-                            @endforeach
+                            <div class="tab-item">
+                                <div class="movie-area mb-10">
+                                @foreach($concerts as $concert)
+                                <div class="movie-list">
+                                    <div class="movie-thumb c-thumb">
+                                        <a href="/concert-details/{{$concert->id}}" class="w-75 bg_img" data-background="{{asset('/').$concert->Images()->get()->first()->path}}">
+                                            <img src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="movie">
+                                        </a>
+                                    </div>
+                                    <div class="movie-content bg-one">
+                                        <h5 class="title">
+                                        <a href="/concert-details/{{$concert->id}}">{{$concert->name}}</a>
+                                        </h5>
+                                        <div class="movie-tags">
+                                            @foreach($concert->genres()->get() as $genre)
+                                            <a href="#0">{{$genre->name}}</a>
+                                            @endforeach
+                                        </div>
+                                        <div class="release">
+                                            <span>تاریخ نمایش : </span> <a href="#0">{{$concert->date}}</a>
+                                        </div>
+                                        <ul class="movie-rating-percent">
+                                        </ul>
+                                        <div class="book-area">
+                                            <div class="book-ticket">
+                                                <div class="react-item">
+                                                <a href="/concert-details/{{$concert->id}}">
+                                                        <div class="thumb">
+                                                            <img src="{{asset('images/icons/book.png')}}" alt="icons">
+                                                        </div>
+                                                        <span class="mr-2">مشاهده جزئیات</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                </div>
+                            </div>
                         </div>
-                        <div class="pagination-area text-center">
-                            <a href="#0"><i class="fas fa-angle-double-right"></i><span> قبلی </span></a>
-                            <a href="#0" class="active">1</a>
-                            <a href="#0">2</a>
-                            <a href="#0">3</a>
-                            <a href="#0">4</a>
-                            <a href="#0">5</a>
-                            <a href="#0"><span>بعدی </span><i class="fas fa-angle-double-left"></i></a>
-                        </div>
+
+                        {{$concerts->appends(request()->query())->links()}}
                     </div>
                 </div>
             </div>

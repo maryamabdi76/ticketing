@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Salons extends Model
 {
+    protected $fillable = [
+        'name','locations_id'
+    ];
+
     public function Shows()
     {
         return $this->hasMany('App\Models\Shows','id','salons_id');

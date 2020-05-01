@@ -22,7 +22,7 @@ class Roles
         foreach ($user->roles as $role)
             if ($role->name == 'Admin') {
                 return $next($request);
-            } elseif ($role->name == 'User') {
+            } elseif ($role->name == 'User' || $role->name == 'BoxOffice') {
                 return redirect()->route('profile');
             }
         abort(403);

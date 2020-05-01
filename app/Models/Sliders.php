@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sliders extends Model
 {
+    protected $fillable=[
+        'events_id','title'
+    ];
     public function Images()
     {
         return $this->morphMany("App\Models\Images","imageable");

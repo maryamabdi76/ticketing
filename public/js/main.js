@@ -206,7 +206,7 @@
             }
         });
         $('.tab-slider').owlCarousel({
-            // loop: true,
+            loop: true,
             rtl: true,
             responsiveClass: true,
             nav: false,
@@ -262,7 +262,7 @@
             }
         })
         $('.casting-slider').owlCarousel({
-            loop: true,
+            // loop: true,
             rtl: true,
             responsiveClass: true,
             nav: false,
@@ -519,10 +519,80 @@ $('.input_seat_checkbox').each(function(){
 
 });
 
-$('.seat_checkbox').on('click',function(){
-    $(this).toggleClass('checked').prev().prop('checked',$(this).is('.checked'))
+$('.input_seat_checkbox_reverse').each(function(){
+    $(this).hide().after('<div class="seat_checkbox checked" />');
+
 });
+
+// $('.seat_checkbox').on('click',function(){
+//     $(this).toggleClass('checked').prev().prop('checked',$(this).is('.checked'))
+// });
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
   });
+
+//   function CountDown(duration, display) {
+//     if (!isNaN(duration)) {
+//         var timer = duration, minutes, seconds;
+
+//       var interVal=  setInterval(function () {
+//             minutes = parseInt(timer / 60, 10);
+//             seconds = parseInt(timer % 60, 10);
+
+//             minutes = minutes < 10 ? "0" + minutes : minutes;
+//             seconds = seconds < 10 ? "0" + seconds : seconds;
+
+//             $(display).html("<b>" + minutes + "m : " + seconds + "s" + "</b>");
+//             if (--timer < 0) {
+//                 timer = duration;
+//                SubmitFunction();
+//                $('#countdowndisplay').empty();
+//                clearInterval(interVal);
+//             }
+//             },1000);
+//     }
+// }
+
+function SubmitFunction(){
+    $('#countdownsubmit').click();
+
+}
+
+//  CountDown(600,$('#countdowndisplay'));
+
+ function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = seconds + " :" + " " + minutes;
+
+        if (--timer < 0) {
+            timer = duration;
+            SubmitFunction();
+            $('#countdowndisplay').empty();
+            clearInterval(interVal);
+        }
+      console.log(parseInt(seconds))
+      window.localStorage.setItem("seconds",seconds)
+      window.localStorage.setItem("minutes",minutes)
+    }, 1000);
+    }
+
+    window.onload = function () {
+      sec  = parseInt(window.localStorage.getItem("seconds"))
+      min = parseInt(window.localStorage.getItem("minutes"))
+
+      if(parseInt(min*sec)){
+        var tenMinutes = (parseInt(min*60)+sec);
+      }else{
+        var tenMinutes = 60 * 10;
+      }
+      display = document.querySelector('#countdowndisplay');
+      startTimer(tenMinutes, display);
+    };

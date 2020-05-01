@@ -7,7 +7,6 @@
  <div id="content">
 
   <div class="container-fluid">
-{{-- {{dd($favorites)}} --}}
     <div class="card cardbg o-hidden border-0 shadow-lg my-5">
         <div class="row">
                 <section class="feature_product_area  new-product">
@@ -18,16 +17,19 @@
                               @endif
                               @if($count==1)
                                     @foreach($favorites as $v)
+                                    <?php if($v->categories_id==1){$cat_name="movie";}
+                                          if($v->categories_id==2){$cat_name="concert";}
+                                          if($v->categories_id==3){$cat_name="theater";} ?>
                                     <div class="col-md-4 minwidth300 mb-20 box">
                                         <div class="movie-grid">
                                             <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details/{{$v->events->id}}">
-                                                    <img height="350px" src="{{asset('/').$v->events->Images()->get()->first()->path}}" alt="movie">
+                                            <a href="/{{$cat_name}}-details/{{$v->id}}">
+                                                    <img height="350px" src="{{asset('/').$v->Images()->get()->first()->path}}" alt="movie">
                                                 </a>
                                             </div>
                                             <div class="movie-content bg-one">
                                                 <h5 class="title m-0">
-                                                    <a href="/movie-details">{{$v->events->name}}</a>
+                                                    <a href="/{{$cat_name}}-details/{{$v->id}}">{{$v->name}}</a>
                                                 </h5>
                                             </div>
                                             <div class="ribbon ribbon-top-right zindex1 mglr9 mgtb15"><span class="shabnam">❤‿❤</span></div>
@@ -38,16 +40,19 @@
 
                                 @if($count > 1)
                                     @foreach($favorites as $v)
+                                    <?php if($v->categories_id==1){$cat_name="movie";}
+                                          if($v->categories_id==2){$cat_name="concert";}
+                                          if($v->categories_id==3){$cat_name="theater";} ?>
                                     <div class="col-md-4 mb-20 box">
                                         <div class="movie-grid">
                                             <div class="movie-thumb c-thumb">
-                                            <a href="/movie-details/{{$v->events->id}}">
-                                                    <img height="350px" src="{{asset('/').$v->events->Images()->get()->first()->path}}" alt="movie">
+                                            <a href="/{{$cat_name}}-details/{{$v->id}}">
+                                                    <img height="350px" src="{{asset('/').$v->Images()->get()->first()->path}}" alt="movie">
                                                 </a>
                                             </div>
                                             <div class="movie-content bg-one">
                                                 <h5 class="title m-0">
-                                                    <a href="/movie-details">{{$v->events->name}}</a>
+                                                    <a href="/{{$cat_name}}-details/{{$v->id}}">{{$v->name}}</a>
                                                 </h5>
                                             </div>
                                             <div class="ribbon ribbon-top-right zindex1 mglr9 mgtb15"><span class="shabnam">❤‿❤</span></div>

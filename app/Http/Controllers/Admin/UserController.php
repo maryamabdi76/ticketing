@@ -98,7 +98,7 @@ class UserController extends Controller
         $form->email = $request->post('email');
         $form->gender = $request->post('gender');
         $role = $request->post('role');
-        $form->Role()->sync([$role]);
+        $form->Roles()->sync([$role]);
         $form->save();
 
         return redirect('admin/users');

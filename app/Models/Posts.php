@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Posts extends Model
 {
-    protected $fillable = ['title', 'content', 'views',];
+
+    use SoftDeletes;
+    protected $date=['deleted_at'];
+
+    protected $fillable = ['title', 'content','events_id', 'views',];
     public function Events()
     {
         return $this->belongsTo('App\Models\Events','events_id','id');

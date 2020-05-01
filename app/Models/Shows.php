@@ -3,9 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Shows extends Model
 {
+
+    use SoftDeletes;
+    protected $date=['deleted_at'];
+
+    protected $fillable = [
+        'events_id','salons_id','date','begin','end','num','price'
+    ];
     public function Sails()
     {
         return $this->hasOne('App\Models\Sails');

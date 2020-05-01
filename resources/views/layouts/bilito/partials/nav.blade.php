@@ -26,125 +26,50 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="/"> خانه </a>
-                    {{-- <ul class="submenu">
-                        <li>
-                            <a href="index.html"> خانه 1 </a>
-                        </li>
-                        <li>
-                            <a href="index-2.html"> خانه 2 </a>
-                        </li>
-                    </ul> --}}
+                    <a class="{{ Request::is('/') ? 'active' : '' }}" href="/"> خانه </a>
                 </li>
                 <li>
-                    <a href="/movie"> فیلم </a>
-                    {{-- <ul class="submenu">
-                        <li>
-                            <a href="movie-grid.html">Movie Grid</a>
-                        </li>
-                        <li>
-                            <a href="movie-list.html">Movie List</a>
-                        </li>
-                        <li>
-                            <a href="movie-details.html">Movie Details</a>
-                        </li>
-                        <li>
-                            <a href="movie-details-2.html">Movie Details 2</a>
-                        </li>
-                        <li>
-                            <a href="movie-ticket-plan.html">Movie Ticket Plan</a>
-                        </li>
-                        <li>
-                            <a href="movie-seat-plan.html">Movie Seat Plan</a>
-                        </li>
-                        <li>
-                            <a href="movie-checkout.html">Movie Checkout</a>
-                        </li>
-                        <li>
-                            <a href="popcorn.html">Movie Food</a>
-                        </li>
-                    </ul> --}}
+                    <a class="{{ Request::is('movie*') ? 'active' : ''}}{{ Request::is('searchmovie') ? 'active' : '' }}" href="/movie"> فیلم </a>
                 </li>
                 <li>
-                    <a href="/concert"> کنسرت </a>
-                    {{-- <ul class="submenu">
-                        <li>
-                            <a href="events.html">Events</a>
-                        </li>
-                        <li>
-                            <a href="event-details.html">Event Details</a>
-                        </li>
-                        <li>
-                            <a href="event-speaker.html">Event Speaker</a>
-                        </li>
-                        <li>
-                            <a href="event-ticket.html">Event Ticket</a>
-                        </li>
-                        <li>
-                            <a href="event-checkout.html">Event Checkout</a>
-                        </li>
-                    </ul> --}}
+                    <a class="{{ Request::is('concert*') ? 'active' : '' }}{{ Request::is('searchconcert') ? 'active' : '' }}" href="/concert"> کنسرت </a>
                 </li>
                 <li>
-                    <a href="/theater"> تئاتر</a>
-                    {{-- <ul class="submenu">
-                        <li>
-                            <a href="sports.html">Sports</a>
-                        </li>
-                        <li>
-                            <a href="sport-details.html">Sport Details</a>
-                        </li>
-                        <li>
-                            <a href="sports-ticket.html">Sport Ticket</a>
-                        </li>
-                        <li>
-                            <a href="sports-checkout.html">Sport Checkout</a>
-                        </li>
-                    </ul> --}}
+                    <a class="{{ Request::is('theater*') ? 'active' : '' }}{{ Request::is('searchtheater') ? 'active' : '' }}" href="/theater"> تئاتر</a>
                 </li>
 
                 <li>
-                    <a href="/blog"> بلاگ </a>
-                    {{-- <ul class="submenu">
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
-                        <li>
-                            <a href="blog-details.html">Blog Single</a>
-                        </li>
-                    </ul> --}}
+                    <a class="{{ Request::is('blog*') ? 'active' : '' }}{{ Request::is('searchblog') ? 'active' : '' }}" href="/blog"> بلاگ </a>
                 </li>
                 <li>
-                    <a href="/about"> درباره ما </a>
-                    {{-- <ul class="submenu">
-                        <li>
-                            <a href="about.html">درباره ما</a>
-                        </li>
-                        <li>
-                            <a href="apps-download.html">دانلود برنامه</a>
-                        </li>
-                        <li>
-                            <a href="404.html">404</a>
-                        </li>
-                    </ul> --}}
+                    <a class="{{ Request::is('about') ? 'active' : '' }}" href="/about"> درباره ما </a>
                 </li>
                 <li>
-                    <a href="/contact"> تماس با ما </a>
+                    <a class="{{ Request::is('contact') ? 'active' : '' }}" href="/contact"> تماس با ما </a>
                 </li>
+
+
+                <form class="ticket-search-form ml-4 mr-4" method="POST" action="{{route('search')}}">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input name="search" type="text" placeholder="جستجو">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                 </form>
 
                 @if (Route::has('login'))
                 <li class="header-button pl-0">
                     @auth
                         <a href="{{ url('/home') }}" style="padding:10px 20px"><i class="fa fa-user"></i></a>
                     @else
-                    <a href="/login"> ورود | عضویت </a>
+                    <a href="/login" style="padding:10px 15px"> ورود | عضویت </a>
                     @endauth
                 </li>
                 @endif
 
             </ul>
 
-            
+
             <div class="header-bar d-lg-none">
                 <span></span>
                 <span></span>

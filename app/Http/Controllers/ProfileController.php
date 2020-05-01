@@ -24,9 +24,13 @@ class ProfileController extends Controller
         $lastfactors= Factors::Where('users_id',auth()->user()->id)->get();
         $factorcount=count($lastfactors);
 
+        $favorites=Reviews::Where(['users_id'=> auth()->user()->id , 'favorite'=> 1])->with('Events')->get();
+        $favoritecount=count($favorites);
+
         $data = array(
             'money' => $money,
-            'factorcount' => $factorcount
+            'factorcount' => $factorcount,
+            'favoritecount' => $favoritecount,
         );
         return view('profile/profile')->with($data);
     }
@@ -99,24 +103,31 @@ class ProfileController extends Controller
 
 
     public function lastfactors(){
-        $ids=array();
-        $i=0;
+        $ids=$shows=$locations=array();
+        $count=$i=0;
         $lastfactors= Factors::Where('users_id',auth()->user()->id)->with('Shows')->get();
-        foreach($lastfactors as $v){
-        $ids[$i]=$v->shows[0]->id;
-        $i++;
-        }
-        $shows = Shows::join('Events','events.id','=','shows.events_id')
-        ->join('Salons','salons.id','=','shows.salons_id')
-        ->where(function($q) use ($ids){
-            foreach($ids as $value){
-                $q->orWhere('Shows.id', '=', $value);
+        if(!empty($lastfactors[0])){
+            foreach($lastfactors as $v){
+            $ids[$i]=$v->shows[0]->id;
+            $i++;
             }
-        })
-        ->get(['events.name AS events_name', 'salons.name AS salons_name', 'shows.date AS shows_date', 'locations_id' , 'begin' ,'end' ,'price']);
+            $ooshows = Shows::join('Events','events.id','=','shows.events_id')
+            ->join('Salons','salons.id','=','shows.salons_id')
+            ->where(function($q) use ($ids){
+                foreach($ids as $value){
+                    $q->orWhere('Shows.id', '=', $value);
+                }
+            })
+            ->get(['events.name AS events_name', 'events.categories_id AS catid', 'salons.name AS salons_name', 'shows.date AS shows_date', 'shows.id AS shows_id', 'locations_id' , 'begin' ,'end' ,'price']);
 
-        $count=count($lastfactors);
-        $locations= Locations::all();
+            foreach($ooshows as $s){
+                $shows[$s->shows_id]=$s;
+            }
+
+            $count=count($lastfactors);
+            $locations= Locations::all();
+        }
+
         $data = array(
             'lastfactors' => $lastfactors,
             'shows' => $shows,
@@ -129,7 +140,8 @@ class ProfileController extends Controller
 
 
     public function favorites(){
-        $favorites=Reviews::Where(['users_id'=> auth()->user()->id , 'favorite'=> 1])->with('Events')->get();
+        $favorites=User::Where('id','=',auth()->user()->id)->with('Events')->get();
+        $favorites=$favorites[0]->events;
         $count=count($favorites);
         $data = array(
             'favorites' => $favorites,

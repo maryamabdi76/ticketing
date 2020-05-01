@@ -1,0 +1,405 @@
+.section-header-1::before, .footer-section::before, .banner-section::before, .speaker-banner::before, .widget-1.widget-check .add-check-area a i::after, .widget-1.widget-check .add-check-area a i::before, .widget-1.widget-check .form-group label::before, .side-shape::after, .side-shape::before, .newslater-container::after, .search-tab .tab-area::before, .movie-details .summery-review .tab-menu li::after, .movie-details .summery-review .tab-menu li::before, .screen::after, .screen::before, .screen-area .subtitle::after, .screen-area .subtitle::before, .checkout-widget .payment-option li.active a::after, .checkout-widget .payment-option li.active a::before, .checkout-widget.checkout-card .payment-card-form .form-group.check-group label::after, .checkout-widget.checkout-card .payment-card-form .form-group.check-group label::before, .event-about-thumb::after, .event-about-thumb::before, .statistics-section::after, .ticket--item .ticket-content ul li::before, .apps-wrapper .apps-bg, .counter--area .counter-item::after, .counter--area .counter-item::before, .account-area .account-form .form-group.checkgroup input::after, .account-area .or span::after, .account-area .or span::before, .contact-container .bg-thumb, .post-item.post-details .post-content .content .post-header blockquote::before {
+    position: absolute;
+    content: '';
+  }
+
+  .section-header-1, .section-header-2, .section-header-2 .tab-menu, .footer-top, .footer-bottom-area, .footer-bottom .links, .social-icons, .header-wrapper, .details-banner-content .social-and-duration, .details-banner-content .social-and-duration .duration-area, .details-banner-content .social-share, .book-wrapper, .book-wrapper .left-side, .book-wrapper .left-side .item .item-header, .book-wrapper .left-side .item .item-header .thumb, .widget-1.widget-facility ul li a, .widget-1 .widget-header, .widget-1.widget-check .form-group, .widget-1.widget-tags ul, .booking-summery ul li .subtitle, .booking-summery ul li .info, .proceed-area .subtitle, .widget-tags ul, .widget-categories ul li a, .widget-post .widget-slider .item .content .meta-post, .widget-post .slider-nav, .movie-rating-percent, .movie-rating-percent li, .movie-rating-percent li .thumb, .movie-list, .movie-list .movie-content .movie-tags, .movie-list .movie-content .book-area .book-ticket, .movie-list .movie-content .book-area .book-ticket .react-item .thumb, .movie-list .movie-content .book-area .book-ticket .react-item, .movie-list .movie-content .book-area .book-ticket .react-item a, .ticket-tab-menu, .ticket-search-form, .ticket-search-form .form-group, .filter-main, .filter-main .left, .filter-main .left .item, .grid-button, .movie-details .summery-review .tab-menu, .movie-details .item .header, .movie-details .item .header .navigation, .movie-review-item, .movie-review-item .author, .seat-plan-wrapper li, .seat-plan-wrapper li .movie-name, .seat-plan-wrapper li .movie-schedule, .window-warning, .seat-area .seat-line, .seat-area .seat-line ul, .proceed-to-book, .page-title-area, .page-title-area .date-item, .grid--area .filter, .grid--area .grid-area, .grid--area .grid-item .grid-inner .grid-thumb .offer-tag, .grid--area .grid-item .grid-inner .grid-thumb .offer-remainder, .checkout-widget .payment-option, .checkout-widget .payment-option li a, .checkout-widget.checkout-card .payment-card-form, .checkout-widget.checkout-card .payment-card-form .form-group.check-group, .checkout-contact-form, .sponsor-tab .tab-menu, .sponsor-slider .sponsor-thumb, .stat-item, .countdown, .event-search-top, .event-search-top .right, .event-search-bottom, .event-search-bottom .contact-side, .event-search-bottom .contact-side .item, .ticket--area .ticket-item .hot, .event-cart, .ticket--item .hot, .speaker-wrapper, .speak-con-area, .speak-con-area .item, .phisophy-list li, .phisophy-list li .thumb, .client-section .owl-dots, .tour-content .list-tour li, .tour-content .list-tour li .thumb, .about-counter, .about-counter .counter-item .counter-content, .app-button, .counter--area, .account-area .account-form .form-group.checkgroup, .section-404, .contact-counter-item .contact-counter-content .counter-item, .contact-info, .contact-info .info-area, .contact-info .info-area .info-item, .post-item .post-content .post-header .meta-post, .post-item .post-content .entry-content, .post-item .post-content .entry-content .left, .post-item .post-content .entry-content .left .authors, .post-item.post-details .post-content, .post-item.post-details .post-content .content .tags-area, .post-item.post-details .post-content .content .tags-area .tags, .blog-author, .comment-area li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+.screen {
+    font-size: 28px;
+    margin: 0 auto 40px;
+    position: relative;
+    text-align: center;
+    max-width: 350px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px;
+  }
+
+  .screen::after, .screen::before {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    height: 1px;
+    background: #213a69;
+  }
+
+  .screen::after {
+    width: 100%;
+    bottom: 0;
+  }
+
+  .screen::before {
+    width: 80%;
+    top: 0;
+  }
+
+  @media (min-width: 576px) {
+    .screen {
+      margin-bottom: 60px;
+    }
+  }
+
+  .screen-thumb {
+    width: 100%;
+    max-width: 730px;
+    margin: 0 auto 30px;
+  }
+
+  .screen-thumb img {
+    width: 100%;
+  }
+
+  @media (min-width: 576px) {
+    .screen-thumb {
+      margin-bottom: 60px;
+    }
+  }
+
+  .screen-area .subtitle {
+    margin: 0 auto 30px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    text-align: center;
+    max-width: 350px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px;
+    color: #31d7a9;
+  }
+
+  .screen-area .subtitle::after, .screen-area .subtitle::before {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    height: 1px;
+    background: #213a69;
+  }
+
+  .screen-area .subtitle::after {
+    width: 100%;
+    bottom: 0;
+  }
+
+  .screen-area .subtitle::before {
+    width: 80%;
+    top: 0;
+  }
+
+  @media (min-width: 576px) {
+    .screen-area .subtitle {
+      margin-bottom: 60px;
+    }
+  }
+
+  .seat-area {
+    margin-bottom: 25px;
+    margin-top: -5px;
+  }
+
+  @media (min-width: 576px) {
+    .seat-area {
+      margin-bottom: 55px;
+    }
+  }
+
+  .seat-area .seat-line {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 0;
+  }
+
+  .seat-area .seat-line > span {
+    width: 20px;
+  }
+
+  .seat-area .seat-line > span:last-child {
+    text-align: right;
+  }
+
+  .seat-area .seat-line ul {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+        list-style: none!important;
+  }
+
+  .seat-area .seat-line ul .front-seat {
+    padding: 0;
+    list-style: none!important;
+  }
+
+  .seat-area .seat-line ul .front-seat ul li {
+    padding: 5px;
+    list-style: none!important;
+  }
+
+  .seat-area .seat-line ul.seat--area {
+    width: calc(100% - 60px);
+  }
+
+  @media (max-width: 991px) and (min-width: 768px) {
+    .seat-area .seat-line .single-seat {
+      width: 35px;
+      padding: 2px !important;
+    }
+    .seat-area .seat-line .single-seat img {
+      width: 100%;
+    }
+    .seat-area .seat-line .single-seat .seat_checkbox {
+      width: 31px;
+      height: 28.78px;
+      background: url(./img/seat1.png);
+    }
+    .seat-area .seat-line .single-seat .seat_checkbox.checked {
+      background: url(./img/seat-chosen1.png);
+
+    }
+  }
+
+  .seat-area.couple {
+    margin-top: -10px;
+    margin-bottom: 70px;
+  }
+
+  @media (min-width: 992px) {
+    .seat-area.couple {
+      margin-bottom: 110px;
+    }
+  }
+
+  .seat-area.couple .seat-line .single-seat {
+    padding: 10px;
+  }
+
+  @media (max-width: 991px) and (min-width: 768px) {
+    .seat-area.couple .seat-line .single-seat {
+      width: 70px;
+      padding: 4px !important;
+    }
+  }
+
+  .single-seat {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .single-seat .sit-num {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #ffffff!important;
+
+  }
+
+  @media (max-width: 991px) {
+    .single-seat .sit-num {
+      width: 100%;
+      font-size: 8px;
+      text-align: center;
+      color: #ffffff!important;
+    }
+  }
+
+  .single-seat:hover .sit-num {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .screen-wrapper {
+      width: 100%;
+      overflow-x: scroll;
+    }
+    .screen-wrapper .seat-area {
+      width: 800px;
+      margin-bottom: 10px;
+    }
+    .screen-wrapper::-webkit-scrollbar {
+      height: 3px;
+    }
+  }
+
+  .movie-facility {
+    overflow: hidden;
+  }
+
+  .proceed-to-book {
+    text-align: right;/*maryamcustom****************************************************************************************************/
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: -25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 767px) {
+    .proceed-to-book .book-item .title {
+      font-size: 24px;
+    }
+    .proceed-to-book .book-item span {
+      font-size: 14px;
+    }
+    .proceed-to-book .book-item .custom-button {
+      font-size: 14px;
+    }
+  }
+
+  .proceed-to-book .book-item {
+    margin-bottom: 25px;
+  }
+
+  .proceed-to-book .book-item span {
+    color: #ffffff;
+    text-transform: capitalize;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .proceed-to-book .book-item .title {
+    color: #31d7a9;
+    text-transform: uppercase;
+  }
+
+  .proceed-to-book .book-item .custom-button {
+    padding: 8px 24px;
+  }
+
+  .proceed-book {
+    padding: 32px 40px 32px;
+    position: relative;
+  }
+
+  .proceed-book::before {
+    background-color: #050068;
+    opacity: 0.851;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .proceed-book {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-top: 80px;
+    }
+  }
+
+  .page-title-area {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin: 0 -15px -20px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .page-title-area .item {
+    margin: 0 15px 20px;
+  }
+
+  .page-title-area .item .title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 767px) {
+    .page-title-area .item.md-order-1 {
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1;
+    }
+  }
+
+  .page-title-area .date-item {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .page-title-area .date-item .date {
+    margin-left: 30px;/*maryamcustom****************************************************************************************************/
+  }
+
+  .page-title-area .date-item .select-bar {
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+    -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+            box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
+    border: none;
+    height: 36px;
+  }
+
+  .page-title-area .date-item .select-bar .current {
+    line-height: 36px;
+    display: inherit;
+  }
+
+  .page-title-area .date-item .select-bar .list {
+    background: #032055;
+  }
+
+  .page-title-area .date-item .select-bar .list li {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .page-title-area .date-item .select-bar .list li:hover, .page-title-area .date-item .select-bar .list li.selected {
+    background: #001232;
+  }
+
+  .page-title-area .date-item .select-bar::after {
+    border-color: #ffffff;
+  }
+
+  .page-title {
+    padding: 40px 0;
+    border-top: 1px solid #17305f;
+    border-bottom: 1px solid #17305f;
+  }
+  .mb-5imp{
+    margin-bottom: 5px!important;
+}
+.ml2imp{
+    margin-left: .2rem!important;
+}
+.tifanyc{
+    color: #29b991!important;
+  }
+.mredc{
+    color: #ce3333!important;
+  }
+.chidemantitle{
+    max-width: 300px;
+    padding: 1rem 0;
+    color: #29b991!important;
+    border-top:1px solid #17305f;
+    border-bottom:1px solid #17305f;
+    text-align: center!important;
+    margin: 0 auto;
+}
+.fontsize12imp{
+    font-size: 12px!important;
+}

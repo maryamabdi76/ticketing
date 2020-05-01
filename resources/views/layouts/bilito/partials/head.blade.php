@@ -20,4 +20,9 @@
     <link rel="stylesheet" href="{{asset('css/stackedCards.css')}}">
 
     <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/myflaticon/flaticon.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bilito</title>

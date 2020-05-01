@@ -406,7 +406,7 @@
                             <span class="cate text-right">ضمانت می کنیم که </span>
                             <h2 class="title text-right">می توانید به ما اعتماد کنید.</h2>
                             <p class="ml-0 text-right">
-                                زیرا آرامش بیشتر به معنای عشق بیشتر به این رویداد است.
+                                زیرا اعتماد، علاقه و آرامش را به همراه می آورد.
                             </p>
                         </div>
                         <ul class="list-tour">
@@ -416,7 +416,7 @@
                                 </div>
                                 <div class="content">
                                     <h5 class="title text-right pr-4">ضمانت ورود</h5>
-                                    <p class="text-right pr-3">بلیط های معتبر ، تحویل به موقع و دسترسی به رویداد شما. یا پول خود را برگردانید عادت زنانه.</p>
+                                    <p class="text-right pr-3">بلیتی معتبر با تحویل به موقع برای سهولت ورود شما به نمایش</p>
                                 </div>
                             </li>
                             <li>

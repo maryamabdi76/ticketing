@@ -23,7 +23,9 @@
                     <div class="thumb">
                         <img src="{{asset('images/ticket/date.png')}}" alt="ticket">
                     </div>
-                    <span class="type">سفارش شما با موفقیت ثبت شد</span>
+                    <span class="text-white">سفارش شما با موفقیت ثبت شد. </span>
+                    @if($flag==0)
+                    <span class="text-white">بلیت خود را میتوانید با کد <strong class="tifanyc">{{$code}}</strong> از دستگاه های بیلیتو ویا گیشه سینما تحویل بگیرید.</span>
                 </div>
                 <div class="form-group">
                     <div class="item md-order-1">
@@ -32,6 +34,20 @@
                             <i class="fa fa-angle-double-right"></i> </a>
                     </div>
                 </div>
+                    @elseif($flag==1)
+                    <span class="type">برای چاپ و یا ذخیره بلیت دکمه "چاپ بلیت" را کلیک کنید.</span>
+                </div>
+                <div class="form-group">
+                    <div class="item md-order-1">
+                        <a href="/printTicket/{{$factor_id}}" class="custom-button back-button ml-3">
+                            چاپ بلیت
+                            <i class="fa fa-angle-double-right"></i> </a>
+                        <a href="/" class="custom-button back-button mr-3">
+                            بازگشت به خانه
+                            <i class="fa fa-angle-double-right"></i> </a>
+                    </div>
+                </div>
+                    @endif
             </form>
         </div>
     </section>

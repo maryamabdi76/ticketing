@@ -33,31 +33,6 @@
             @endforeach
 		</ul>
     </div>
-
-    {{-- <section id="slider" class="m-5">
-        <input type="radio" name="slider" id="s1">
-        <input type="radio" name="slider" id="s2">
-        <input type="radio" name="slider" id="s3"checked>
-        <input type="radio" name="slider" id="s4">
-        <input type="radio" name="slider" id="s5">
-        <label for="s1" id="slide1"style="background-image:url({{asset('images/slider/slider1.jpg')}});
-                                            background-repeat: no-repeat;
-                                            background-size:cover"></label>
-        <label for="s2" id="slide2" style="background-image:url({{asset('images/slider/slider2.jpg')}});
-                                            background-repeat: no-repeat;
-                                            background-size:cover"></label>
-        <label for="s3" id="slide3" style="background-image:url({{asset('images/slider/slider3.jpg')}});
-                                            background-repeat: no-repeat;
-                                            background-size:cover"></label>
-        <label for="s4" id="slide4" style="background-image:url({{asset('images/slider/slider4.jpg')}});
-                                            background-repeat: no-repeat;
-                                            background-size:cover"></label>
-        <label for="s5" id="slide5" style="background-image:url({{asset('images/slider/slider5.jpg')}});
-                                            background-repeat: no-repeat;
-                                            background-size:cover"></label>
-      </section> --}}
-
-
     <!-- ==========Best Seller========== -->
     <section class="event-section padding-top padding-bottom">
         <div class="container">
@@ -76,19 +51,19 @@
                             <div class="item">
                                 <div class="event-grid">
                                     <div class="movie-thumb c-thumb">
-                                            @if($v[0]->categories_id==1)
-                                            <a href="/movie-details/{{$v[0]->events_id}}">
-                                            <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
-                                            </a>
-                                            @elseif($v[0]->categories_id==2)
-                                            <a href="/concert-details/{{$v[0]->events_id}}">
-                                            <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
-                                            </a>
-                                            @else
-                                            <a href="/theater-details/{{$v[0]->events_id}}">
-                                            <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
-                                            </a>
-                                            @endif
+                                        @if($v[0]->categories_id==1)
+                                        <a href="/movie-details/{{$v[0]->id}}">
+                                        <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
+                                        </a>
+                                        @elseif($v[0]->categories_id==2)
+                                        <a href="/concert-details/{{$v[0]->id}}">
+                                        <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
+                                        </a>
+                                        @else
+                                        <a href="/theater-details/{{$v[0]->id}}">
+                                        <img width="330px" height="400px" src="{{asset('/').$v[0]->Images()->get()->first()->path}}" alt="movie">
+                                        </a>
+                                        @endif
 
                                         <div class="event-date">
                                             <h6 class="date-title"><i class="fa fa-store"></i></h6>
@@ -204,12 +179,6 @@
                         <p>مطمئن باشید که امروز این فیلم ها را از دست نخواهید داد.</p>
                     </div>
                     <ul class="tab-menu">
-                        <li class="active">
-                            در حال نمایش
-                        </li>
-                        {{-- <li>
-                            به زودی
-                        </li> --}}
                         <a href="{{route('movie')}}" style="">نمایش همه</a>
                     </ul>
                 </div>
@@ -298,12 +267,6 @@
                         <p>مطمئن باشید که امروز این کنسرت ها را از دست نخواهید داد.</p>
                     </div>
                     <ul class="tab-menu">
-                        <li class="active">
-                            در حال نمایش
-                        </li>
-                        {{-- <li>
-                            به زودی
-                        </li> --}}
                         <a href="{{route('concert')}}" style="">نمایش همه</a>
 
                     </ul>
@@ -379,12 +342,6 @@
                         <p>مطمئن باشید که امروز این تئاتر ها را از دست نخواهید داد.</p>
                     </div>
                     <ul class="tab-menu">
-                        <li class="active">
-                            در حال نمایش
-                        </li>
-                        {{-- <li>
-                            به زودی
-                        </li> --}}
                         <a href="{{route('theater')}}" style="">نمایش همه</a>
 
                     </ul>

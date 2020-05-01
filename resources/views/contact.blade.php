@@ -2,7 +2,6 @@
 @extends('layouts.bilito.mainlayout')
 @section('content')
 
-
     <!-- ==========Banner-Section========== -->
     <section class="main-page-header speaker-banner bg_img" data-background="{{asset('images/banner/banner07.jpg')}}">
         <div class="container">
@@ -20,6 +19,11 @@
     <!-- ==========Banner-Section========== -->
 
     <!-- ==========Contact-Section========== -->
+
+    @if($success)
+    <div class="cate text-center p-3 m-5" style="border:2px solid #31d7a9;color:#31d7a9">{{$success}}</div>
+    @endif
+
     <section class="contact-section padding-top">
         <div class="contact-container">
             <div class="bg-thumb bg_img" data-background="{{asset('images/contact/contact.jpg')}}"></div>
@@ -31,22 +35,43 @@
                             <h2 class="title text-right">با ما در ارتباط باشید !</h2>
                             <p class="text-right">ما دوست داریم تا با صحبت با شما و با استفاده از نظرات و پیشنهاداتتان یک همکاری مفید داشته باشیم. هر سوال یا نظری داشتید تنها کافیست پیام دهید، و ما در اسرع وقت پاسخ خواهیم داد.</p>
                         </div>
-                        <form class="contact-form" id="contact_form_submit">
+                        <form class="contact-form" method="POST" id="contact_form_submit" action="/contact/send">
+                            {{ csrf_field() }}
                             <div class="form-group text-right">
                                 <label for="name">نام و نام خانوادگی <span>*</span></label>
-                                <input type="text" name="name" id="name" required>
+                                <input class="@error('name') is-invalid @enderror" type="text" name="name" id="name" required>
+                                @error('name')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                <div class="form-group text-right">
                             </div>
-                            <div class="form-group text-right">
                                 <label for="email">ایمیل <span>*</span></label>
-                                <input type="text" name="email" id="email" required>
+                                <input class="@error('email') is-invalid @enderror" type="email" name="email" id="email" required>
+                                @error('email')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                <div class="form-group text-right">
                             </div>
-                            <div class="form-group text-right">
                                 <label for="subject">موضوع <span>*</span></label>
-                                <input type="text" placeholder="     موضوع پیامتان را بنویسید" name="subject" id="subject" required>
+                                <input class="@error('subject') is-invalid @enderror" type="text" placeholder="موضوع پیامتان را بنویسید" name="subject" id="subject" required>
+                                @error('subject')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                             <div class="form-group text-right">
                                 <label for="message">متن <span>*</span></label>
-                                <textarea name="message" id="message" placeholder="متن پیامتان را بنویسید" required></textarea>
+                                <textarea class="@error('message') is-invalid @enderror" name="message" id="message" placeholder="متن پیامتان را بنویسید" required></textarea>
+                                @error('message')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                             <div class="form-group text-right">
                                 <input class="h5 letter__spacing__1" type="submit" value="ارسال پیام">

@@ -32,10 +32,40 @@
                         @foreach($posts as $post)
                         <div class="post-item">
                             <div class="post-thumb">
+                                @if($post->Videos()->count()>0)
+                                <div class="owl-carousel owl-theme blog-slider">
+                                    @foreach($post->Images()->get() as $k=>$photo)
+                                    <img height="350px" src="{{asset('/').$photo->path}}" alt="blog">
+                                    @endforeach
+                                    @foreach($post->Videos()->get() as $k=>$film)
+                                    <video width="100%" height="300" controls>
+                                        <source src="{{asset('/').$film->source}}" type="video/mp4">
+                                      </video>
+                                      @endforeach
+                                </div>
+                                <div class="blog-prev">
+                                    <i class="flaticon-double-right-arrows-angles"></i>
+                                </div>
+                                <div class="blog-next active">
+                                    <i class="flaticon-double-right-arrows-angles"></i>
+                                </div>
+                                @else
                                 <a href="/blog-details/{{$post->id}}">
-                                    <img height="350px" src="{{asset('/').$post->Images()->get()->first()->path}}" alt="blog">
-                                    {{-- <img src="{{asset('images/blog/blog01.jpg')}}" alt="blog"> --}}
-                                </a>
+                                    <div class="owl-carousel owl-theme blog-slider">
+                                        @foreach($post->Images()->get() as $k=>$photo)
+                                        <img height="350px" src="{{asset('/').$photo->path}}" alt="blog">
+                                        @endforeach
+                                    </div>
+                                    @if($post->Images()->count()>1)
+                                        <div class="blog-prev">
+                                            <i class="flaticon-double-right-arrows-angles"></i>
+                                        </div>
+                                        <div class="blog-next active">
+                                            <i class="flaticon-double-right-arrows-angles"></i>
+                                        </div>
+                                        </a>
+                                    @endif
+                                @endif
                             </div>
                             <div class="post-content">
                                 <div class="post-header">
@@ -43,7 +73,8 @@
                                         <a href="/blog-details/{{$post->id}}">{{$post->title}}</a>
                                     </h4>
                                     <div class="meta-post justify-content-end">
-                                        <a href="#0" class="ml-4"><i class="flaticon-conversation"></i>{{$comments->where('posts_id', $post->id)->count()}} نظر</a>
+                                        <a href="#0" class="ml-4"><i class="flaticon-conversation"></i>
+                                            {{$comments->where('posts_id', $post->id)->count()}} نظر</a>
                                         <a href="#0"><i class="flaticon-view"></i>{{$post->views}} بازدید</a>
                                     </div>
                                 <p class="text-right">{{Str::limit($post->content,200,' ....')}}</p>
@@ -63,131 +94,9 @@
                             </div>
                         </div>
                         @endforeach
-                        {{-- <div class="post-item">
-                            <div class="post-thumb">
-                                <div class="owl-carousel owl-theme blog-slider">
-                                    <img src="{{asset('images/blog/blog02.jpg')}}" alt="blog">
-                                    <img src="{{asset('images/blog/blog03.jpg')}}" alt="blog">
-                                    <img src="{{asset('images/blog/blog04.jpg')}}" alt="blog">
-                                    <img src="{{asset('images/blog/blog01.jpg')}}" alt="blog">
-                                </div>
-                                <div class="blog-prev">
-                                    <i class="flaticon-double-right-arrows-angles"></i>
-                                </div>
-                                <div class="blog-next active">
-                                    <i class="flaticon-double-right-arrows-angles"></i>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-header">
-                                    <h4 class="title text-right">
-                                        <a href="/blog-details/{{$post->id}}">
-                                            نکاتی که باید هنگام خرید بلیت در خاطر داشته باشیم!
-                                        </a>
-                                    </h4>
-                                    <div class="meta-post justify-content-end">
-                                        <a href="#0" class="ml-4"><i class="flaticon-conversation"></i>20 نظر</a>
-                                        <a href="#0"><i class="flaticon-view"></i>466 بازدید</a>
-                                    </div>
-                                    <p class="text-right">
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.                                      </p>
-                                    </p>
-                                </div>
-                                <div class="entry-content">
-                                    <div class="left">
-                                        <span class="date p-2">29 آذر ماه 1398</span>
-                                        <div class="authors">
-                                            <div class="thumb">
-                                                <a href="#0"><img src="{{asset('images/blog/author.jpg')}}" alt="#0"></a>
-                                            </div>
-                                            <h6 class="title p-2"><a href="/concert-speaker">سبحان محمدیان</a></h6>
-                                        </div>
-                                    </div>
-                                    <a href="/blog-details/{{$post->id}}" class="buttons"> بیشتر بخوانید <i class="fas fa-angle-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-thumb">
-                                <img src="{{asset('images/blog/blog03.jpg')}}" alt="blog">
-                                <a href="https://www.youtube.com/embed/GT6-H4BRyqQ" class="video-button video-popup">
-                                    <i class="flaticon-play-button"></i>
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-header">
-                                    <h4 class="title text-right">
-                                        <a href="/blog-details/{{$post->id}}">
-                                            یک قیمت برای تمامی صندلی ها ؟ زمان تغییر رسیده !
-                                        </a>
-                                    </h4>
-                                <div class="meta-post justify-content-end">
-                                        <a href="#0" class="ml-4"><i class="flaticon-conversation"></i>20 نظر</a>
-                                        <a href="#0"><i class="flaticon-view"></i>466 بازدید</a>
-                                    </div>
-                                    <p class="text-right">
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.                                      </p>
-                                    </p>
-                                </div>
-                                <div class="entry-content">
-                                    <div class="left">
-                                        <span class="date p-2">29 آذر ماه 1398</span>
-                                        <div class="authors">
-                                            <div class="thumb">
-                                                <a href="#0"><img src="{{asset('images/blog/author.jpg')}}" alt="#0"></a>
-                                            </div>
-                                            <h6 class="title p-2"><a href="/concert-speaker">سبحان محمدیان</a></h6>
-                                        </div>
-                                    </div>
-                                    <a href="/blog-details/{{$post->id}}" class="buttons"> بیشتر بخوانید <i class="fas fa-angle-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-thumb">
-                                <a href="/blog-details/{{$post->id}}">
-                                    <img src="{{asset('images/blog/blog04.jpg')}}" alt="blog">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-header">
-                                    <h4 class="title text-right">
-                                        <a href="/blog-details/{{$post->id}}">
-                                            اکران فیلم های 3D درسینما های سراسر ایران
-                                        </a>
-                                    </h4>
-                                <div class="meta-post justify-content-end">
-                                        <a href="#0" class="ml-4"><i class="flaticon-conversation"></i>20 نظر</a>
-                                        <a href="#0"><i class="flaticon-view"></i>466 بازدید</a>
-                                </div>
-                                    <p class="text-right">
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.                                      </p>
-                                    </p>
-                                </div>
-                                <div class="entry-content">
-                                    <div class="left">
-                                        <span class="date p-2">29 آذر ماه 1398</span>
-                                        <div class="authors">
-                                            <div class="thumb">
-                                                <a href="#0"><img src="{{asset('images/blog/author.jpg')}}" alt="#0"></a>
-                                            </div>
-                                            <h6 class="title p-2"><a href="/concert-speaker">سبحان محمدیان</a></h6>
-                                        </div>
-                                    </div>
-                                    <a href="/blog-details/{{$post->id}}" class="buttons"> بیشتر بخوانید <i class="fas fa-angle-left"></i></a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </article>
-                    <div class="pagination-area text-center">
-                        <a href="#0"><i class="fas fa-angle-double-right"></i><span> قبلی </span></a>
-                        <a href="#0" class="active">1</a>
-                        <a href="#0">2</a>
-                        <a href="#0">3</a>
-                        <a href="#0">4</a>
-                        <a href="#0">5</a>
-                        <a href="#0"><span>بعدی </span><i class="fas fa-angle-double-left"></i></a>
-                    </div>
+                    {{$posts->links()}}
+
                 </div>
 
 <!-- =================================side=================================== -->
@@ -221,7 +130,9 @@
                                             <a href="/blog-details/{{$lastpost->id}}">{{$lastpost->title}}</a>
                                         </h6>
                                         <div class="meta-post justify-content-start">
-                                            <a href="/blog-details/{{$lastpost->id}}" class="ml-4"><i class="flaticon-conversation"></i>{{$comments->where('posts_id', $lastpost->id)->count()}} نظر</a>
+                                            <a href="/blog-details/{{$lastpost->id}}" class="ml-4"><i class="flaticon-conversation"></i>
+                                                {{$comments->where('posts_id', $lastpost->id)->count()}}
+                                             نظر</a>
                                             <a href="/blog-details/{{$lastpost->id}}"><i class="flaticon-view"></i>{{$lastpost->views}} بازدید</a>
                                         </div>
                                     </div>
@@ -229,49 +140,8 @@
                                 @endforeach
                             </div>
                         </div>
-                        
-                        {{-- <div class="widget widget-categories">
-                            <h5 class="title text-right">دسته بندی ها</h5>
-                            <ul>
-                                <li>
-                                    <a href="#0">
-                                        <span>سانس ها و بلیت ها</span><span>50</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <span>آخرین پیش نمایش ها</span><span>43</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <span>جدیدترین ها</span><span>34</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <span>روی پرده سینما</span><span>63</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <span>تاریخ اکران</span><span>11</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <span>برترین ها</span><span>30</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <span>نوستالژی</span><span>55</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div> --}}
+
                         <div class="widget widget-tags">
-                            <!-- <h5 class="title">featured tags</h5> -->
                             <ul>
                                 @foreach($tags as $tag)
                                 <li>

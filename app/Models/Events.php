@@ -3,9 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Events extends Model
 {
+
+    use SoftDeletes;
+    protected $date=['deleted_at'];
+
+    protected $fillable = [
+        'categories_id','name','act','team','description','date'
+    ];
+
+    public function User()
+    {
+        return $this->belongsToMany('App\User', 'favorites', 'events_id', 'users_id');
+    }
     public function Genres()
     {
         return $this->belongsToMany('App\Models\Genres', 'events_genre', 'events_id', 'genres_id');

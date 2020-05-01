@@ -3,9 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Factors extends Model
 {
+
+    use SoftDeletes;
+    protected $date=['deleted_at'];
+
+    protected $fillable = [
+        'users_id','sum','discount','total','purchase_date'
+    ];
+
     public function Factors_Status()
     {
         return $this->belongsTo('App\Models\Factors_Status','status','id');
@@ -20,7 +29,7 @@ class Factors extends Model
     }
     public function Discounts()
     {
-        return $this->belongsTo('App\Models\Discounts','discount','id');
+        return $this->belongsTo('App\Models\Discounts','discount_id','id');
     }
     public function Shows()
     {

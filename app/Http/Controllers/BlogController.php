@@ -1,7 +1,5 @@
 <?php
-
-
-// namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,9 +12,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $posts = Posts::all();
-        $lastposts = Posts::all()->take(3);
-        $comments = Comments::all();
+        $posts = Posts::orderBy('created_at','desc')->paginate(5);
+        $lastposts = Posts::orderBy('created_at', 'desc')->take(3)->get();
+        $comments = Comments::where('status',1)->get();
         $tags = Tags::all();
         $data = array(
             'posts' => $posts,
@@ -30,9 +28,9 @@ class BlogController extends Controller
     public function details($id)
     {
         $post = Posts::findOrFail($id);
-        $comments = Comments::where('posts_id', $post->id)->with('user')->orderBy('created_at')->get();
+        $comments = Comments::where('posts_id', $post->id)->where('status',1)->with('user')->orderBy('created_at')->get();
         $lastposts = Posts::orderBy('created_at', 'desc')->take(3)->get();
-        $allcomments = Comments::all();
+        $allcomments = Comments::where('status',1)->get();
         $tags = Tags::all();
         $taggables = Taggables::where('taggable_id',$post->id)->join('tags','tags.id','taggables.tags_id')->get();
         $data = array(
@@ -42,7 +40,7 @@ class BlogController extends Controller
             'allcomments' => $allcomments,
             'tags' => $tags,
             'taggables' => $taggables,
-            'allcomment'=>Comments::all()
+            'allcomment'=>$allcomments
         );
         $post->update(['views' => $post->views + 1, 'updated_at' => Posts::raw('updated_at')]);
         // dd($data);die();
@@ -53,7 +51,7 @@ class BlogController extends Controller
     {
         $posts = Posts::where('title', 'like', "%{$request->query('searchblog')}%")->orWhere('content', 'like', "%{$request->query('searchblog')}%")->get();
         $lastposts = Posts::all()->take(3);
-        $comments = Comments::all();
+        $comments = Comments::where('status',1);
         $tags = Tags::all();
         $data = array(
             'posts' => $posts,
@@ -63,7 +61,7 @@ class BlogController extends Controller
         );
         return view('blog/blog')->with($data);
     }
-    
+
     public function searchtag($id)
     {
         $posts = Posts::join('taggables','taggables.taggable_id','=','posts.id')
@@ -71,7 +69,7 @@ class BlogController extends Controller
                         ->select('posts.id','events_id','title','content','views')
                         ->get();
         $lastposts = Posts::all()->take(3);
-        $comments = Comments::all();
+        $comments = Comments::where('status',1);
         $tags = Tags::all();
         $data = array(
             'posts' => $posts,
@@ -87,7 +85,6 @@ class BlogController extends Controller
         $request->validate([
             'comment'=>'required|string|max:255'
         ]);
-        // dd($request->userid);
         $users_id=auth()->user()->id;
         Comments::create([
             'users_id' => $users_id,

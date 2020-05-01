@@ -4,13 +4,6 @@
 
     <!-- ==========Event-Banner-Section========== -->
     <section class="event-banner-section bg_img " data-background="">
-    {{-- <section class="event-banner-section bg_img " data-background="{{asset('/').$concert->Images()->get()->first()->path}}"> --}}
-        {{-- <section class="event-banner-section bg_img" data-background="{{asset('images/banner/banner06.jpg')}}"> --}}
-            {{-- <div class="details-banner-wrapper">
-                <div class="details-banner-thumb">
-                    <img src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="movie">
-                </div>
-            </div> --}}
         <div class="container">
             <div class="event-banner">
                 <a href="https://www.youtube.com/embed/GT6-H4BRyqQ" class="video-popup">
@@ -27,29 +20,8 @@
         <div class="container">
             <div class="event-search bg_img" data-background="{{asset('images/ticket/ticket-bg01.jpg')}}">
                 <div class="event-search-top">
-                    <div class="left">
-                        <h3 class="title">{{$concert->name}}</h3>
-                    </div>
-                    <div class="right">
-                        <ul class="countdown">
-							<li>
-								<h2><span class="days">00</span></h2>
-								<p class="days_text">روز</p>
-							</li>
-							<li>
-								<h2><span class="hours">00</span></h2>
-								<p class="hours_text">ساعت</p>
-							</li>
-							<li>
-								<h2><span class="minutes">00</span></h2>
-								<p class="minu_text">دقیقه</p>
-							</li>
-							<li>
-								<h2><span class="seconds">00</span></h2>
-								<p class="seco_text">ثانیه</p>
-							</li>
-						</ul>
-                        <a href="/concert-ticket" class="custom-button">خرید بلیت</a>
+                    <div class="jccenter">
+                        <h3 class="title mb-3">{{$concert->name}}</h3>
                     </div>
                 </div>
                 <div class="event-search-bottom">
@@ -59,7 +31,7 @@
                                 <img src="{{asset('images/event/icon/event-icon01.png')}}" alt="event">
                             </div>
                             <div class="item-content">
-                                <span class="up">{{$concert->date}}</span>
+                                <span class="up">{{str_replace('-','/',str_replace('00:00:00', '', $concert->date))}}</span>
                                 <span></span>
                             </div>
                         </div>
@@ -68,8 +40,8 @@
                                 <img src="{{asset('images/event/icon/event-icon02.png')}}" alt="event">
                             </div>
                             <div class="item-content">
-                                <span class="up">خیابان لورم</span>
-                                <span>شهر لورم</span>
+                                <span class="up">خیابان ولیعصر</span>
+                                <span>شهر تهران</span>
                             </div>
                         </div>
                         <div class="item">
@@ -114,692 +86,305 @@
         </div>
     </section>
     <!-- ==========Event-Book-Search========== -->
-
+    @include('flash-message')
     <!-- ==========Event-About========== -->
     <section class="event-about padding-top padding-bottom">
         <div class="container">
             <div class="row justify-content-between flex-wrap-reverse">
-                <div class="col-lg-7 col-xl-6">
+                <div class="col-md-7">
                     <div class="event-about-content">
                         <div class="section-header-3 left-style m-0">
-                            <span class="cate">آماده هستید که شرکت کنید ؟</span>
                             <h2 class="title">{{$concert->name}}<span></span></h2>
-                                        <div class="movie-details">
-                                            <div class="tab summery-review">
-                                                <ul class="tab-menu">
-                                                    <li class="active">
-                                                         کنسرت
-                                                    </li>
-                                                    <li>
-                                                        نظرات کاربران <span>{{$count}}</span>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-area">
-                                                    <div class="tab-item active">
-                                                        {{-- <div class="item">
-                                                            <h5 class="sub-title">خلاصه</h5>
-                                                            <p>{{$concert->description}}</p>
-                                                        </div> --}}
-                                                        <div class="item">
-                                                            <div class="header">
-                                                                <h5 class="sub-title">خواننده</h5>
-                                                            </div>
-                                                            <p>{{$concert->act}}</p>
-                                                        </div>
-                                                        <div class="item">
-                                                            <div class="header">
-                                                                <h5 class="sub-title">عوامل</h5>
-                                                            </div>
-                                                            <p style="white-space: pre-wrap">{{$concert->team}}</p>
-                                                        </div>
+                            <section class="book-section bg-one mb-5">
+                                <div class="container">
+                                    <div class="book-wrapper">
+                                        <div class="left-side">
+                                            <div class="item">
+                                                <div class="item-header">
+                                                    <div class="star-ratings-sprite">
+                                                        <span style="width:{{$averate}}%" class="star-ratings-sprite-rating"></span>
                                                     </div>
-                                                    <div class="tab-item">
-                                                        @foreach($reviews as $v)
-                                                            <div class="movie-review-item">
-                                                                <div class="author">
-                                                                    <div class="thumb">
-                                                                        @if($v->user->gender===1)
-                                                                            <img src="{{asset('images/avatar/femaleavatar.png')}}" alt="female avatar"/>
-                                                                        @endif
-                                                                        @if($v->user->gender===2)
-                                                                            <img src="{{asset('images/avatar/maleavatar.png')}}" alt="male avatar"/>
-                                                                        @endif
-                                                                    </div>
-                                                                    <div class="movie-review-info">
-                                                                        <h6 class="subtitle mt-3">{{$v->user->name}}</h6>
-                                                                        <span class="reply-date">{{$v->created_at}}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="movie-review-content">
-                                                                        <div class="review">
-                                                                        @for ($i=1; $i <= 5 ; $i++)
-                                                                        <i class="fas fa-heart {{ ($i <= $v->rating) ? 'heart__f' : 'heart__o'}}"></i>
-                                                                        @endfor
-                                                                        </div>
-                                                                    <p>{{$v->comment}}</p>
-                                                                    <div class="review-meta">
-                                                                        <a href="#0">
-                                                                            <i class="flaticon-hand"></i><span>{{$v->like}}</span>
-                                                                        </a>
-                                                                        <a href="#0" class="dislike">
-                                                                            <i class="flaticon-dont-like-symbol"></i><span>{{$v->dislike}}</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                        @if(!empty(Auth::user()->name))
-                                                            <div class="widget-1 widget-offer">
-                                                                    <h3 class="title mt-5">نظرات خود را ثبت کنید</h3>
-                                                                    <div class="offer-body">
-                                                                        <div class="offer-item">
-                                                                            <form method="POST" action="/review" class="mt-0" id="review">
-                                                                                @csrf
-                                                                                <input type="hidden" name="events_id" value="{{$id}}">
-                                                                                <div class="form-group">
-                                                                                    <span><label for="rating" class="pl-3">امتیاز شما به این فیلم :</label>
-                                                                                    <input type="number" id="rating" name="rating" min="0" max="5" class="inpnumw"></span>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                <textarea rows="8" cols="80" name="comment" form="review" class="bgtrasparent text-white" placeholder="نظر خود را اینجا بنویسید ..."></textarea>
-                                                                                </div>
-                                                                                <input class="letter__spacing__1 probutton" type="submit" value="ثبت نظر">
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                        </div>
-
+                                                    <h5 class="title pr-3">{{$averate/20}}</h5>
+                                                </div>
+                                                <p>نظر کاربران</p>
+                                            </div>
+                                            @if(!empty(Auth::user()->username))
+                                            <input type="hidden" id="username" value="{{Auth::user()->username}}">
+                                            <div class="item">
+                                                <div class="item-header">
+                                                    <div class="thumb addfavorite" data-toggle="tooltip" data-placement="top" title="افزودن به علاقه مندی ها" id="{{$event_id}}">
+                                                        <img src="{{asset('images/movie/hearts.png')}}" alt="movie">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="movie-details">
+                                <div class="tab summery-review">
+                                    <ul class="tab-menu">
+                                        <li class="active">
+                                             کنسرت
+                                        </li>
+                                        <li>
+                                            نظرات کاربران <span>{{$count}}</span>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-area">
+                                        <div class="tab-item active">
+                                            <div class="item">
+                                                <div class="header">
+                                                    <h5 class="sub-title">خواننده</h5>
+                                                </div>
+                                                <p>{{$concert->act}}</p>
+                                            </div>
+                                            <div class="item">
+                                                <div class="header">
+                                                    <h5 class="sub-title">عوامل</h5>
+                                                </div>
+                                                <p style="white-space: pre-wrap">{{$concert->team}}</p>
                                             </div>
                                         </div>
-                                        <div class="widget-1 widget-offer">
-                                                <h3 class="title mt-5">خرید بلیت</h3>
-                                                <div class="offer-body">
-                                                    <div class="offer-item">
-                                                        @if($flag===0)
-                                                            <div class="mt-3 mb-3 text-center">
-                                                            <p class="text-white text-center">متاسفانه در حال حاضر این برنامه نمایش داده نمی شود !</p>
-                                                            </div>
-                                                        @endif
-                                                        @if($flag===1)
-                                                            <form method="POST" action="/ticket" class="mt-0">
-                                                                @csrf
-                                                                <input type="hidden" name="id" value="{{$id}}">
-                                                                <span class="text-white pt-1 pb-1">روز مورد نظرتان را انتخاب کنید:</span>
-                                                                <select class="myselect-bar1 text-black mt-3 mb-3" name="date">
-                                                                    @foreach($date as $d)
-                                                                        <option value="{{$d}}">{{$d}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                                <input class="letter__spacing__1 probutton" type="submit" value="خرید بلیت">
-                                                            </form>
-                                                        @endif
+                                        <div class="tab-item">
+                                            @foreach($reviews as $v)
+                                                <div class="movie-review-item">
+                                                    <div class="author">
+                                                        <div class="thumb">
+                                                            @if($v->user->gender===1)
+                                                                <img src="{{asset('images/avatar/femaleavatar.png')}}" alt="female avatar"/>
+                                                            @endif
+                                                            @if($v->user->gender===2)
+                                                                <img src="{{asset('images/avatar/maleavatar.png')}}" alt="male avatar"/>
+                                                            @endif
+                                                        </div>
+                                                        <div class="movie-review-info">
+                                                            <h6 class="subtitle mt-3">{{$v->user->name}}</h6>
+                                                            <span class="reply-date">{{$v->created_at}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="movie-review-content">
+                                                        <div class="review">
+                                                            @for ($i=1; $i <= 5 ; $i++)
+                                                                <i class="fas fa-star {{ ($i <= $v->rating) ? 'heart__f' : 'heart__o'}}"></i>
+                                                            @endfor
+                                                        </div>
+                                                        <p>{{$v->comment}}</p>
                                                     </div>
                                                 </div>
+                                            @endforeach
+                                            @if(!empty(Auth::user()->name))
+                                                <div class="widget-1 widget-offer">
+                                                    <h3 class="title mt-5">نظرات خود را ثبت کنید</h3>
+                                                    <div class="offer-body">
+                                                        <div class="offer-item">
+                                                            <form class="mt-0" id="review">
+                                                                @csrf
+                                                                <input type="hidden" name="events_id" id="events_id" value="{{$id}}">
+                                                                <div class="form-group">
+                                                                    <span><label for="rating" class="pl-3">امتیاز شما به این فیلم :</label>
+                                                                    <input type="number" id="rating" name="rating" min="0" max="5" class="inpnumw"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                <textarea rows="8" cols="80" name="comment" id="comment" form="review" class="bgtrasparent text-white" placeholder="نظر خود را اینجا بنویسید ..."></textarea>
+                                                                </div>
+                                                                <input class="letter__spacing__1 probutton" type="button" id="addreview" value="ثبت نظر">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-1 widget-offer">
+                        <h3 class="title mt-5">خرید بلیت</h3>
+                        <div class="offer-body">
+                            <div class="offer-item">
+                                @if($flag===0)
+                                    <div class="mt-3 mb-3 text-center">
+                                        <p class="text-white text-center">متاسفانه در حال حاضر این برنامه نمایش داده نمی شود !</p>
+                                    </div>
+                                @endif
+
+                                @if($flag===1)
+                                    @if(empty(Auth::user()->name))
+                                        <div class="mt-3 mb-3 text-center">
+                                            <?php $dc=count($date)?>
+                                            @if($dc==1)
+                                                <p class="text-white text-center">این برنامه در روز؛
+                                                    @foreach($date as $d)
+                                                    {{$d}},
+                                                    @endforeach
+                                                نمایش داده میشود.</p>
+                                            @endif
+                                            @if($dc>1)
+                                                <p class="text-white text-center">این برنامه در روزهای؛
+                                                    @foreach($date as $d)
+                                                    {{$d}},
+                                                    @endforeach
+                                                نمایش داده میشود.</p>
+                                            @endif
+                                            <p class="text-white text-center">لطفا برای خرید بلیت، ابتدا <a href="/login" class="tifanyc">وارد</a>  شوید و یا <a href="/register" class="tifanyc">ثبت نام</a> کنید.</p>
+                                        </div>
+                                    @endif
+                                    @if(!empty(Auth::user()->name))
+                                        <form method="POST" action="/ticket" class="mt-0">
+                                            @csrf
+                                            <div class="datebuy">
+                                                <input type="hidden" name="id" value="{{$id}}">
+                                                <span class="text-white mt-4 pb-1">روز مورد نظرتان را انتخاب کنید:</span>
+                                                <select class="myselect-bar1 text-black mt-3 mb-3" name="date">
+                                                    @foreach($date as $d)
+                                                        <option value="{{$d}}">{{$d}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <input class="letter__spacing__1 probutton inpsubw" type="submit" value="خرید بلیت">
                                             </div>
+                                        </form>
+                                    @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-7">
+                <div class="col-md-5">
                     <div class="event-about-thumb">
                         <img src="{{asset('/').$concert->Images()->get()->first()->path}}" alt="event">
                     </div>
                 </div>
             </div>
+            @if($relatedEvents->count()>1)
+            <div class="row pt-5">
+                <div class="col-12 movie-details">
+                    <div class="item">
+                        <div class="header">
+                            <h5 class="sub-title">رویداد های مرتبط</h5>
+                        </div>
+                        <div class="casting-slider owl-carousel">
+                            @foreach($relatedEvents as $v)
+                            @if($v->id!=$concert->id)
+                            <div class="thumb">
+                                <a href="{{$v->id}}">
+                                    <img width="150px" height="250px" src="{{asset('/').$v->Images()->get()->first()->path}}" alt="movie">
+                                </a>
+                                <h6 class="cast-title"><a href="{{$v->id}}">{{$v->name}}</a></h6>
+                            </div>
+                            @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </section>
     <!-- ==========Event-About========== -->
 
-    <!-- ==========Gallery-Section========== -->
-    <div class="speaker-gallery padding-bottom">
-        <div class="row m-0">
-            <div class="col-md-6 p-0">
-                <div class="row m-0">
-                    <div class="col-sm-6 p-0">
-                        <div class="gallery-item two">
-                            <div class="gallery-thumb">
-                                <a href="{{asset('images/gallery/gallery01.jpg')}}" class="img-pop">
-                                    <i class="flaticon-loupe"></i>
-                                </a>
-                                <img src="{{asset('images/gallery/gallery01.jpg')}}" alt="gallery">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-0">
-                        <div class="gallery-item two">
-                            <div class="gallery-thumb">
-                                <a href="{{asset('images/gallery/gallery02.jpg')}}" class="img-pop">
-                                    <i class="flaticon-loupe"></i>
-                                </a>
-                                <img src="{{asset('images/gallery/gallery02.jpg')}}" alt="gallery">
-                            </div>
-                        </div>
-                        <div class="gallery-item two">
-                            <div class="gallery-thumb">
-                                <a href="{{asset('images/gallery/gallery03.jpg')}}" class="img-pop">
-                                    <i class="flaticon-loupe"></i>
-                                </a>
-                                <img src="{{asset('images/gallery/gallery03.jpg')}}" alt="gallery">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 p-0">
-                <div class="gallery-item">
-                    <div class="gallery-thumb">
-                        <a href="{{asset('images/gallery/gallery04.jpg')}}" class="img-pop">
-                            <i class="flaticon-loupe"></i>
-                        </a>
-                        <img src="{{asset('images/gallery/gallery04.jpg')}}" alt="gallery">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ==========Gallery-Section========== -->
+    <!-- ==========Ajax / JS========== -->
 
-    {{-- <div class="container">
-        <div class="row justify-content-center flex-wrap-reverse mb--50">
-            <div class="col-lg-7 offset-lg-1 mb-50">
-                <div class="movie-details">
-                    <div class="tab summery-review">
-                        <ul class="tab-menu">
-                            <li class="active">
-                                خلاصه کنسرت
-                            </li>
-                            <li>
-                                نظرات کاربران <span>147</span>
-                            </li>
-                        </ul>
-                        <div class="tab-area">
-                            <div class="tab-item active">
-                                <div class="item">
-                                    <h5 class="sub-title">خلاصه</h5>
-                                    <p>{{$concert->description}}</p>
-                                </div>
-                                <div class="item">
-                                    <div class="header">
-                                        <h5 class="sub-title">خواننده</h5>
-                                    </div>
-                                    <p>{{$concert->act}}</p>
-                                </div>
-                                <div class="item">
-                                    <div class="header">
-                                        <h5 class="sub-title">عوامل</h5>
-                                    </div>
-                                    <p>{{$concert->team}}</p>
+    <script>
+    $(document).ready(function() {
+        $('.addfavorite').click(function() {
+            var id = $(this).attr('id');
+            var username = $('#username').val();
 
-                            </div>
-                            <div class="tab-item">
-                                <div class="movie-review-item">
-                                    <div class="author">
-                                        <div class="thumb">
-                                            <a href="#0">
-                                                <img src="{{asset('images/cast/cast02.jpg')}}" alt="cast">
-                                            </a>
-                                        </div>
-                                        <div class="movie-review-info">
-                                            <span class="reply-date">13 روز پیش</span>
-                                            <h6 class="subtitle"><a href="#0">minkuk seo</a></h6>
-                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-review-content">
-                                        <div class="review">
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                        </div>
-                                        <h6 class="cont-title">Awesome Movie</h6>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                        <div class="review-meta">
-                                            <a href="#0">
-                                                <i class="flaticon-hand"></i><span>8</span>
-                                            </a>
-                                            <a href="#0" class="dislike">
-                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                            </a>
-                                            <a href="#0">
-                                                گزارش مشکل
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="movie-review-item">
-                                    <div class="author">
-                                        <div class="thumb">
-                                            <a href="#0">
-                                                <img src="{{asset('images/cast/cast04.jpg')}}" alt="cast">
-                                            </a>
-                                        </div>
-                                        <div class="movie-review-info">
-                                            <span class="reply-date">13 روز پیش</span>
-                                            <h6 class="subtitle"><a href="#0">rudra rai</a></h6>
-                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-review-content">
-                                        <div class="review">
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                        </div>
-                                        <h6 class="cont-title">Awesome Movie</h6>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                        <div class="review-meta">
-                                            <a href="#0">
-                                                <i class="flaticon-hand"></i><span>8</span>
-                                            </a>
-                                            <a href="#0" class="dislike">
-                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                            </a>
-                                            <a href="#0">
-                                                گزارش مشکل
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="movie-review-item">
-                                    <div class="author">
-                                        <div class="thumb">
-                                            <a href="#0">
-                                                <img src="{{asset('images/cast/cast01.jpg')}}" alt="cast">
-                                            </a>
-                                        </div>
-                                        <div class="movie-review-info">
-                                            <span class="reply-date">13 روز پیش</span>
-                                            <h6 class="subtitle"><a href="#0">rafuj</a></h6>
-                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-review-content">
-                                        <div class="review">
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                        </div>
-                                        <h6 class="cont-title">Awesome Movie</h6>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                        <div class="review-meta">
-                                            <a href="#0">
-                                                <i class="flaticon-hand"></i><span>8</span>
-                                            </a>
-                                            <a href="#0" class="dislike">
-                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                            </a>
-                                            <a href="#0">
-                                                گزارش مشکل
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="movie-review-item">
-                                    <div class="author">
-                                        <div class="thumb">
-                                            <a href="#0">
-                                                <img src="{{asset('images/cast/cast03.jpg')}}" alt="cast">
-                                            </a>
-                                        </div>
-                                        <div class="movie-review-info">
-                                            <span class="reply-date">13 روز پیش</span>
-                                            <h6 class="subtitle"><a href="#0">bela bose</a></h6>
-                                            <span>نظر تایید شده <i class="fas fa-check"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-review-content">
-                                        <div class="review">
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                            <i class="flaticon-favorite-heart-button"></i>
-                                        </div>
-                                        <h6 class="cont-title">Awesome Movie</h6>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                                        <div class="review-meta">
-                                            <a href="#0">
-                                                <i class="flaticon-hand"></i><span>8</span>
-                                            </a>
-                                            <a href="#0" class="dislike">
-                                                <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                            </a>
-                                            <a href="#0">
-                                                گزارش مشکل
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="load-more text-center">
-                                    <a href="#0" class="custom-button transparent">نمایش بیشتر</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- ==========Speaker-Section========== -->
-    {{-- <section class="speaker-section padding-bottom padding-top">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">با کادر ما آشنا شوید</span>
-                <h2 class="title">متخصصان پشتیبان</h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-            </div>
-            <div class="speaker--slider">
-                <div class="speaker-slider owl-carousel owl-theme">
-                    <div class="speaker-item">
-                        <div class="speaker-thumb">
-                            <a href="/concert-speaker">
-                                <img src="{{asset('images/speaker/speaker01.jpg')}}" alt="speaker">
-                            </a>
-                        </div>
-                        <div class="speaker-content">
-                            <h5 class="title">
-                                <a href="/concert-speaker">
-                                    سارا کریمی جاوان
-                                </a>
-                            </h5>
-                            <span>بنیانگذار ، مدیر عامل</span>
-                        </div>
-                    </div>
-                    <div class="speaker-item">
-                        <div class="speaker-thumb">
-                            <a href="/concert-speaker">
-                                <img src="{{asset('images/speaker/speaker02.jpg')}}" alt="speaker">
-                            </a>
-                        </div>
-                        <div class="speaker-content">
-                            <h5 class="title">
-                                <a href="/concert-speaker">
-                                    مریم عبدی وزوانی
-                                </a>
-                            </h5>
-                            <span>بنیانگذار ، مدیر عامل</span>
-                        </div>
-                    </div>
-                    <div class="speaker-item">
-                        <div class="speaker-thumb">
-                            <a href="/concert-speaker">
-                                <img src="{{asset('images/speaker/speaker03.jpg')}}" alt="speaker">
-                            </a>
-                        </div>
-                        <div class="speaker-content">
-                            <h5 class="title">
-                                <a href="/concert-speaker">
-                                    علیمراد بستانی
-                                </a>
-                            </h5>
-                            <span>متخصص امنیت شبکه</span>
-                        </div>
-                    </div>
-                    <div class="speaker-item">
-                        <div class="speaker-thumb">
-                            <a href="/concert-speaker">
-                                <img src="{{asset('images/speaker/speaker04.jpg')}}" alt="speaker">
-                            </a>
-                        </div>
-                        <div class="speaker-content">
-                            <h5 class="title">
-                                <a href="/concert-speaker">
-                                    سحر اسحاقی
-                                </a>
-                            </h5>
-                            <span>متخصص IT</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="speaker-prev">
-                    <i class="flaticon-double-right-arrows-angles"></i>
-                </div>
-                <div class="speaker-next">
-                    <i class="flaticon-double-right-arrows-angles"></i>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- ==========Speaker-Section========== -->
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: "/addfavorite",
+                dataType: 'json',
+                data: { "id" : id},
+
+                success:function(response , status){
+                    if(response.flag == 1){
+                    swal({
+                            title: username + " عزیز",
+                            text: "این نمایش با موفقیت به لیست علاقه مندی های شما اضافه شد.",
+                            type: "success",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                    if(response.flag == 0){
+                    swal({
+                            title: username + " عزیز",
+                            text: "این نمایش از لیست علاقه مندی های شما حذف شد.",
+                            type: "warning",
+                            confirmButtonText: "باشه"
+                        });
+                    }
+                },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log('AJAX error:', textStatus)
+                }
+            });
+        });
 
 
-    <!-- ==========Statistics-Section========== -->
-    {{-- <section class="statistics-section padding-top padding-bottom bg_img pb-lg-0" data-background="{{asset('images/statistics/statistics-bg01.jpg')}}">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">ما چه کار می کنیم </span>
-                <h2 class="title">آمار اخیر ما </h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-            </div>
-            <div class="statistics-wrapper">
-                <div class="row mb--20">
-                    <div class="col-md-4">
-                        <div class="stat-item">
-                            <div class="stat-thumb">
-                                <img src="{{asset('images/statistics/stat01.png')}}" alt="statistics">
-                            </div>
-                            <div class="stat-content">
-                                <h3 class=" counter-item odometer" data-odometer-final="450"></h3>
-                                <span class="info">Tickets Booked</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-item">
-                            <div class="stat-thumb">
-                                <img src="{{asset('images/statistics/stat02.png')}}" alt="statistics">
-                            </div>
-                            <div class="stat-content">
-                                <h3 class=" counter-item odometer" data-odometer-final="500"></h3>
-                                <span class="info">Usefull Sessions</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-item">
-                            <div class="stat-thumb">
-                                <img src="{{asset('images/statistics/stat03.png')}}" alt="statistics">
-                            </div>
-                            <div class="stat-content">
-                                <h3 class=" counter-item odometer" data-odometer-final="28"></h3>
-                                <span class="info">Talented Speakers</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- ==========Statistics-Section========== -->
+        $('#addreview').click(function(){
 
-    <!-- ==========Faq-Section========== -->
-    {{-- <section class="faq-section padding-top">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">ما چطور می توانیم کمک کنیم ؟</span>
-                <h2 class="title">سوالات متداول</h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-            </div>
-            <div class="faq-area padding-bottom">
-                <div class="faq-wrapper">
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">آیا می توانم بلیط های خود را بعد از قرار دادن سفارش ارتقا دهم ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item active open">
-                        <div class="faq-title">
-                            <h6 class="title">چرا روش تحویل بلیط من تغییر کرده است ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">چرا نام دیگری روی بلیط چاپ شده است و آیا این مسئله در رویداد من مشکل ایجاد خواهد کرد ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">بلیط های صندلی های من متوالی نیست ، آیا آنها هنوز کنار هم تضمین شده اند ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">چرا نام دیگری روی بلیط چاپ شده است و آیا این مسئله در رویداد من مشکل ایجاد خواهد کرد ؟</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- ==========Faq-Section========== -->
+            var events_id = $('#events_id').val();
+            var rating = $('#rating').val();
+            var comment = $('#comment').val();
+            var username = $('#username').val();
 
-    <!-- ==========Event-Section========== -->
-    {{-- <section class="event-details padding-bottom padding-top">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">حامیان رویداد</span>
-                <h2 class="title">همکاران و حامیان </h2>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-            </div>
-            <div class="tabTwo sponsor-tab">
-                <ul class="tab-menu">
-                    <li class="active">
-                        حامیان سوپر
-                    </li>
-                    <li>
-                        حامیان طلایی
-                    </li>
-                    <li>
-                        حامیان نقره ای
-                    </li>
-                </ul>
-                <div class="tab-area">
-                    <div class="tab-item active">
-                        <div class="owl-theme owl-carousel sponsor-slider">
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/1.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/2.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/3.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/4.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/5.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-theme owl-carousel sponsor-slider">
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/3.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/4.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/5.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/1.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/2.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-theme owl-carousel sponsor-slider">
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/3.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/1.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/4.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/2.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                            <div class="sponsor-thumb">
-                                <a href="#0">
-                                    <img src="{{asset('images/sponsor/5.png')}}" alt="sponsor">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- ==========Event-Section========== -->
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            if(comment==""){
+                swal({
+                    title: username + " عزیز",
+                    text: "نوشتن متن نظر الزامی است.",
+                    type: "warning",
+                    confirmButtonText: "باشه"
+                });
+            }
+            if(rating > 5 || rating < 1){
+                swal({
+                    title: username + " عزیز",
+                    text: "امتیاز شما باید عددی بین 0 تا 5 باشد.",
+                    type: "warning",
+                    confirmButtonText: "باشه"
+                });
+            }
+            if(comment!=="" && 0<rating<6){
+                $.ajax({
+                    type: 'POST',
+                    url: "/review",
+                    dataType: 'json',
+                    data: { "events_id" : events_id,
+                            "rating" : rating,
+                            "comment" : comment
+                    },
+
+                    success:function(response , status){
+                        swal({
+                                title: username + " عزیز",
+                                text: "نظرات شما با موفقیت ثبت و پس از بازخوانی نمایش داده خواهد شد.",
+                                type: "success",
+                                confirmButtonText: "باشه"
+                            });
+
+                    },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log('AJAX error:', textStatus)
+                    }
+                });
+            }
+        });
+
+
+    });
+    </script>
 
     @endsection
