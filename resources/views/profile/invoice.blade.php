@@ -1,7 +1,6 @@
 @extends('layouts.prolayout')
 
 @section('content')
-{{-- {{dd($money)}} --}}
 <div id="content-wrapper" class="d-flex flex-column col-10 p-5">
     <div id="content">
         <div class="container-fluid">

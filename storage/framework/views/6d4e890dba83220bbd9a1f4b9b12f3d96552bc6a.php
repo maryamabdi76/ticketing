@@ -7,7 +7,6 @@
   <script src="<?php echo e(asset('js/jquery-3.3.1.min.js')); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="<?php echo e(asset('js/modernizr-3.6.0.min.js')); ?>"></script>
-
 <script src="<?php echo e(asset('js/plugins.js')); ?>"></script>
 <script src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
 
@@ -27,5 +26,13 @@
 
 <script src="<?php echo e(asset('js/main.js')); ?>"></script>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165352289-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-165352289-1');
+</script>
 <?php /**PATH C:\xampp\htdocs\maktab\Laravel\Ticketing\resources\views/layouts/bilito/partials/footer-scripts.blade.php ENDPATH**/ ?>

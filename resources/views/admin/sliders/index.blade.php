@@ -34,7 +34,6 @@
                                 </p>
                                 <table class="d-table table text-center table-bordred table-striped">
                                     <thead>
-                                        {{-- <th><input type="checkbox" class="checkthis" /></th> --}}
                                         <th>آیدی</th>
                                         <th>عکس</th>
                                         <th>عنوان</th>
@@ -43,7 +42,6 @@
                                     <tbody>
                                         @foreach($slider as $k=>$v)
                                         <tr>
-                                        {{-- <td><input type="checkbox" class="checkthis" /></td> --}}
                                         <td>{{$v->id}}</td>
                                         <td><img class="img-fluid" width="150px" src="{{asset('/').$v->Images()->get()->first()->path}}" alt="" /></td>
                                         <td>{{$v->title}}</td>

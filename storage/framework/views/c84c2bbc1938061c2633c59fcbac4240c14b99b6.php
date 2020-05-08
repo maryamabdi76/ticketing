@@ -122,7 +122,7 @@
                             </li>
                             <li>
                                 <h6 class="subtitle"><span><?php echo e($location->name); ?></span><span><?php echo e($show[0]->salons_name); ?></span></h6>
-                            <div class="info"><span>تاریخ</span> <span><?php echo e($show[0]->shows_date); ?></span></div>
+                            <div class="info"><span>تاریخ</span> <span><?php echo e($date); ?></span></div>
                             <div class="info"><span>سانس</span> <span><?php echo e($show[0]->end); ?>&nbsp;-&nbsp;<?php echo e($show[0]->begin); ?></span></div>
                                 <div class="info"><span>شماره صندلی</span>
                                     <span><?php $__currentLoopData = $factor[0]->shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $a): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -143,6 +143,9 @@
                     </div>
                     <div class="proceed-area  text-center">
                         <h6 class="subtitle"><span>مبلغ قابل پرداخت</span><span><?php echo e($factor[0]->total); ?> تومان</span></h6>
+                        <?php if($factor[0]->discount_id!==null): ?>
+                            <a href="/removediscount/<?php echo e($factor_id); ?>" class="custom-button back-button">حذف کد تخفیف</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

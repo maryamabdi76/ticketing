@@ -25,9 +25,6 @@
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12">
-{{-- <div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12"> --}}
             <div class="card text-right">
                 <div class="card-header">{{ __('نمایش پست') }}</div>
 
@@ -56,7 +53,6 @@
                             <div class="col-md-6">
                                 @foreach($post->Videos()->get() as $k=>$v)
                                 <video width="" height="150" controls>
-                                {{-- <video width="{{$v->width}}" height="{{$v->height}}" controls> --}}
                                     <source src="{{asset('/').$v->source}}" type="video/mp4">
                                   </video>
                                   @endforeach

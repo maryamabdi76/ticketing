@@ -19,8 +19,12 @@ class TicketController extends Controller
         $id=$request->post('id');
         $date=$request->post('date');
 
-        $eventname=Events::find($id);
-        $eventname=$eventname->name;
+        $event=Events::find($id);
+        $eventname=$event->name;
+        $eventcat=$event->categories_id;
+        if($eventcat==1){$eventcat="movie";}
+        if($eventcat==2){$eventcat="concert";}
+        if($eventcat==3){$eventcat="theater";}
 
         $shows = Shows::where('events_id','=',$id)->get();
         foreach($shows as $v){
@@ -49,9 +53,9 @@ class TicketController extends Controller
             'locations' => $locations,
             'count' => $count,
             'event' => $id,
-            'eventname'=>$eventname
+            'eventname'=>$eventname,
+            'eventcat' => $eventcat
         );
-        // dd($id);die();
 
         return view('ticket')->with($data);
     }

@@ -8,7 +8,7 @@
         <div class="container">
             <div class="banner-content event-content">
                 <h1 class="title bold">بلیت <span class="color-theme">کنسرت </span> بخرید</h1>
-                <p>بلیط های کنسرت را از قبل خریداری کنید ، زمان کنسرت و موارد دیگر را پیدا کنید</p>
+                <p>بلیت خود را برای کنسرت سریعتر از همه و بدون دغدغه تکمیل ظرفیت خریداری کنید.</p>
             </div>
         </div>
     </section>
@@ -43,7 +43,6 @@
                                     <input type="checkbox" name="genre[]" value="*" id="genre0"><label for="genre0">همه</label>
                                 </div>
                                 @foreach($genres as $genre)
-                                {{-- {{dd($genre->name)}} --}}
                                 <div class="form-group">
                                     <input type="checkbox" name="genre[]" value="{{$genre->name}}" id="genre{{$genre->id}}">
                                     <label for="genre{{$genre->id}}">{{$genre->name}}</label>
@@ -94,7 +93,7 @@
                         <div class="tab-area">
                             <div class="tab-item active">
                                 <div class="row mb-10 justify-content-center">
-                                @if($concerts->count()==0)
+                                    @if(empty($concerts) || $concerts->count()==0)
                                     <h5 class="text-center pt-5 pb-5">متاسفانه موردی یافت نشد!</h5>
                                 @endif
                                  @foreach($concerts as $concert)
@@ -159,8 +158,9 @@
                                 </div>
                             </div>
                         </div>
-
+                        @if(!empty($concerts))
                         {{$concerts->appends(request()->query())->links()}}
+                        @endif
                     </div>
                 </div>
             </div>

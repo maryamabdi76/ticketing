@@ -4,7 +4,6 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link pt-3 pb-5 pl-5 pr-5">
       <img src="<?php echo e(asset('images/logo/logo.png')); ?>" alt="Logo" class="brand-image">
-      
     </a>
 
     <!-- Sidebar -->
@@ -82,6 +81,28 @@
                         <a href="<?php echo e(route('admin.genres.index')); ?>" class="nav-link  <?php echo e(Request::is('admin/genres*') ? 'active' : ''); ?>">
                           <i class="fa fa-circle-o nav-icon"></i>
                           <p>مدیریت ژانر ها</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview <?php echo e(Request::is('editDiscount*') ? 'menu-open' : ''); ?>  <?php echo e(Request::is('admin/discounts*') ? 'menu-open' : ''); ?>  <?php echo e(Request::is('createDiscount') ? 'menu-open' : ''); ?>">
+                <a href="" class="nav-link ">
+                  <i class="fa fa-percent nav-icon"></i>
+                  <p>کد های تخفیف
+                      <i class="right fa fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="/createDiscount" class="nav-link <?php echo e(Request::is('createDiscount') ? 'active' : ''); ?>">
+                        <i class="fa fa-plus-circle nav-icon"></i>
+                        <p>اضافه کردن کد تخفیف</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo e(route('admin.discounts.index')); ?>" class="nav-link  <?php echo e(Request::is('admin/discounts*') ? 'active' : ''); ?>">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>مدیریت کد های تخفیف</p>
                         </a>
                     </li>
                 </ul>
@@ -180,7 +201,6 @@
 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                    
                     <img src="<?php echo e(asset('images/movie/salonicon.png')); ?>" class="ml2imp">
                     <p>سالن ها
                     <i class="fa fa-angle-left right"></i>
@@ -271,8 +291,6 @@
                     </li>
                 </ul>
             </li>
-            
-
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

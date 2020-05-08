@@ -25,9 +25,6 @@
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12">
-{{-- <div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12"> --}}
             <div class="card text-right">
                 <div class="card-header">{{ __('افزودن بخش') }}</div>
                     <p class="mt-3 text-center">قرار دادن "-" در میان اعداد در بخش "چیدمان صندلی ها" به معنی فضای خالی بین سری از صندلی هاست.</p>

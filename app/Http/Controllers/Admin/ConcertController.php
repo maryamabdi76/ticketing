@@ -171,7 +171,6 @@ class ConcertController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function destroy(User $user)
     public function destroy($id)
     {
         $concert = Events::find($id);

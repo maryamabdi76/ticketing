@@ -1,10 +1,5 @@
 <?php $__env->startSection('content'); ?>
 
-
-    <!-- ==========Window-Warning-Section========== -->
-    
-    <!-- ==========Window-Warning-Section========== -->
-
     <!-- ==========Banner-Section========== -->
     <section class="details-banner hero-area bg_img" data-background="<?php echo e(asset('images/banner/banner04.jpg')); ?>">
         <div class="container">
@@ -12,7 +7,6 @@
                 <div class="details-banner-content">
                 <h3 class="title"><?php echo e($eventname); ?></h3>
                     <div class="tags">
-                        
                         <a href="#0">فارسی</a>
                     </div>
                 </div>
@@ -24,58 +18,11 @@
     <!-- ==========Book-Section========== -->
     <section class="book-section bg-one">
         <div class="container">
-            <form class="ticket-search-form two">
-                <div class="form-group">
-                    <div class="thumb">
-                        <img src="<?php echo e(asset('images/ticket/city.png')); ?>" alt="ticket">
-                    </div>
-                    <span class="type">شهر</span>
-                    <select class="select-bar">
-                        <option value="london">تهران</option>
-                        <option value="dhaka">اصفهان</option>
-                        <option value="rosario">شیراز</option>
-                        <option value="madrid">کیش</option>
-                        <option value="koltaka">گیلان</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="thumb">
-                        <img src="<?php echo e(asset('images/ticket/date.png')); ?>" alt="ticket">
-                    </div>
-                    <span class="type">روز</span>
-                    <select class="select-bar">
-                        <option value="26-12-19">23/10/2020</option>
-                        <option value="26-12-19">24/10/2020</option>
-                        <option value="26-12-19">25/10/2020</option>
-                        <option value="26-12-19">26/10/2020</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="thumb">
-                        <img src="<?php echo e(asset('images/ticket/cinema.png')); ?>" alt="ticket">
-                    </div>
-                    <span class="type">سینما</span>
-                    <select class="select-bar">
-                        <option value="Awaken">ملت</option>
-                        <option value="dhaka">ماندانا</option>
-                        <option value="rosario">آزادی</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="thumb">
-                        <img src="<?php echo e(asset('images/ticket/exp.png')); ?>" alt="ticket">
-                    </div>
-                    <span class="type">نمایش</span>
-                    <select class="select-bar">
-                        <option value="English-2D">English-2D</option>
-                        <option value="English-3D">English-3D</option>
-                        <option value="Hindi-2D">Hindi-2D</option>
-                        <option value="Hindi-3D">Hindi-3D</option>
-                        <option value="Telegu-2D">Telegu-2D</option>
-                        <option value="Telegu-3D">Telegu-3D</option>
-                    </select>
-                </div>
-            </form>
+            <div class="row">
+                <a href="/<?php echo e($eventcat); ?>-details/<?php echo e($event); ?>" class="custom-button back-button inpsubw justify-content-start">
+                 قبلی
+                <i class="fa fa-angle-double-left"></i> </a>
+            </div>
         </div>
     </section>
     <!-- ==========Book-Section========== -->
@@ -114,9 +61,6 @@
                                         <input type="hidden" name="salons_id" value="<?php echo e($s->salons_id); ?>">
                                         <input type="hidden" name="shows_id" value="<?php echo e($s->shows_id); ?>">
                                         <input type="submit" value="<?php echo e($s->begin); ?>" class="bgtrasparent maxh2">
-                                        
-                                            
-                                        
                                     </form>
                                 </div>
                                 <?php endif; ?>

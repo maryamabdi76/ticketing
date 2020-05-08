@@ -13,6 +13,7 @@ use App\Models\Locations;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\DB;
+use Verta;
 
 class ProfileController extends Controller
 {
@@ -24,13 +25,15 @@ class ProfileController extends Controller
         $lastfactors= Factors::Where('users_id',auth()->user()->id)->get();
         $factorcount=count($lastfactors);
 
-        $favorites=Reviews::Where(['users_id'=> auth()->user()->id , 'favorite'=> 1])->with('Events')->get();
+        $favorites=User::Where('id','=',auth()->user()->id)->with('Events')->get();
+        $favorites=$favorites[0]->events;
         $favoritecount=count($favorites);
 
         $data = array(
             'money' => $money,
             'factorcount' => $factorcount,
-            'favoritecount' => $favoritecount,
+            'favoritecount' => $favoritecount
+
         );
         return view('profile/profile')->with($data);
     }
@@ -128,13 +131,24 @@ class ProfileController extends Controller
             $locations= Locations::all();
         }
 
+        foreach($shows as $sh){
+            $shamsi = Verta::parse($sh->shows_date);
+            $t = $shamsi->formatWord('l');
+            $sh->shows_date = $t.' '.$sh->shows_date;
+        }
+
+        foreach($lastfactors as $lf){
+            $pd = intval($lf->purchase_date);
+            $purchase_date = Verta::createTimestamp($pd);
+            $lf->purchase_date = $purchase_date;
+        }
+
         $data = array(
             'lastfactors' => $lastfactors,
             'shows' => $shows,
             'locations' => $locations,
             'count'=> $count
         );
-        // dd($data);die();
         return view('profile/lastfactors')->with($data);
     }
 
@@ -147,7 +161,6 @@ class ProfileController extends Controller
             'favorites' => $favorites,
             'count'=> $count
         );
-        // dd($data);die();
         return view('profile/favorites')->with($data);
     }
 

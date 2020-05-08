@@ -4,9 +4,7 @@
 
 
     <!-- ==========Banner-Section========== -->
-    {{-- <section class="details-banner bg_img" data-background="{{asset('images/banner/banner03.jpg')}}"> --}}
     <section class="details-banner bg_img" data-background="{{asset('images/banner/banner04.jpg')}}">
-        {{-- <section class="details-banner bg_img" data-background="{{asset('/').$movie->Images()->get()->first()->path}}"> --}}
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-thumb">
@@ -18,7 +16,6 @@
                 <div class="details-banner-content mr-25darsad">
                 <h3 class="title">{{$movie->name}}</h3>
                     <div class="tags">
-                        {{-- <a href="#0">فارسی</a> --}}
                     </div>
                     @foreach($movie->genres()->get() as $genre)
                     <a href="/movie/genres/{{$genre->id}}" class="button">{{$genre->name}}</a>
@@ -29,7 +26,6 @@
                                 <i class="fas fa-calendar-alt"></i><span>{{str_replace('-','/',str_replace('00:00:00', '', $movie->date))}}</span>
                             </div>
                             <div class="item">
-                                {{-- <i class="fas fa-clock"></i><span>2ساعت  50 دقیقه </span> --}}
                             </div>
                         </div>
                     </div>
@@ -92,7 +88,6 @@
                     <div class="movie-details">
                         <h3 class="title">تصاویر</h3>
                         <div class="details-photos owl-carousel">
-                            {{-- {{dd($movie->Images())}} --}}
                             @foreach($movie->Images()->orderBy('id','desc')->take(5)->get() as $k=>$photo)
                             <div class="thumb">
                                 <a href="{{asset('/').$photo->path}}" class="img-pop">
@@ -109,7 +104,6 @@
                             <div class="col-12">
                                 <a href="/blog-details/{{$post->id}}" class="text-white text-hover" >
                                     <i class="fa fa-angle-left ml-2"></i>{{$post->title}}
-                                    {{-- <img src="{{asset('/').$post->Images()->get()->first()->path}}" alt="movie"> --}}
                                 </a>
                             </div>
                             @endforeach
@@ -236,8 +230,8 @@
                                                             <input type="hidden" name="id" value="{{$id}}">
                                                             <span class="text-white mt-4 pb-1">روز مورد نظرتان را انتخاب کنید:</span>
                                                             <select class="myselect-bar1 text-black mt-3 mb-3" name="date">
-                                                                @foreach($date as $d)
-                                                                    <option value="{{$d}}">{{$d}}</option>
+                                                                @foreach($date as $k=>$d)
+                                                                    <option value="{{$k}}">{{$d}}</option>
                                                                 @endforeach
                                                             </select>
                                                             <input class="letter__spacing__1 probutton inpsubw" type="submit" value="خرید بلیت">

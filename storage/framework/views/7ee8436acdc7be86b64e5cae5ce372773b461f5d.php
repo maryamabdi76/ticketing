@@ -29,13 +29,13 @@
                     <a class="<?php echo e(Request::is('/') ? 'active' : ''); ?>" href="/"> خانه </a>
                 </li>
                 <li>
-                    <a class="<?php echo e(Request::is('movie*') ? 'active' : ''); ?><?php echo e(Request::is('searchmovie') ? 'active' : ''); ?>" href="/movie"> فیلم </a>
+                    <a class="<?php echo e(Request::is('movie*') ? 'active' : ''); ?><?php echo e(Request::is('searchmovie') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingMovie') ? 'active' : ''); ?>" href="/movie"> فیلم </a>
                 </li>
                 <li>
-                    <a class="<?php echo e(Request::is('concert*') ? 'active' : ''); ?><?php echo e(Request::is('searchconcert') ? 'active' : ''); ?>" href="/concert"> کنسرت </a>
+                    <a class="<?php echo e(Request::is('concert*') ? 'active' : ''); ?><?php echo e(Request::is('searchconcert') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingConcert') ? 'active' : ''); ?>" href="/concert"> کنسرت </a>
                 </li>
                 <li>
-                    <a class="<?php echo e(Request::is('theater*') ? 'active' : ''); ?><?php echo e(Request::is('searchtheater') ? 'active' : ''); ?>" href="/theater"> تئاتر</a>
+                    <a class="<?php echo e(Request::is('theater*') ? 'active' : ''); ?><?php echo e(Request::is('searchtheater') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingTheater') ? 'active' : ''); ?>" href="/theater"> تئاتر</a>
                 </li>
 
                 <li>

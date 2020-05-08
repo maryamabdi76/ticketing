@@ -52,7 +52,6 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
@@ -105,7 +104,6 @@ class SliderController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
         $id = $request->id;
         $form = Sliders::find($id);
         $form->title = $request->post('title');
@@ -117,7 +115,6 @@ class SliderController extends Controller
         $filesupdate = $request->file('file');
         if ($filesupdate)
             foreach ($filesupdate as $k => $file) {
-                // dd($photoid[$k]);
                 $imagename = $file->getClientOriginalName();
                 $file->move('images/sliders/', $imagename);
                 Images::where('id', $photoid[$k])->update(['path' => 'images/sliders/' . $imagename, 'imageable_id' => $form->id]);

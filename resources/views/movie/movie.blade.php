@@ -8,7 +8,9 @@
     <div class="container">
         <div class="banner-content">
             <h1 class="title bold">بلیت <span class="color-theme">فیلم</span> بگیرید</h1>
-            <p>بلیت فیلم ها را پشیرفته بخرید ، زمان فیلم ها را پیدا کنید ، تیزر فیلم را تماشا کنید ، بررسی های فیلم را بخوانید و موارد دیگر</p>
+            <p>بازیگران، عوامل، خلاصه داستان و نظرات هر فیلم را بخوانید. تصمیم بگیرید. بلیت بخرید.
+                به همین راحتی !
+            </p>
         </div>
     </div>
 </section>
@@ -93,7 +95,7 @@
                     <div class="tab-area">
                         <div class="tab-item active">
                             <div class="row mb-10 justify-content-center">
-                                @if($movies->count()==0)
+                                @if(empty($movies) || $movies->count()==0)
                                 <h5 class="text-center pt-5 pb-5">متاسفانه موردی یافت نشد!</h5>
                                 @endif
                                 @foreach($movies as $movie)
@@ -157,7 +159,9 @@
                             </div>
                         </div>
                     </div>
+                    @if(!empty($movies))
                     {{$movies->appends(request()->query())->links()}}
+                    @endif
                 </div>
             </div>
         </div>

@@ -25,12 +25,10 @@
         <div class="row">
           <div class="col-12">
                 <div class="card text-right">
-                    {{-- <div class="card-header">events</div> --}}
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="d-table table text-center table-bordred table-striped">
                                     <thead>
-                                        {{-- <th><input type="checkbox" class="checkthis" /></th> --}}
                                         <th>آیدی</th>
                                         <th>کاربر</th>
                                         <th>امتیاز</th>
@@ -43,7 +41,6 @@
                                     <tbody>
                                         @foreach($review as $k=>$v)
                                         <tr>
-                                        {{-- <td><input type="checkbox" class="checkthis" /></td> --}}
                                         <td>{{$v->id}}</td>
                                         <td>{{$v->user->name}}</td>
                                         <td>{{$v->rating}}</td>

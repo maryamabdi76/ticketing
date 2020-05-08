@@ -25,9 +25,6 @@
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12">
-{{-- <div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12"> --}}
             <div class="card text-right">
                 <div class="card-header">{{ __('ویرایش فیلم') }}</div>
 
@@ -63,7 +60,6 @@
                                     <span class="fa fa-trash"></span>
                                     @endif
                                 </a>
-                                {{-- <br> --}}
                                 @endforeach
                             </div>
                             <label for="imagefile" class="col-md-4 col-form-label text-md-left">{{ __('اضافه کردن عکس جدید') }}</label>

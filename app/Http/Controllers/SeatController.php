@@ -9,6 +9,7 @@ use App\Models\Salons;
 use App\Models\Factors;
 use App\Models\Locations;
 use App\Reserve;
+use Illuminate\Support\Facades\Redirect;
 
 class SeatController extends Controller
 {
@@ -16,8 +17,9 @@ class SeatController extends Controller
     {
         $salons_id = $request->post('salons_id');
         $shows_id = $request->post('shows_id');
-        $segments=$taken_seats=$myseats=array();
+        $segments=$myseats=array();
         $i=$j=$price=0;
+        $flag = false;
 
         $salon= Salons::where('id','=',$salons_id)->with('segments','locations')->get();
         $salon=$salon[0];
@@ -31,7 +33,6 @@ class SeatController extends Controller
         $taken=Shows::where('id','=',$shows_id)->with('factors')->get();
         $event_id=$taken[0]->events_id;
         $price=$taken[0]->price;
-        $taken=$taken[0]->factors;
 
         $event=Events::where('id','=',$event_id)->get();
         $show_name= $event[0]->name;
@@ -40,24 +41,21 @@ class SeatController extends Controller
         if($eventcat==2){$eventcat="concert";}
         if($eventcat==3){$eventcat="theater";}
 
-        foreach($taken as $v){
-            $taken_seats[$i]= $v->pivot->seat_number;
-            $i++;
-        }
-
         $id=auth()->user()->id;
         $factor=Factors::where([['users_id', '=', $id],['status', '=', 1]])->with('shows')->get();
-         if(!empty($factor[0]) && $factor[0]->shows[0]->id==$shows_id){
-            $factor_id=$factor[0]->id;
-            $factor=$factor[0]->shows;
+        foreach($factor as $f){
+            if($f->shows[0]->id==$shows_id){
+                $flag = true;
+                $factor_id = $f->id;
+                $index=$i;
+            }
+            $i++;
+        }
+         if(!empty($factor[0]) && $flag){
+            $factor=$factor[$index]->shows;
             foreach($factor as $f){
                 $myseats[$j]= $f->pivot->seat_number;
                 $j++;
-            }
-            foreach($myseats as $ms){
-                if (($key = array_search($ms, $taken_seats)) !== false) {
-                    unset($taken_seats[$key]);
-                }
             }
             $zeroseat=array_search(0, $myseats);
             unset($myseats[$zeroseat]);
@@ -89,7 +87,6 @@ class SeatController extends Controller
             'salon_name' => $salon_name,
             'segments' => $segments,
             'location' => $location,
-            'taken_seats' => $taken_seats,
             'myseats' => $myseats,
             'alphabet' => $alphabet,
             'price' => $price
@@ -137,6 +134,7 @@ class SeatController extends Controller
         $i=$sum=0;
         $seats=array();
         $factor_id=$request->post('factor_id');
+        $username = auth()->user()->username;
 
         if(!empty($request->post('seat'))){
             if (is_array($request->post('seat'))) {

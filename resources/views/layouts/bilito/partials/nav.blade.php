@@ -29,13 +29,13 @@
                     <a class="{{ Request::is('/') ? 'active' : '' }}" href="/"> خانه </a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('movie*') ? 'active' : ''}}{{ Request::is('searchmovie') ? 'active' : '' }}" href="/movie"> فیلم </a>
+                    <a class="{{ Request::is('movie*') ? 'active' : ''}}{{ Request::is('searchmovie') ? 'active' : '' }}{{ Request::is('sortShowingMovie') ? 'active' : '' }}" href="/movie"> فیلم </a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('concert*') ? 'active' : '' }}{{ Request::is('searchconcert') ? 'active' : '' }}" href="/concert"> کنسرت </a>
+                    <a class="{{ Request::is('concert*') ? 'active' : '' }}{{ Request::is('searchconcert') ? 'active' : '' }}{{ Request::is('sortShowingConcert') ? 'active' : '' }}" href="/concert"> کنسرت </a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('theater*') ? 'active' : '' }}{{ Request::is('searchtheater') ? 'active' : '' }}" href="/theater"> تئاتر</a>
+                    <a class="{{ Request::is('theater*') ? 'active' : '' }}{{ Request::is('searchtheater') ? 'active' : '' }}{{ Request::is('sortShowingTheater') ? 'active' : '' }}" href="/theater"> تئاتر</a>
                 </li>
 
                 <li>

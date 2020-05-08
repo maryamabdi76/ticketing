@@ -9,6 +9,7 @@ use App\Models\Categories;
 use App\Models\Shows;
 use App\Models\Salons;
 use App\Models\Genres;
+use App\Models\Factors;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -54,7 +55,6 @@ class ShowController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'date' => 'required|string|max:255',
             'begin' => 'required|string',
@@ -115,7 +115,6 @@ class ShowController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function destroy(User $user)
     public function destroy($id)
     {
         $show = Shows::find($id);

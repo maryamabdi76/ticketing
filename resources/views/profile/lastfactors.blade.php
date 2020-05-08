@@ -65,7 +65,7 @@
                                     چاپ بلیت
                                     <i class="fa fa-angle-double-right"></i> </a>
                                 @endif
-                                    <p class="mt-2 text-right tifany">تاریخ ثبت سفارش : {{date("Y-m-d",$lastfactors[$i]->purchase_date)}} </p>
+                                    <p class="mt-2 text-right tifany">تاریخ ثبت سفارش : {{$lastfactors[$i]->purchase_date}} </p>
                             </div>
                         </div>
                     @endfor

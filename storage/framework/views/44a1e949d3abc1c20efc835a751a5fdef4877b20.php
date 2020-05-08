@@ -6,7 +6,6 @@
         <div class="banner-bg bg_img bg-fixed" data-background="<?php echo e(asset('images/banner/banner02.jpg')); ?>"></div>
         <div class="container">
             <div class="banner-content">
-                
             </div>
         </div>
     </section>

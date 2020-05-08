@@ -8,8 +8,6 @@
         <div class="banner-bg bg_img bg-fixed" data-background="{{asset('images/banner/banner02.jpg')}}"></div>
         <div class="container">
             <div class="banner-content">
-                {{-- <h1 class="title bold">بلیت <span class="color-theme">فیلم</span> بگیرید</h1>
-                <p>بلیت فیلم ها را پشیرفته بخرید ، زمان فیلم ها را پیدا کنید ، تیزر فیلم را تماشا کنید ، بررسی های فیلم را بخوانید و موارد دیگر</p> --}}
             </div>
         </div>
     </section>

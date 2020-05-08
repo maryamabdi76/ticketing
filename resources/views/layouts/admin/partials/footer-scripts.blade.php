@@ -1,5 +1,4 @@
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('plugins/datatables/dataTables.bootstrap4.js')}}"></script>
@@ -26,6 +25,7 @@
 <script src="{{asset('js/viewport.jquery.js')}}"></script>
 <script src="{{asset('js/nice-select.js')}}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
 
 <script>
     $(function () {

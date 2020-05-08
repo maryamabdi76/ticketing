@@ -32,7 +32,6 @@
                                 </p>
                                 <table class="d-table table text-center table-bordred table-striped">
                                     <thead>
-                                        
                                         <th>آیدی</th>
                                         <th>نام سالن</th>
                                         <th>نام رویداد</th>
@@ -55,6 +54,9 @@
                                         <td><?php echo e($v->num); ?></td>
                                         <td><?php echo e($v->price); ?></td>
                                         <td>
+                                            <a href="/showShow/<?php echo e($v->salons->id.'-'.$v->id); ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" title="نمایش سالن و رزرو">
+                                                <span class="fa fa-eye"></span>
+                                            </a>
                                             <a href="/editShow/<?php echo e($v["id"]); ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" title="ویرایش">
                                                 <span class="fa fa-edit"></span>
                                             </a>

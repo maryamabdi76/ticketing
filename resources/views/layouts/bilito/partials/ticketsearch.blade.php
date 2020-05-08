@@ -12,19 +12,19 @@
                     </div>
                     <div class="col-lg-6 mb-20">
                         <ul class="tab-menu ticket-tab-menu">
-                            <li class="active">
+                            <li class="{{ Request::is('movie*') ? 'active' : ''}}{{ Request::is('searchmovie') ? 'active' : '' }}{{ Request::is('sortShowingMovie') ? 'active' : '' }}">
                                 <span>فیلم</span>
                                 <div class="tab-thumb">
                                     <img src="{{asset('images/ticket/ticket-tab01.png')}}" alt="ticket">
                                 </div>
                             </li>
-                            <li>
+                            <li class="{{ Request::is('concert*') ? 'active' : '' }}{{ Request::is('searchconcert') ? 'active' : '' }}{{ Request::is('sortShowingConcert') ? 'active' : '' }}">
                                 <span>کنسرت</span>
                                 <div class="tab-thumb">
                                     <img src="{{asset('images/ticket/ticket-tab02.png')}}" alt="ticket">
                                 </div>
                             </li>
-                            <li>
+                            <li class="{{ Request::is('theater*') ? 'active' : '' }}{{ Request::is('searchtheater') ? 'active' : '' }}{{ Request::is('sortShowingTheater') ? 'active' : '' }}">
                                 <span>تئاتر</span>
                                 <div class="tab-thumb">
                                     <img src="{{asset('images/ticket/ticket-tab01.png')}}" alt="ticket">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="tab-area">
-                    <div class="tab-item active">
+                    <div class="tab-item {{ Request::is('movie*') ? 'active' : ''}}{{ Request::is('searchmovie') ? 'active' : '' }}{{ Request::is('sortShowingMovie') ? 'active' : '' }}">
                         <form class="ticket-search-form" method="POST" action="{{route('searchmovie')}}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -79,7 +79,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-item">
+                    <div class="tab-item {{ Request::is('concert*') ? 'active' : '' }}{{ Request::is('searchconcert') ? 'active' : '' }}{{ Request::is('sortShowingConcert') ? 'active' : '' }}">
                         <form class="ticket-search-form" method="POST" action="{{route('searchconcert')}}">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -124,7 +124,7 @@
                         </div>
                     </form>
                     </div>
-                    <div class="tab-item">
+                    <div class="tab-item {{ Request::is('theater*') ? 'active' : '' }}{{ Request::is('searchtheater') ? 'active' : '' }}{{ Request::is('sortShowingTheater') ? 'active' : '' }}">
                         <form class="ticket-search-form" method="POST" action="{{route('searchtheater')}}">
                             {{ csrf_field() }}
                             <div class="form-group">

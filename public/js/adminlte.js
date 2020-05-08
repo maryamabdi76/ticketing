@@ -821,3 +821,20 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 //# sourceMappingURL=adminlte.js.map
+
+
+
+// =================admin reserve=================
+$('.input_seat_checkbox').each(function(){
+    $(this).hide().after('<div class="seat_checkbox" />');
+
+});
+
+$('.input_seat_checkbox_reverse').each(function(){
+    $(this).hide().after('<div class="seat_checkbox checked" />');
+
+});
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });

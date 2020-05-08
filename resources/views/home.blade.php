@@ -182,6 +182,92 @@
           </div>
         </div>
         <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-3">
+
+              <div class="card"  style="height:350px !important">
+                <div class="card-header">
+                  <h3 class="card-title">مرورگر‌ها</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="chart-responsive">
+                  <canvas id="pieChart" style="height:250px"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card "  style="height:350px !important">
+                    <div class="card-header">
+                      <h3 class="card-title">صفحات و میزان بازدید آنها</h3>
+
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="chart">
+                        <table class="table table-borderless table-sm text-center">
+                            <thead>
+                                <th>صفحه</th>
+                                <th>میزان بازدید</th>
+                            </thead>
+                            @foreach($analyticsData as $v)
+                            <tr>
+                                <td>{{$v['url']}}</td>
+                                <td>{{$v['pageViews']}}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+
+            </div>
+            <!-- /.col (LEFT) -->
+            <div class="col-md-5">
+
+                <div class="card "  style="height:350px !important">
+                    <div class="card-header">
+                      <h3 class="card-title">بازدیدکننده و تعداد صفحات بازدید شده</h3>
+
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="chart">
+                        <canvas id="barChart" style="height:250px"></canvas>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+            </div>
+          </div>
+          <!-- /.row -->
+
+
+
         <!-- Main row -->
         <div class="row">
           <div class="col-md-6">
@@ -304,4 +390,114 @@
     </section>
     <!-- /.content -->
 
-@endsection
+
+    <script>
+        $(function () {
+          var areaChartData = {
+      labels: {!! json_encode($dates->map(function($date) { return $date->format('d/m'); })) !!},
+            datasets: [
+              {
+                label: "تعدادصفحات",
+                fillColor: "#FFC107",
+                strokeColor: "rgba(210, 214, 222, 1)",
+                pointColor: "rgba(210, 214, 222, 1)",
+                pointStrokeColor: "#c1c7d1",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: {!! json_encode($pageViews) !!}
+              },
+              {
+                label: "تعداد بازدید کننده",
+                fillColor: "#28A745",
+                strokeColor: "rgba(60,141,188,0.8)",
+                pointColor: "#3b8bba",
+                pointStrokeColor: "rgba(60,141,188,1)",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(60,141,188,1)",
+                data: {!! json_encode($visitors) !!}
+              }
+            ]
+          };
+
+
+          //-------------
+          //- PIE CHART -
+          //-------------
+          // Get context with jQuery - using jQuery's .get() method.
+          var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+  var pieChart = new Chart(pieChartCanvas)
+          var PieData = {!! $browserjson  !!}
+          var pieOptions     = {
+              //Boolean - Whether we should show a stroke on each segment
+              segmentShowStroke    : true,
+    //String - The colour of each segment stroke
+    segmentStrokeColor   : '#fff',
+    //Number - The width of each segment stroke
+    segmentStrokeWidth   : 1,
+    //Number - The percentage of the chart that we cut out of the middle
+    percentageInnerCutout: 50, // This is 0 for Pie charts
+    //Number - Amount of animation steps
+    animationSteps       : 100,
+    //String - Animation easing effect
+    animationEasing      : 'easeOutBounce',
+    //Boolean - Whether we animate the rotation of the Doughnut
+    animateRotate        : true,
+    //Boolean - Whether we animate scaling the Doughnut from the centre
+    animateScale         : false,
+    //Boolean - whether to make the chart responsive to window resizing
+    responsive           : true,
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio  : false,
+    //String - A legend template
+    legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
+    //String - A tooltip template
+    tooltipTemplate      : '<%=value %> <%=label%>'
+  };
+          //Create pie or douhnut chart
+          // You can switch between pie and douhnut using the method below.
+          pieChart.Doughnut(PieData, pieOptions);
+
+          //-------------
+          //- BAR CHART -
+          //-------------
+          var barChartCanvas = $("#barChart").get(0).getContext("2d");
+          var barChart = new Chart(barChartCanvas);
+          var barChartData = areaChartData;
+          barChartData.datasets[1].fillColor = "#00a65a";
+          barChartData.datasets[1].strokeColor = "#00a65a";
+          barChartData.datasets[1].pointColor = "#00a65a";
+          var barChartOptions = {
+            //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+            scaleBeginAtZero: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: true,
+            //String - Colour of the grid lines
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - If there is a stroke on each bar
+            barShowStroke: true,
+            //Number - Pixel width of the bar stroke
+            barStrokeWidth: 2,
+            //Number - Spacing between each of the X value sets
+            barValueSpacing: 5,
+            //Number - Spacing between data sets within X values
+            barDatasetSpacing: 1,
+            //String - A legend template
+            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+            //Boolean - whether to make the chart responsive
+            responsive: true,
+            maintainAspectRatio: true
+          };
+
+          barChartOptions.datasetFill = true;
+          barChart.Bar(barChartData, barChartOptions);
+
+
+        });
+      </script>
+    @endsection

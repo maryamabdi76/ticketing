@@ -55,12 +55,6 @@
                                     <input type="hidden" name="photoid[]" value="{{$photo->id}}">
                                     <input name="file[{{$k}}]" type="file" style="z-index: 999; opacity: 0; width:22px; height:24px; position: relative;top:2px; right:26px;">
                                     <a class="btn btn-info btn-sm fa fa-edit text-white"></a>
-                                    {{-- @if($slider->Images()->get()->count()>1)
-                                    <a href="/deleteMoviePhoto/{{$photo->id}}/{{$slider->id}}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="حذف" onclick="return confirm('Are you sure you want to delete this item?');" >
-                                    <span class="fa fa-trash"></span>
-                                    @endif --}}
-                                </a>
-                                {{-- <br> --}}
                                 @endforeach
                             </div>
                         </div>

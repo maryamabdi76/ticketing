@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Analytics;
+use Spatie\Analytics\Period;
+use App\Libraries\GoogleAnalytics;
+
 use App\Models\Events;
 use App\User;
+use Carbon\Carbon;
 use App\Models\Factors;
 use App\Models\Posts;
 use App\Models\Shows;
@@ -31,6 +36,35 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $startDate = Carbon::now()->subYear();
+        $endDate = Carbon::now();
+        //$data = GoogleAnalytics::visitors_and_pageviews();
+        //dd($data);exit;
+        $analyticsData_one = Analytics::fetchVisitorsAndPageViews(Period::create($startDate, $endDate));
+        $dates = $analyticsData_one->pluck('date');
+        $visitors = $analyticsData_one->pluck('visitors');
+        $pageViews= $analyticsData_one->pluck('pageViews');
+
+        $analyticsData = Analytics::fetchMostVisitedPages(Period::create($startDate, $endDate), 7);
+        $url = $analyticsData->pluck('url');
+        $pageViews2 = $analyticsData->pluck('pageViews');
+        
+        /* $analyticsData_two = Analytics::fetchVisitorsAndPageViews(Period::days(14)); */
+        /* $this->data2['two_dates'] = $analyticsData_two->pluck('date'); */
+        /* $this->data2['two_visitors'] = $analyticsData_two->pluck('visitors')->count(); */
+        /* $this->data2['two_pageTitle'] = $analyticsData_two->pluck('pageTitle')->count(); */
+        /* $analyticsData_three = Analytics::fetchMostVisitedPages(Period::days(14)); */
+        /* $this->data2['three_url'] = $analyticsData_three->pluck('url'); */
+        /* $this->data2['three_pageTitle'] = $analyticsData_three->pluck('pageTitle'); */
+        /* $this->data2['three_pageViews'] = $analyticsData_three->pluck('pageViews'); */
+        $browserjson = GoogleAnalytics::topbrowsers();
+        $result = GoogleAnalytics::country();
+        $country = $result->pluck('country');
+        $country_sessions= $result->pluck('sessions');
+        $ceci_ver= config('mycms.ceci_ver');
+
+
+
         $soldSeats=$cash=0;
         $factor=Factors::with('shows')->get();
         foreach($factor as $f){
@@ -127,9 +161,21 @@ class HomeController extends Controller
             'soldSeats' => $soldSeats,
             'cash' => $cash,
             'shows' => $shows,
+            'analyticsData'=>$analyticsData,
             'views' => Posts::sum('views'),
+            'dates' => $dates,
+            'visitors' => $visitors,
+            'pageViews' => $pageViews,
+            'url' => $url,
+            'pageViews2' => $pageViews2,
+            'country' => $country,
+            'country_sessions' => $country_sessions,
+            'browserjson'=>$browserjson,
+            'ceci_ver' => $ceci_ver,
             // 'mostratings' => Reviews::having('rating', '>=', 1)->count(),
         );
-        return view('home')->with($data);
+
+
+    return view('home')->with($data);
     }
 }

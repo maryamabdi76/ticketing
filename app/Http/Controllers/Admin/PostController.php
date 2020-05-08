@@ -121,7 +121,6 @@ class PostController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
         $id = $request->id;
         $form = Posts::find($id);
         $form->title = $request->post('title');
@@ -134,7 +133,6 @@ class PostController extends Controller
         $filesupdate = $request->file('file');
         if ($filesupdate)
             foreach ($filesupdate as $k => $file) {
-                // dd($photoid[$k]);
                 $imagename = $file->getClientOriginalName();
                 $file->move('images/blogs/', $imagename);
                 Images::where('id', $photoid[$k])->update(['path' => 'images/blogs/' . $imagename, 'imageable_id' => $form->id]);
@@ -151,7 +149,6 @@ class PostController extends Controller
         $filesupdate = $request->file('video');
         if ($filesupdate)
             foreach ($filesupdate as $k => $file) {
-                // dd($photoid[$k]);
                 $videoname = $file->getClientOriginalName();
                 $file->move('images/blogs/', $videoname);
                 Videos::where('id', $photoid[$k])->update(['source' => 'images/blogs/' . $videoname, 'title' => $videoname, 'width' => 100, 'height' => 100, 'videoable_id' => $form->id]);

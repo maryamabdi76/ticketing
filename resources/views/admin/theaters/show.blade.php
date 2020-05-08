@@ -25,9 +25,6 @@
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12">
-{{-- <div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12"> --}}
             <div class="card text-right">
                 <div class="card-header">{{ __('نمایش تئاتر') }}</div>
 
@@ -66,15 +63,6 @@
 
                             </div>
                         </div>
-
-                        {{-- <div class="form-group row">
-                            <div class="col-md-4 font-weight-bold text-md-left">{{ __('توضیحات') }}</div>
-                            <i class="fa fa-arrow-left mt-1 text-primary"></i>
-                            <div class="col-md-6">
-                                {{ $theater->description}}
-                            </div>
-                        </div> --}}
-
                         <div class="form-group row">
                             <div class="col-md-4 font-weight-bold text-md-left">{{ __('ژانر') }}</div>
                             <i class="fa fa-arrow-left mt-1 text-primary"></i>

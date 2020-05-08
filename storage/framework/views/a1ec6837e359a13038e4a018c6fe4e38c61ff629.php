@@ -12,19 +12,19 @@
                     </div>
                     <div class="col-lg-6 mb-20">
                         <ul class="tab-menu ticket-tab-menu">
-                            <li class="active">
+                            <li class="<?php echo e(Request::is('movie*') ? 'active' : ''); ?><?php echo e(Request::is('searchmovie') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingMovie') ? 'active' : ''); ?>">
                                 <span>فیلم</span>
                                 <div class="tab-thumb">
                                     <img src="<?php echo e(asset('images/ticket/ticket-tab01.png')); ?>" alt="ticket">
                                 </div>
                             </li>
-                            <li>
+                            <li class="<?php echo e(Request::is('concert*') ? 'active' : ''); ?><?php echo e(Request::is('searchconcert') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingConcert') ? 'active' : ''); ?>">
                                 <span>کنسرت</span>
                                 <div class="tab-thumb">
                                     <img src="<?php echo e(asset('images/ticket/ticket-tab02.png')); ?>" alt="ticket">
                                 </div>
                             </li>
-                            <li>
+                            <li class="<?php echo e(Request::is('theater*') ? 'active' : ''); ?><?php echo e(Request::is('searchtheater') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingTheater') ? 'active' : ''); ?>">
                                 <span>تئاتر</span>
                                 <div class="tab-thumb">
                                     <img src="<?php echo e(asset('images/ticket/ticket-tab01.png')); ?>" alt="ticket">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="tab-area">
-                    <div class="tab-item active">
+                    <div class="tab-item <?php echo e(Request::is('movie*') ? 'active' : ''); ?><?php echo e(Request::is('searchmovie') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingMovie') ? 'active' : ''); ?>">
                         <form class="ticket-search-form" method="POST" action="<?php echo e(route('searchmovie')); ?>">
                                 <?php echo e(csrf_field()); ?>
 
@@ -80,7 +80,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-item">
+                    <div class="tab-item <?php echo e(Request::is('concert*') ? 'active' : ''); ?><?php echo e(Request::is('searchconcert') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingConcert') ? 'active' : ''); ?>">
                         <form class="ticket-search-form" method="POST" action="<?php echo e(route('searchconcert')); ?>">
                             <?php echo e(csrf_field()); ?>
 
@@ -126,7 +126,7 @@
                         </div>
                     </form>
                     </div>
-                    <div class="tab-item">
+                    <div class="tab-item <?php echo e(Request::is('theater*') ? 'active' : ''); ?><?php echo e(Request::is('searchtheater') ? 'active' : ''); ?><?php echo e(Request::is('sortShowingTheater') ? 'active' : ''); ?>">
                         <form class="ticket-search-form" method="POST" action="<?php echo e(route('searchtheater')); ?>">
                             <?php echo e(csrf_field()); ?>
 

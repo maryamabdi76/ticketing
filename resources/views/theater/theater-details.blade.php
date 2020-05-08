@@ -209,8 +209,8 @@
                                                             <input type="hidden" name="id" value="{{$id}}">
                                                             <span class="text-white mt-4 pb-1">روز مورد نظرتان را انتخاب کنید:</span>
                                                             <select class="myselect-bar1 text-black mt-3 mb-3" name="date">
-                                                                @foreach($date as $d)
-                                                                    <option value="{{$d}}">{{$d}}</option>
+                                                                @foreach($date as $k=>$d)
+                                                                    <option value="{{$k}}">{{$d}}</option>
                                                                 @endforeach
                                                             </select>
                                                             <input class="letter__spacing__1 probutton inpsubw" type="submit" value="خرید بلیت">

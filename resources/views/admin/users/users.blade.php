@@ -5,16 +5,12 @@
 <title>Laravel DataTable - Tuts Make</title>
 
 <link rel="stylesheet" href="{{asset('css/app.css')}}" />
-{{-- <link rel="stylesheet" href="{{asset('css/bootstrap-4.4.1-rtl.css')}}" /> --}}
 <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-{{-- <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet"> --}}
-{{-- <link  href="ttps://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"> --}}
 
 <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('js/popper.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> --}}
 </head>
       <body>
          <div class="container">
@@ -29,8 +25,6 @@
                     <th>ایمیل</th>
                     <th>جنسیت</th>
                     <th>تاریخ عضویت</th>
-                    {{-- <th>Edit</th>
-                    <th>Delete</th> --}}
                   </tr>
                </thead>
             </table>
@@ -38,7 +32,7 @@
    <script>
    $(document).ready( function () {
     $('#laravel_datatable').DataTable({
-            
+
            processing: true,
            serverSide: true,
            dataType:'POST',
@@ -51,7 +45,7 @@
                     { data: 'gender', name: 'gender' },
                     { data: 'email', name: 'email' },
                     { data: 'created_at', name: 'created_at' },
-                   
+
                  ]
         });
      });

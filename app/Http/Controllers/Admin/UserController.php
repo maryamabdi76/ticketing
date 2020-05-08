@@ -27,11 +27,6 @@ class UserController extends Controller
         return view('admin.users.index')->with('users', $users);
     }
 
-    // public function alluserdatatables()
-    // {
-    //     $users = User::all();
-    //     return DataTables()->of($users)->make(true);
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -114,13 +109,8 @@ class UserController extends Controller
     // public function destroy(User $user)
     public function destroy($id)
     {
-
         $user = User::find($id);
-        // if(Auth::user()->id != $user)
         $user->delete();
         return redirect('/admin/users');
-
-        //    return Redirect::route('admin.users.index');
-        //    }
     }
 }

@@ -12,6 +12,7 @@ use App\Models\Shows;
 use App\Models\Reviews;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Verta;
 
 class TheaterController extends Controller
 {
@@ -40,7 +41,7 @@ class TheaterController extends Controller
     {
 
         $date = array();
-        $i = $flag = $averate = $rate = 0;
+        $flag = $averate = $rate = 0;
 
         $theater = Events::findOrFail($id);
         $related = Posts::where('events_id', $id)->get();
@@ -52,6 +53,10 @@ class TheaterController extends Controller
         $reviews = Reviews::where('events_id', $id)->where('status', 1)->with('user')->orderBy('created_at')->take(10)->get();
         $count = count($reviews);
 
+        foreach($reviews as $r){
+            $r->created_at = new Verta($r->created_at);
+        }
+        
         if ($count !== 0) {
             foreach ($reviews as $r) {
                 $rate += $r->rating;
@@ -64,8 +69,9 @@ class TheaterController extends Controller
         $shows = Shows::where('events_id', '=', $id)->get();
 
         foreach ($shows as $v) {
-            $date[$i] = $v->date;
-            $i++;
+            $shamsi = Verta::parse($v->date);
+            $t = $shamsi->formatWord('l');
+            $date[$v->date] = $t.' '.$v->date;
         }
         $date = array_unique($date);
 
@@ -85,8 +91,6 @@ class TheaterController extends Controller
             'flag' => $flag,
             'id' => $id
         );
-
-        // dd($reviews);die();
 
         return view('theater.theater-details')->with($data);
     }

@@ -11,26 +11,20 @@ use App\Models\Locations;
 use App\Models\Discounts;
 use App\User;
 use phpDocumentor\Reflection\Location;
+use Verta;
 
 class CheckoutController extends Controller
 {
     public function checkout($id)
     {
         $walletflag=0;
-        $msg="";
         $flag = strpos($id, '-');
 
         if ($flag){
             $get = explode('-',$id);
             $id = $get[0];
             $getmsg = $get[1];
-            if($getmsg=="expired"){$msg="متاسفانه فرصت استفاده از این کد تخفیف به پایان رسیده.";}
-            elseif($getmsg=="notFound"){$msg="کد تخفیف وارد شده معتبر نمی باشد.";}
-            elseif($getmsg=="used"){$msg="متاسفانه تنها از یک کد تخفیف برای هر خرید می توانید استفاده کنید.";}
-            elseif($getmsg=="wallet"){$walletflag=1;}
-        }
-        else{
-            $msg="";
+            if($getmsg=="wallet"){$walletflag=1;}
         }
 
         $factor=Factors::where('id','=',$id)->with('Shows')->get();
@@ -54,6 +48,11 @@ class CheckoutController extends Controller
         $locations_id=$show[0]->locations_id;
         $location=Locations::find($locations_id);
 
+        $date = $show[0]->shows_date;
+        $shamsi = Verta::parse($date);
+        $t = $shamsi->formatWord('l');
+        $date = $t.' '.$date;
+
         $data = array(
             'factor' => $factor,
             'factor_id' => $id,
@@ -64,8 +63,8 @@ class CheckoutController extends Controller
             'eventname' => $eventname,
             'eventcat' => $eventcat,
             'location' => $location,
-            'msg' => $msg,
-            'walletflag' => $walletflag
+            'walletflag' => $walletflag,
+            'date' => $date
         );
 
         return view('checkout')->with($data);
@@ -78,7 +77,6 @@ class CheckoutController extends Controller
         $factor_id = $request->post('factor_id');
         $factor = Factors::find($factor_id);
         $factor_discount=$factor->discount_id;
-        // dd($discount);die();
 
         if(empty($factor_discount)){
             if(!empty($discount[0])){
@@ -94,35 +92,56 @@ class CheckoutController extends Controller
 
                         $new_discount = ($percentage / 100) * $sum;
                         $new_total = $sum - $new_discount;
+                        $factor->discount_id = $discount[0]->id;
+                        $factor->discount = $new_discount;
+                        $factor->total = $new_total;
+                        $factor->save();
+                        $msg="";
+                        $flag=1;
+                    }
+                    elseif($sum-$value < 10000){
+                        $minimum = $value+10000;
+                        $msg="استفاده از این کد تخفیف تنها برای فاکتور های بالای $minimum تومان امکان پذیر می باشد.";
+                        $flag=0;
                     }
                     else{
                         $new_total = $sum - $value;
                         $new_discount = $value;
+                        $factor->discount_id = $discount[0]->id;
+                        $factor->discount = $new_discount;
+                        $factor->total = $new_total;
+                        $factor->save();
+                        $msg="";
+                        $flag=1;
                     }
-
-                    $factor->discount_id = $discount[0]->id;
-                    $factor->discount = $new_discount;
-                    $factor->total = $new_total;
-                    $factor->save();
-                    $get = $factor_id;
                 }
                 else{
-                    $msg = "expired";
-                    $get = $factor_id.'-'.$msg;
+                    $msg="متاسفانه فرصت استفاده از این کد تخفیف به پایان رسیده.";
+                    $flag=0;
                 }
             }
             else{
-                $msg = "notFound";
-                $get = $factor_id.'-'.$msg;
+                $msg="کد تخفیف وارد شده معتبر نمی باشد.";
+                $flag=0;
             }
         }
         elseif(!empty($factor_discount)){
-            $msg = "used";
-            $get = $factor_id.'-'.$msg;
+            $msg="متاسفانه تنها از یک کد تخفیف برای هر خرید می توانید استفاده کنید.";
+            $flag=0;
         }
 
-        return redirect("checkout/$get");
+        return response()->json(array('flag'=> $flag, 'msg'=> $msg), 200);
 
+
+    }
+
+    public function removediscount($id){
+        $factor = Factors::find($id);
+        $factor->discount = 0;
+        $factor->discount_id = null;
+        $factor->total = $factor->sum;
+        $factor->save();
+        return redirect("checkout/$id");
     }
 
     public function finalize($id)
@@ -163,7 +182,12 @@ class CheckoutController extends Controller
         $user_id = $factor[0]->users_id;
         $total = $factor[0]->total;
         $event_id = $factor[0]->shows[0]->events_id;
+
         $date = $factor[0]->shows[0]->date;
+        $shamsi = Verta::parse($date);
+        $t = $shamsi->formatWord('l');
+        $date = $t.' '.$date;
+
         $begin = $factor[0]->shows[0]->begin;
         $end = $factor[0]->shows[0]->end;
         $salon_id = $factor[0]->shows[0]->salons_id;

@@ -25,5 +25,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="<?php echo e(asset('js/jquery-3.3.1.min.js')); ?>"></script>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-    <title>Bilito</title>
-<?php /**PATH C:\xampp\htdocs\maktab\Laravel\Ticketing\resources\views/layouts/bilito/partials/head.blade.php ENDPATH**/ ?>
+    <title>Bilito</title><?php /**PATH C:\xampp\htdocs\maktab\Laravel\Ticketing\resources\views/layouts/bilito/partials/head.blade.php ENDPATH**/ ?>

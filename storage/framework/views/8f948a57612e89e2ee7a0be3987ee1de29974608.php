@@ -52,9 +52,6 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom-area">
-                <!-- <div class="right">
-                    <p>Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a></p>
-                </div> -->
                 <ul class="links">
                     <li>
                         <a href="#0">درباره ما</a>

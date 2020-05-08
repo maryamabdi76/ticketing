@@ -12,6 +12,7 @@ use App\Models\Shows;
 use App\Models\Reviews;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Verta;
 
 class MovieController extends Controller
 {
@@ -39,7 +40,7 @@ class MovieController extends Controller
     public function details($id)
     {
         $date = array();
-        $i = $flag = $averate = $rate = 0;
+        $flag = $averate = $rate = 0;
 
         $movie = Events::findOrFail($id);
         $related = Posts::where('events_id', $id)->get();
@@ -51,6 +52,10 @@ class MovieController extends Controller
         $reviews = Reviews::where('events_id', $id)->where('status', 1)->orderBy('created_at')->get();
         $shows = Shows::where('events_id', $id)->get();
 
+        foreach($reviews as $r){
+            $r->created_at = new Verta($r->created_at);
+        }
+        
         $count = count($reviews);
 
         if ($count !== 0) {
@@ -63,8 +68,9 @@ class MovieController extends Controller
         }
 
         foreach ($shows as $v) {
-            $date[$i] = $v->date;
-            $i++;
+            $shamsi = Verta::parse($v->date);
+            $t = $shamsi->formatWord('l');
+            $date[$v->date] = $t.' '.$v->date;
         }
         $date = array_unique($date);
         if ($date) {
@@ -136,7 +142,6 @@ class MovieController extends Controller
                 ->where('shows.date', 'like', "%{$date}%")
                 ->select('events.id', 'events.name', 'events.date')
                 ->where('events.name', 'like', "%{$search}%")->orderBy('events.id', 'desc');
-        // dd($movies);
         elseif (isset($search))
             $query = Events::where('categories_id', 1)
                 ->where('events.name', 'like', "%{$search}%")->orderBy('id', 'desc');

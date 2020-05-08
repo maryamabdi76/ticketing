@@ -70,6 +70,7 @@ Route::post('/reserve-seats', 'SeatController@reserve')->name('reserveseats');
 Route::post('/seatsLiveFeed', 'SeatController@seatsLiveFeed')->name('seatsLiveFeed');
 Route::get('/checkout/{id}', 'CheckoutController@checkout')->name('checkout');
 Route::post('/discount', 'CheckoutController@discount')->name('discount');
+Route::get('/removediscount/{id}', 'CheckoutController@removediscount')->name('removediscount');
 
 // ======Transaction======
 
@@ -126,6 +127,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('Roles')-
     Route::resource('/users','UserController');
     Route::resource('/sliders','SliderController');
     Route::resource('/genres','GenreController');
+    Route::resource('/discounts','DiscountController');
     Route::resource('/movies','MovieController');
     Route::resource('/concerts','ConcertController');
     Route::resource('/theaters','TheaterController');
@@ -156,6 +158,13 @@ Route::post('/storeGenre', 'Admin\GenreController@store')->middleware('Roles');
 Route::get('/editGenre/{id}', 'Admin\GenreController@edit')->middleware('Roles');
 Route::post('/updateGenre', 'Admin\GenreController@update')->middleware('Roles');
 Route::get('/deleteGenre/{id}', 'Admin\GenreController@destroy')->middleware('Roles');
+
+// ====Admin Discount====
+Route::get('/createDiscount', 'Admin\DiscountController@create')->middleware('Roles');
+Route::post('/storeDiscount', 'Admin\DiscountController@store')->middleware('Roles');
+Route::get('/editDiscount/{id}', 'Admin\DiscountController@edit')->middleware('Roles');
+Route::post('/updateDiscount', 'Admin\DiscountController@update')->middleware('Roles');
+Route::get('/deleteDiscount/{id}', 'Admin\DiscountController@destroy')->middleware('Roles');
 
 // ====Admin Movie====
 Route::get('/showMovie/{id}', 'Admin\MovieController@show')->middleware('Roles');
@@ -229,6 +238,10 @@ Route::post('/updateSegment', 'Admin\SegmentController@update')->middleware('Rol
 Route::get('/createSegment/{id}', 'Admin\SegmentController@create')->middleware('Roles');
 Route::post('/storeSegment', 'Admin\SegmentController@store')->middleware('Roles');
 Route::get('/deleteSegment/{id}', 'Admin\SegmentController@destroy')->middleware('Roles');
+
+// ====Admin Reserve====
+Route::get('/showShow/{id}', 'Admin\AdminReserveController@show')->middleware('Roles');
+Route::post('/adminChosenSeat', 'Admin\AdminReserveController@adminChosenSeat')->middleware('Roles');
 
 // ===================End Admin=======================
 

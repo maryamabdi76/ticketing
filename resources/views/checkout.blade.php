@@ -72,17 +72,17 @@
                 <div class="col-lg-8">
                     <div class="checkout-widget checkout-contact">
                         <h5 class="title">کد تخفیف </h5>
-                        <form class="checkout-contact-form" action="/discount" method="POST">
+                        <div class="checkout-contact-form">
                             @csrf
-                            <input type="hidden" name="factor_id" value="{{$factor[0]->id}}">
+                            <input type="hidden" name="username" id="username" value="{{Auth::user()->username}}">
+                            <input type="hidden" name="factor_id" id="factor_id" value="{{$factor[0]->id}}">
                             <div class="form-group">
-                                <input type="text" name="discount" placeholder="کد تخفیف را وارد کنید">
+                                <input type="text" name="discount" id="discount" placeholder="کد تخفیف را وارد کنید">
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="اعمال" class="custom-button">
+                                <input type="button" value="اعمال" class="letter__spacing__1 probutton inpsubw p-0" id="discountbtn">
                             </div>
-                        </form>
-                        <p class="text-white text-right pt-4 discount__msg">{{$msg}}</p>
+                        </div>
                     </div>
                     <div class="checkout-widget checkout-card mb-0">
                         <h5 class="title">عملیات پرداخت </h5>
@@ -124,7 +124,7 @@
                             </li>
                             <li>
                                 <h6 class="subtitle"><span>{{$location->name}}</span><span>{{$show[0]->salons_name}}</span></h6>
-                            <div class="info"><span>تاریخ</span> <span>{{$show[0]->shows_date}}</span></div>
+                            <div class="info"><span>تاریخ</span> <span>{{$date}}</span></div>
                             <div class="info"><span>سانس</span> <span>{{$show[0]->end}}&nbsp;-&nbsp;{{$show[0]->begin}}</span></div>
                                 <div class="info"><span>شماره صندلی</span>
                                     <span>@foreach($factor[0]->shows as $a)
@@ -144,11 +144,61 @@
                     </div>
                     <div class="proceed-area  text-center">
                         <h6 class="subtitle"><span>مبلغ قابل پرداخت</span><span>{{$factor[0]->total}} تومان</span></h6>
+                        @if($factor[0]->discount_id!==null)
+                            <a href="/removediscount/{{$factor_id}}" class="custom-button back-button">حذف کد تخفیف</a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- ==========Movie-Section========== -->
+    <script>
+        $(document).ready(function() {
 
+            $('#discountbtn').click(function() {
+                var username = $('#username').val();
+                var factor_id = $('#factor_id').val();
+                var discount = $('#discount').val();
+
+                $.ajaxSetup({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/discount",
+                    dataType: 'json',
+                    data: { "factor_id" : factor_id,
+                            "discount" : discount },
+
+                    success:function(response , status){
+                        if(response.flag == 1){
+                        swal({
+                                title: username + " عزیز",
+                                text: "کد تخفیف با موفقیت اعمال شد.",
+                                type: "success",
+                                confirmButtonText: "باشه"},
+                                function(){
+                                    location.reload();
+                                }
+                            );
+                        }
+                        if(response.flag == 0){
+                        swal({
+                                title: username + " عزیز",
+                                text: response.msg,
+                                type: "warning",
+                                confirmButtonText: "باشه"
+                            });
+                        }
+                    },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log('AJAX error:', XMLHttpRequest)
+                    }
+                });
+            });
+        });
+    </script>
     @endsection

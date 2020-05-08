@@ -7,8 +7,7 @@
                 <div class="details-banner-content style-two">
                     <h3 class="title"><?php echo e($show_name); ?></h3>
                     <div class="tags">
-                        <a href="#0"><?php echo e($location->name); ?></a>
-                        
+                        <a href=""><?php echo e($location->name); ?></a>
                     </div>
                 </div>
             </div>
@@ -21,14 +20,11 @@
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="/ticket/" class="custom-button back-button">
-                        <i class="fa fa-angle-double-left"></i> قبلی
-                    </a>
                 </div>
                 <div class="item" id="countdowndisplay">
                 </div>
                 <p>زمان باقی مانده</p>
-                <form action="/timeout" method="POST" class="d-none" id="countdownform">
+                <form action="/timeout" method="POST" class="myd-none" id="countdownform">
                     <?php echo csrf_field(); ?>
                     <input type="hidden" name="factor_id" value="<?php echo e($factor_id); ?>">
                     <input type="hidden" name="event_id" value="<?php echo e($events_id); ?>">
@@ -169,6 +165,7 @@
                     <div id="msg"></div>
                     <div class="book-item">
                             <input class="letter__spacing__1 probutton inpdatew p-3" type="submit" value="خرید بلیت">
+                            <a href="/determent/<?php echo e($factor_id.'-'.$events_id.'-'.$eventcat); ?>" class="custom-button back-button mr-5 pr-5 pl-5 mt-3">انصراف</a>
                     </div>
                 </form>
 
@@ -176,6 +173,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="username" value="<?php echo e(Auth::user()->username); ?>">
     <script>
     $(document).ready(function() {
         $('.seat-free').click(function() {
@@ -228,11 +226,14 @@
                 },
 
                 success: function(data) {
+                    $('.d-none').removeClass("d-none");
+                    $('.taken_seat').hide();
+
                     $.each(data.taken_seats, function(k, v) {
                         var id  = $('#' + v);
                         var seat_number = v;
-                        $('.taken_seat').hide();
-                        id.hide().after('<li class="single-seat taken_seat"><img src="'+img+'" alt="seat"><span class="sit-num">'+seat_number+'</span></li>').one();
+
+                        id.addClass("d-none").after('<li class="single-seat taken_seat"><img src="'+img+'" alt="seat"><span class="sit-num">'+seat_number+'</span></li>').one();
                     });
                     console.log(data.taken_seats);
                 },complete: function() {
@@ -244,6 +245,21 @@
                 }
             });
         })();
+
+        $('#seatform').submit(function() {
+            var username = $('#username').val();
+            if ($('input:checkbox', this).is(':checked')){
+                // everything's fine...
+            } else {
+                swal({
+                    title: username + " عزیز",
+                    text: "برای خرید بلیت انتخاب حداقل یک صندلی الزامی است.",
+                    type: "warning",
+                    confirmButtonText: "باشه"
+                });
+                return false;
+            }
+        });
     });
     </script>
     <!-- ==========Movie-Section========== -->

@@ -1,1 +1,0 @@
-<?php /**PATH C:\xampp\htdocs\maktab\Laravel\Ticketing\resources\views/layouts/propartials/header.blade.php ENDPATH**/ ?>

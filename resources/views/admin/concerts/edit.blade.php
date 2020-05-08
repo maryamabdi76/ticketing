@@ -25,9 +25,6 @@
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12">
-{{-- <div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12"> --}}
             <div class="card text-right">
                 <div class="card-header">{{ __('ویرایش کنسرت') }}</div>
 
@@ -63,7 +60,6 @@
                                     <span class="fa fa-trash"></span>
                                     @endif
                                 </a>
-                                {{-- <br> --}}
                                 @endforeach
                             </div>
                             <label for="imagefile" class="col-md-4 col-form-label text-md-left">{{ __('اضافه کردن عکس جدید') }}</label>
@@ -104,20 +100,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        {{-- <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-left">{{ __('توضیحات') }}</label>
-
-                            <div class="col-md-6">
-                                <textarea id="description" rows="8" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ $concert->description}}</textarea>
-                                @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
                         <div class="form-group row">
                             <label for="category" class="col-md-4 col-form-label text-md-left">{{ __('ژانر') }}</label>
 

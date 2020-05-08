@@ -70,7 +70,7 @@
                             <div class="content">
                                 <div class="entry-content p-0">
                                     <div class="left text-white">
-                                        <span class="date">{{str_replace('-','/',str_replace('00:00:00', '', $post->created_at))}}</span>
+                                        <span class="date">{{str_replace('00:00:00', '', $created_at)}}</span>
                                     </div>
                                 </div>
                                 <div class="post-header text-white">
@@ -148,15 +148,16 @@
                             <div class="widget-1 widget-offer">
                                 <div class="offer-body">
                                     <div class="offer-item">
-                                        <form class="blog-form"  method="POST" action="{{route('addCommentBlog')}}">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="postid" value="{{$post->id}}"/>
-                                            <input type="hidden" name="userid" value="{{Auth::id()}}"/>
+                                        <form class="blog-form" id="commentform">
+                                            @csrf
+                                            <input type="hidden" name="postid" id="postid" value="{{$post->id}}"/>
+                                            <input type="hidden" name="userid" id="userid" value="{{Auth::id()}}"/>
+                                            <input type="hidden" id="username" value="{{Auth::user()->username}}">
                                             <div class="form-group text-right">
-                                                <textarea name="comment" placeholder="متن مورد نظر شما..." required></textarea>
+                                                <textarea rows="8" cols="80" form="commentform" name="comment" id="comment" placeholder="متن مورد نظر شما..."></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <input class="" type="submit" value="ثبت">
+                                                <input  class="letter__spacing__1 probutton inpsubw p-0" type="button" value="ثبت" id="addcomment">
                                             </div>
                                         </form>
                                     </div>
@@ -243,5 +244,56 @@
         </div>
     </div>
 </section>
+
+<script>
+$(document).ready(function() {
+
+    $('#addcomment').click(function(){
+
+    var postid = $('#postid').val();
+    var userid = $('#userid').val();
+    var comment = $('#comment').val();
+    var username = $('#username').val();
+
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    if(comment==""){
+        swal({
+            title: username + " عزیز",
+            text: "نوشتن متن نظر الزامی است.",
+            type: "warning",
+            confirmButtonText: "باشه"
+        });
+    }
+    if(comment!==""){
+        $.ajax({
+            type: 'POST',
+            url: "/addCommentBlog",
+            dataType: 'json',
+            data: { "postid" : postid,
+                    "userid" : userid,
+                    "comment" : comment
+            },
+
+            success:function(response , status){
+                swal({
+                        title: username + " عزیز",
+                        text: "نظرات شما با موفقیت ثبت و پس از بازخوانی نمایش داده خواهد شد.",
+                        type: "success",
+                        confirmButtonText: "باشه"
+                    });
+
+            },error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log('AJAX error:', textStatus)
+            }
+        });
+    }
+    });
+});
+</script>
 <!-- ==========Blog-Section========== -->
 @endsection

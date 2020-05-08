@@ -9,8 +9,7 @@
                 <div class="details-banner-content style-two">
                     <h3 class="title">{{$show_name}}</h3>
                     <div class="tags">
-                        <a href="#0">{{$location->name}}</a>
-                        {{-- <a href="#0">English - 2D</a> --}}
+                        <a href="">{{$location->name}}</a>
                     </div>
                 </div>
             </div>
@@ -23,14 +22,11 @@
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="/ticket/" class="custom-button back-button">
-                        <i class="fa fa-angle-double-left"></i> قبلی
-                    </a>
                 </div>
                 <div class="item" id="countdowndisplay">
                 </div>
                 <p>زمان باقی مانده</p>
-                <form action="/timeout" method="POST" class="d-none" id="countdownform">
+                <form action="/timeout" method="POST" class="myd-none" id="countdownform">
                     @csrf
                     <input type="hidden" name="factor_id" value="{{$factor_id}}">
                     <input type="hidden" name="event_id" value="{{$events_id}}">
@@ -92,51 +88,41 @@
                                         <?php
                                         $seat_number=$alphabet[$i].$n;
                                         $flag=$mine=0;
-                                        if(in_array($seat_number, $taken_seats)){$flag=1;}
                                         if(!empty($myseats)){
                                             if(in_array($seat_number, $myseats)){$mine=1;}
                                         }
                                         ?>
-                                            @if($flag==0)
-                                                @if($mine==0)
-                                                    @if($price==0)
-                                                        <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$seg->price}} تومان">
-                                                            <input type="checkbox" name="seat[]" value="{{$seg->price}}" id="{{$seat_number}}" class="input_seat_checkbox reserve-seat">
-                                                            <span class="sit-num">{{$seat_number}}</span>
-                                                            <?php $n++; ?>
-                                                        </li>
-                                                    @endif
-                                                    @if($price > 0)
-                                                        <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$price}} تومان">
-                                                            <input type="checkbox" name="seat[]" value="{{$price}}" id="{{$seat_number}}" class="input_seat_checkbox reserve-seat">
-                                                            <span class="sit-num">{{$seat_number}}</span>
-                                                            <?php $n++; ?>
-                                                        </li>
-                                                    @endif
+                                            @if($mine==0)
+                                                @if($price==0)
+                                                    <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$seg->price}} تومان">
+                                                        <input type="checkbox" name="seat[]" value="{{$seg->price}}" id="{{$seat_number}}" class="input_seat_checkbox reserve-seat">
+                                                        <span class="sit-num">{{$seat_number}}</span>
+                                                        <?php $n++; ?>
+                                                    </li>
                                                 @endif
-                                                @if($mine==1)
-                                                    @if($price==0)
-                                                        <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$seg->price}} تومان">
-                                                            <input type="checkbox" name="seat[]" value="{{$seg->price}}" id="{{$seat_number}}" class="input_seat_checkbox_reverse reserve-seat" checked>
-                                                            <span class="sit-num">{{$seat_number}}</span>
-                                                            <?php $n++; ?>
-                                                        </li>
-                                                    @endif
-                                                    @if($price > 0)
-                                                        <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$price}} تومان">
-                                                        <input type="checkbox" name="seat[]" value="{{$price}}" id="{{$seat_number}}" class="input_seat_checkbox_reverse reserve-seat" checked>
-                                                            <span class="sit-num">{{$seat_number}}</span>
-                                                            <?php $n++; ?>
-                                                        </li>
-                                                    @endif
+                                                @if($price > 0)
+                                                    <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$price}} تومان">
+                                                        <input type="checkbox" name="seat[]" value="{{$price}}" id="{{$seat_number}}" class="input_seat_checkbox reserve-seat">
+                                                        <span class="sit-num">{{$seat_number}}</span>
+                                                        <?php $n++; ?>
+                                                    </li>
                                                 @endif
                                             @endif
-                                            @if($flag==1)
-                                            <li class="single-seat">
-                                                <img src="{{asset('images/movie/seat01-taken.png')}}" alt="seat">
-                                                <span class="sit-num">{{$seat_number}}</span>
-                                                <?php $n++; ?>
-                                            </li>
+                                            @if($mine==1)
+                                                @if($price==0)
+                                                    <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$seg->price}} تومان">
+                                                        <input type="checkbox" name="seat[]" value="{{$seg->price}}" id="{{$seat_number}}" class="input_seat_checkbox_reverse reserve-seat" checked>
+                                                        <span class="sit-num">{{$seat_number}}</span>
+                                                        <?php $n++; ?>
+                                                    </li>
+                                                @endif
+                                                @if($price > 0)
+                                                    <li class="single-seat seat-free" id="{{$seat_number}}" data-toggle="tooltip" data-placement="top" title="قیمت صندلی: {{$price}} تومان">
+                                                    <input type="checkbox" name="seat[]" value="{{$price}}" id="{{$seat_number}}" class="input_seat_checkbox_reverse reserve-seat" checked>
+                                                        <span class="sit-num">{{$seat_number}}</span>
+                                                        <?php $n++; ?>
+                                                    </li>
+                                                @endif
                                             @endif
                                         @endfor
                                     </ul>
@@ -170,6 +156,7 @@
                     <div id="msg"></div>
                     <div class="book-item">
                             <input class="letter__spacing__1 probutton inpdatew p-3" type="submit" value="خرید بلیت">
+                            <a href="/determent/{{$factor_id.'-'.$events_id.'-'.$eventcat}}" class="custom-button back-button mr-5 pr-5 pl-5 mt-3">انصراف</a>
                     </div>
                 </form>
 
@@ -177,6 +164,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="username" value="{{Auth::user()->username}}">
     <script>
     $(document).ready(function() {
         $('.seat-free').click(function() {
@@ -229,11 +217,14 @@
                 },
 
                 success: function(data) {
+                    $('.d-none').removeClass("d-none");
+                    $('.taken_seat').hide();
+
                     $.each(data.taken_seats, function(k, v) {
                         var id  = $('#' + v);
                         var seat_number = v;
-                        $('.taken_seat').hide();
-                        id.hide().after('<li class="single-seat taken_seat"><img src="'+img+'" alt="seat"><span class="sit-num">'+seat_number+'</span></li>').one();
+
+                        id.addClass("d-none").after('<li class="single-seat taken_seat"><img src="'+img+'" alt="seat"><span class="sit-num">'+seat_number+'</span></li>').one();
                     });
                     console.log(data.taken_seats);
                 },complete: function() {
@@ -245,6 +236,21 @@
                 }
             });
         })();
+
+        $('#seatform').submit(function() {
+            var username = $('#username').val();
+            if ($('input:checkbox', this).is(':checked')){
+                // everything's fine...
+            } else {
+                swal({
+                    title: username + " عزیز",
+                    text: "برای خرید بلیت انتخاب حداقل یک صندلی الزامی است.",
+                    type: "warning",
+                    confirmButtonText: "باشه"
+                });
+                return false;
+            }
+        });
     });
     </script>
     <!-- ==========Movie-Section========== -->

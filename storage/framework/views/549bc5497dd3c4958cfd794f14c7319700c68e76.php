@@ -2,9 +2,7 @@
 
 
     <!-- ==========Banner-Section========== -->
-    
     <section class="details-banner bg_img" data-background="<?php echo e(asset('images/banner/banner04.jpg')); ?>">
-        
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-thumb">
@@ -16,7 +14,6 @@
                 <div class="details-banner-content mr-25darsad">
                 <h3 class="title"><?php echo e($movie->name); ?></h3>
                     <div class="tags">
-                        
                     </div>
                     <?php $__currentLoopData = $movie->genres()->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <a href="/movie/genres/<?php echo e($genre->id); ?>" class="button"><?php echo e($genre->name); ?></a>
@@ -27,7 +24,6 @@
                                 <i class="fas fa-calendar-alt"></i><span><?php echo e(str_replace('-','/',str_replace('00:00:00', '', $movie->date))); ?></span>
                             </div>
                             <div class="item">
-                                
                             </div>
                         </div>
                     </div>
@@ -90,7 +86,6 @@
                     <div class="movie-details">
                         <h3 class="title">تصاویر</h3>
                         <div class="details-photos owl-carousel">
-                            
                             <?php $__currentLoopData = $movie->Images()->orderBy('id','desc')->take(5)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="thumb">
                                 <a href="<?php echo e(asset('/').$photo->path); ?>" class="img-pop">
@@ -108,7 +103,6 @@
                                 <a href="/blog-details/<?php echo e($post->id); ?>" class="text-white text-hover" >
                                     <i class="fa fa-angle-left ml-2"></i><?php echo e($post->title); ?>
 
-                                    
                                 </a>
                             </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -235,8 +229,8 @@
                                                             <input type="hidden" name="id" value="<?php echo e($id); ?>">
                                                             <span class="text-white mt-4 pb-1">روز مورد نظرتان را انتخاب کنید:</span>
                                                             <select class="myselect-bar1 text-black mt-3 mb-3" name="date">
-                                                                <?php $__currentLoopData = $date; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                    <option value="<?php echo e($d); ?>"><?php echo e($d); ?></option>
+                                                                <?php $__currentLoopData = $date; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <option value="<?php echo e($k); ?>"><?php echo e($d); ?></option>
                                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </select>
                                                             <input class="letter__spacing__1 probutton inpsubw" type="submit" value="خرید بلیت">

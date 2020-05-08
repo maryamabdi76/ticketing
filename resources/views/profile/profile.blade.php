@@ -16,9 +16,6 @@
           </div>
 
           <div class="card o-hidden border-0 shadow-lg my-5 cardbg">
-
-                {{-- <div class="row"> --}}
-
                   <i class="fas fa-fw fa-user fa-4x jccenter pt-4 pb-1 "></i><br>
                   <div class="text-center jccenter">
                       <h3 class="txtblack">{{ Auth::user()->username }}</h3>

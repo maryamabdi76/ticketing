@@ -5,18 +5,13 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
-      
     </ul>
-
-    <!-- SEARCH FORM -->
-    
 
     <!-- Right navbar links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fa fa-user"></i>
-          
         </a>
         <div class="dropdown-menu dropdown-menu-left">
           <a href="#" class="dropdown-item">
@@ -36,8 +31,6 @@
          </a>
         </div>
       </li>
-
-      
     </ul>
   </nav>
   <!-- /.navbar -->

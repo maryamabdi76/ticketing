@@ -33,17 +33,7 @@
                     <div class="form-group checkgroup text-right">
                         <input type="checkbox" id="remember" name="remember" checked>
                         <label class="text-right" for="remember">مرا به خاطر بسپار</label>
-                        <!-- <a href="#0" class="forget-pass"> </a> -->
                     </div>
-
-                    {{-- <div class="text-right option">
-                        @if (Route::has('password.request'))
-                        <a class="" href="{{ route('password.request') }}">
-                            {{ __('گذر واژه خود را فراموش کردید؟') }}
-                        </a>
-                        @endif
-                    </div> --}}
-
                     <div class="form-group text-center">
                         <input class="letter__spacing__1" type="submit" value="ورود">
                     </div>

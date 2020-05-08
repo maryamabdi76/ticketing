@@ -1,5 +1,3 @@
-  
-  <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
   <footer class="main-footer">

@@ -51,7 +51,6 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'name' => 'required|string|max:255',
             'act' => 'required|string',
@@ -122,7 +121,6 @@ class MovieController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
         $id = $request->id;
         $form = Events::find($id);
         $form->name = $request->post('name');
@@ -143,7 +141,6 @@ class MovieController extends Controller
         $filesupdate = $request->file('file');
         if ($filesupdate)
             foreach ($filesupdate as $k => $file) {
-                // dd($photoid[$k]);
                 $imagename = $file->getClientOriginalName();
                 $file->move('images/movies/', $imagename);
                 Images::where('id', $photoid[$k])->update(['path' => 'images/movies/' . $imagename, 'imageable_id' => $form->id]);

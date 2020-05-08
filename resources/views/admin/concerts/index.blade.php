@@ -24,11 +24,7 @@
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12">
-{{-- <div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12"> --}}
                 <div class="card text-right">
-                    {{-- <div class="card-header">Concert</div> --}}
                         <div class="card-body">
                             <div class="table-responsive">
                                 <p data-placement="top" data-toggle="tooltip" title="">
@@ -38,7 +34,6 @@
                                 </p>
                                 <table class="d-table table text-center table-bordred table-striped">
                                     <thead>
-                                        {{-- <th><input type="checkbox" class="checkthis" /></th> --}}
                                         <th>آیدی</th>
                                         <th>عکس</th>
                                         <th>نام کنسرت</th>
@@ -49,7 +44,6 @@
                                     <tbody>
                                         @foreach($concert as $k=>$v)
                                         <tr>
-                                        {{-- <td><input type="checkbox" class="checkthis" /></td> --}}
                                         <td>{{$v->id}}</td>
                                         <td><img class="img-fluid" width="150px" src="{{asset('/').$v->Images()->get()->first()->path}}" alt="" /></td>
                                         <td>{{$v->name}}</td>

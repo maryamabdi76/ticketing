@@ -79,8 +79,7 @@
                                 </div>
                                 <div class="entry-content">
                                     <div class="left">
-                                        <span class="date p-2"><?php echo e(str_replace('-','/',str_replace('00:00:00', ' ', $post->created_at))); ?></span>
-                                        
+                                        <span class="date p-2"><?php echo e(str_replace('00:00:00', ' ', $post->created_at)); ?></span>
                                     </div>
                                     <a href="/blog-details/<?php echo e($post->id); ?>" class="buttons"> ادامه مطلب <i class="fas fa-angle-left"></i></a>
                                 </div>
@@ -116,7 +115,6 @@
                                     <div class="thumb">
                                         <a href="/blog-details/<?php echo e($lastpost->id); ?>">
                                             <img height="220px" src="<?php echo e(asset('/').$lastpost->Images()->get()->first()->path); ?>" alt="blog">
-                                            
                                         </a>
                                     </div>
                                     <div class="content">

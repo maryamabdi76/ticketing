@@ -34,7 +34,6 @@
                                 </p>
                                 <table class="d-table table text-center table-bordred table-striped">
                                     <thead>
-                                        {{-- <th><input type="checkbox" class="checkthis" /></th> --}}
                                         <th>آیدی</th>
                                         <th>نام</th>
                                         <th>عملیات</th>
@@ -42,7 +41,6 @@
                                     <tbody>
                                         @foreach($genre as $k=>$v)
                                         <tr>
-                                        {{-- <td><input type="checkbox" class="checkthis" /></td> --}}
                                         <td>{{$v->id}}</td>
                                         <td>{{$v->name}}</td>
                                         <td>

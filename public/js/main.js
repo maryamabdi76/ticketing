@@ -524,35 +524,10 @@ $('.input_seat_checkbox_reverse').each(function(){
 
 });
 
-// $('.seat_checkbox').on('click',function(){
-//     $(this).toggleClass('checked').prev().prop('checked',$(this).is('.checked'))
-// });
-
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
   });
 
-//   function CountDown(duration, display) {
-//     if (!isNaN(duration)) {
-//         var timer = duration, minutes, seconds;
-
-//       var interVal=  setInterval(function () {
-//             minutes = parseInt(timer / 60, 10);
-//             seconds = parseInt(timer % 60, 10);
-
-//             minutes = minutes < 10 ? "0" + minutes : minutes;
-//             seconds = seconds < 10 ? "0" + seconds : seconds;
-
-//             $(display).html("<b>" + minutes + "m : " + seconds + "s" + "</b>");
-//             if (--timer < 0) {
-//                 timer = duration;
-//                SubmitFunction();
-//                $('#countdowndisplay').empty();
-//                clearInterval(interVal);
-//             }
-//             },1000);
-//     }
-// }
 
 function SubmitFunction(){
     $('#countdownsubmit').click();

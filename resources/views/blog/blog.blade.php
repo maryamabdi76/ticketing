@@ -81,13 +81,7 @@
                                 </div>
                                 <div class="entry-content">
                                     <div class="left">
-                                        <span class="date p-2">{{str_replace('-','/',str_replace('00:00:00', ' ', $post->created_at))}}</span>
-                                        {{-- <div class="authors">
-                                            <div class="thumb">
-                                                <a href="#0"><img src="{{asset('images/blog/author.jpg')}}" alt="#0"></a>
-                                            </div>
-                                            <h6 class="title p-2"><a href="/concert-speaker">سبحان محمدیان</a></h6>
-                                        </div> --}}
+                                        <span class="date p-2">{{str_replace('00:00:00', ' ', $post->created_at)}}</span>
                                     </div>
                                     <a href="/blog-details/{{$post->id}}" class="buttons"> ادامه مطلب <i class="fas fa-angle-left"></i></a>
                                 </div>
@@ -122,7 +116,6 @@
                                     <div class="thumb">
                                         <a href="/blog-details/{{$lastpost->id}}">
                                             <img height="220px" src="{{asset('/').$lastpost->Images()->get()->first()->path}}" alt="blog">
-                                            {{-- <img src="{{asset('images/blog/slider01.jpg')}}" alt="blog"> --}}
                                         </a>
                                     </div>
                                     <div class="content">

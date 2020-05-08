@@ -36,8 +36,6 @@
                                         <th>ایمیل</th>
                                         <th>جنسیت</th>
                                         <th>نقش</th>
-                                        {{-- <th>تاریخ عضویت</th>
-                                        <th>آخرین تغییر</th> --}}
                                         <th>عملیات</th>
                                     </thead>
                                     <tbody>
@@ -54,8 +52,6 @@
                                             {{ $role->name }}
                                             @endforeach
                                         </td>
-                                        {{-- <td>{{$v['created_at']}}</td>
-                                        <td>{{$v['updated_at']}}</td> --}}
                                         <td>
                                             <a href="/editUser/{{$v["id"]}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="ویرایش">
                                                 <span class="fa fa-edit"></span>

@@ -34,7 +34,6 @@
                                 </p>
                                 <table class="d-table table text-center table-bordred table-striped">
                                     <thead>
-                                        {{-- <th><input type="checkbox" class="checkthis" /></th> --}}
                                         <th>آیدی</th>
                                         <th>نام سالن</th>
                                         <th>نام رویداد</th>
@@ -57,6 +56,9 @@
                                         <td>{{$v->num}}</td>
                                         <td>{{$v->price}}</td>
                                         <td>
+                                            <a href="/showShow/{{$v->salons->id.'-'.$v->id}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="نمایش سالن و رزرو">
+                                                <span class="fa fa-eye"></span>
+                                            </a>
                                             <a href="/editShow/{{$v["id"]}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="ویرایش">
                                                 <span class="fa fa-edit"></span>
                                             </a>

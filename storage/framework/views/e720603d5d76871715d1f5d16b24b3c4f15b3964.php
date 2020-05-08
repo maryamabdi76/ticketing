@@ -6,7 +6,9 @@
     <div class="container">
         <div class="banner-content">
             <h1 class="title bold">بلیت <span class="color-theme">فیلم</span> بگیرید</h1>
-            <p>بلیت فیلم ها را پشیرفته بخرید ، زمان فیلم ها را پیدا کنید ، تیزر فیلم را تماشا کنید ، بررسی های فیلم را بخوانید و موارد دیگر</p>
+            <p>بازیگران، عوامل، خلاصه داستان و نظرات هر فیلم را بخوانید. تصمیم بگیرید. بلیت بخرید.
+                به همین راحتی !
+            </p>
         </div>
     </div>
 </section>
@@ -92,7 +94,7 @@
                     <div class="tab-area">
                         <div class="tab-item active">
                             <div class="row mb-10 justify-content-center">
-                                <?php if($movies->count()==0): ?>
+                                <?php if(empty($movies) || $movies->count()==0): ?>
                                 <h5 class="text-center pt-5 pb-5">متاسفانه موردی یافت نشد!</h5>
                                 <?php endif; ?>
                                 <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -156,8 +158,10 @@
                             </div>
                         </div>
                     </div>
+                    <?php if(!empty($movies)): ?>
                     <?php echo e($movies->appends(request()->query())->links()); ?>
 
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

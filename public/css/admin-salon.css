@@ -152,7 +152,6 @@
     width: calc(100% - 60px);
   }
 
-  @media (max-width: 991px) and (min-width: 768px) {
     .seat-area .seat-line .single-seat {
       width: 35px;
       padding: 2px !important;
@@ -169,7 +168,6 @@
       background: url(./img/seat-chosen1.png);
 
     }
-  }
 
   .seat-area.couple {
     margin-top: -10px;
@@ -402,4 +400,10 @@
 }
 .fontsize12imp{
     font-size: 12px!important;
+}
+.seinfoli{
+    display: flex!important;
+    justify-content: space-around!important;
+    align-content: center!important;
+    padding-bottom: 3rem!important;
 }

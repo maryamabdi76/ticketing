@@ -39,7 +39,7 @@
                             <b><i class="fa fa-calendar pl-1"></i> زمان برگزاری:</b>
                         </div>
                         <div class="note">
-                            <p>تاریخ: {{$date}}&nbsp;&nbsp;ساعت: {{$begin}} تا {{$end}}</p>
+                            <p>تاریخ: {{$date}}&nbsp;&nbsp;ساعت: {{$begin}} الی {{$end}}</p>
                         </div>
                     </div>
                     <div class="d-flex text-right bord ml-2 mr-2">
